@@ -1,15 +1,23 @@
-<section class="container" id="user-dashboard">
-  <h1>Dashboard</h1>
+<section>
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2" role="Course Map">
+      <section class="box with-title">
+        <h6 class="title">
+          <%= image_tag 'map_marker.png' %>
+          Mapa dos cursos
+        </h6>
 
-  <section class="courses">
-    <% @courses.each do |course| %>
-      <div class="course">
-        <%= link_to course_path(course) do %>
-          <%= course.name %>
-          <br>
-          <%= image_tag course.image, width: 100, alt: "Imagem do curso #{course.name}" %>
-        <% end %>
-      </div>
-    <% end %>
-  </section>
+        <div id="course-map">
+          <% @courses.each do |course| %>
+            <%= link_to course_path(course), class: 'course' do %>
+              <%= image_tag course.image, width: 50 %>
+              <%= course.name %>
+            <% end %>
+          <% end %>
+        </div>
+      </section>
+    </div>
+  </div>
+
+
 </section>

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, user-scalable=no">
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Oswald:300,400' rel='stylesheet' type='text/css'>
 
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -16,29 +16,41 @@
 <body>
   <%= javascript_include_tag 'include_tags/superdev_fb_app' %>
 
-  <header id="site-header">
-    <div class="row">
-      <div class="col-sm-2">
-        <%= link_to root_path do %>
-          <%= image_tag 'logo.png', width: 140 %>
-        <% end %>
-
-        <%= render 'user_notifications', resource: current_user %>
-      </div>
-      <div class="col-sm-8 text-center">
-        <h3 class="course-name"><%= params[:course_id].try :titleize %></h3>
+  <header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4 offset-sm-4 text-center">
+          <%= link_to root_path do %>
+            <%= image_tag 'logo.png', width: '165' %>
+          <% end %>
+        </div>
+        <div class="col-sm-4 text-right">
+          <%= link_to 'Crie sua conta', new_user_session_path, class: 'btn btn-primary' %>
+        </div>
       </div>
     </div>
   </header>
 
-  <main id="main-content">
-    <%= display_flash %>
-    <%= yield %>
+  <main>
+    <div class="container-fluid"><%= yield %></div>
   </main>
 
-
   <footer>
+    <div class="container-fluid">
+      <p class="text-center">
+        <small>Copyright @ 2016 SuperDev</small>
+      </p>
 
+      <div class="text-center">
+        <small>
+          <%= link_to 'Sobre', root_path %>
+          <span class="text-muted">.</span>
+          <%= link_to 'Contato', root_path %>
+          <span class="text-muted">.</span>
+          <a href="https://www.facebook.com/superdev.academy" target="_superdev_facebook">Facebook</a>
+        </small>
+      </div>
+    </div>
   </footer>
 
 </body>
