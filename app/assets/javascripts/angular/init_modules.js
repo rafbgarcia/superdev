@@ -9,6 +9,6 @@ angular.module('User', []);
 angular.module('Question', []);
 angular.module('Discussion', []);
 
-$(document).on('ready page:load', function() {
+$(document).on('turbolinks:load', function() {
   angular.bootstrap(document.body, ['SuperDev']);
 });

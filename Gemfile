@@ -13,7 +13,9 @@ end
   gem 'simple_form'
   gem 'friendly_id', '~> 5.1.0'
   gem "paperclip", "~> 5.0.0"
-  gem 'aws-sdk-rails'
+  gem 'aws-sdk', '~> 2'
+  # gem 'aws-sdk-rails'
+  gem 'nested_form_fields' # Include Add/Remove button to nested forms
 
   source 'https://rails-assets.org' do
     gem 'rails-assets-tether', '>= 1.3.3'

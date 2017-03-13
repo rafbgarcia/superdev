@@ -10,7 +10,7 @@ Rails.application.configure do
     enable_starttls_auto: true,
   }
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.asset_host = 'http://superdev.com.br'
+  config.action_mailer.asset_host = 'https://superdev.academy'
 
   config.paperclip_defaults = {
     storage: :s3,

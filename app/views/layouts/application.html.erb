@@ -10,7 +10,6 @@
   <link href='https://fonts.googleapis.com/css?family=Oswald:300,400' rel='stylesheet' type='text/css'>
 
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <%= include_sync_config %>
   <%= csrf_meta_tags %>
 </head>
 
@@ -24,7 +23,7 @@
           <%= image_tag 'logo.png', width: 140 %>
         <% end %>
 
-        <%= render partial: 'user_notifications', resource: current_user %>
+        <%= render 'user_notifications', resource: current_user %>
       </div>
       <div class="col-sm-8 text-center">
         <h3 class="course-name"><%= params[:course_id].try :titleize %></h3>
@@ -38,11 +37,9 @@
   </main>
 
 
-  <footer id="user-info">
-    <%= render 'footer' -%>
-  </footer>
+  <footer>
 
-  <div id="page-loading">Carregando...</div>
+  </footer>
 
 </body>
 </html>

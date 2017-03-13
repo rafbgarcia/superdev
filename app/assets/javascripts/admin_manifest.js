@@ -2,7 +2,7 @@
 //= require jquery_ujs
 //= require turbolinks
 
-//= require_tree ./imports
+//= require_tree ./vendor
 //= require nested_form_fields
 
 //= require ./ace/ace

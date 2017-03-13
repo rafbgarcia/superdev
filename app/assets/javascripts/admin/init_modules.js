@@ -6,6 +6,6 @@ angular.module('SuperDevAdmin', [
 angular.module('CodeQuestion', []);
 
 
-$(document).on('ready page:load', function() {
+$(document).on('turbolinks:load', function() {
   angular.bootstrap(document.body, ['SuperDevAdmin']);
 });
