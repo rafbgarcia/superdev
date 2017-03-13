@@ -1,24 +1,56 @@
-<section class="container">
-  <%= link_to 'Voltar para tela do curso', course_path(id: params[:course_id]), class: 'btn btn-default' %>
+<section class="container smaller">
+  <section class="breadcrumbs">
+    <%= link_to @course.name, course_path(@course) %>
+    >
+    <%= @lesson.name %>
+  </section>
 
-  <div class="breadcrumbs">
-    <% if @item.has_previous_item? -%>
-      <%= link_to 'Questão anterior', item_path(@item.previous_item), class: 'btn btn-default' %>
-    <% else -%>
-      <span class="btn btn-default" disabled>Questão anterior</span>
-    <% end -%>
+  <div class="box no-padding">
+    <header>
+      <div class="row">
+        <div class="col-sm-8">
+          <h5 class="title">
+            <%= image_tag "question_type_#{format_item_type(@item.type)}.png" %>
+            <%= @item.title %>
+          </h5>
+        </div>
+        <div class="col-sm-4 text-right">
+          <% if @item.has_previous_item? -%>
+            <%= link_to item_path(@item.previous_item), class: 'question-link' do %>
+              <%= image_tag 'previous.png' %>
+              Anterior
+            <% end %>
+          <% else -%>
+            <span class="question-link disabled">
+              <%= image_tag 'previous.png' %>
+              Anterior
+            </span>
+          <% end -%>
 
-    <% if @item.has_next_item? -%>
-      <%= link_to 'Próxima Questão', item_path(@item.next_item), class: 'btn btn-primary' %>
-    <% else -%>
-      <span class="btn btn-primary" disabled>Próxima Questão</span>
-    <% end -%>
+          <span>/</span>
+
+          <% if @item.has_next_item? -%>
+            <%= link_to item_path(@item.next_item), class: 'question-link' do %>
+              Próximo
+              <%= image_tag 'next.png' %>
+            <% end %>
+          <% else -%>
+            <span class="question-link disabled">
+              Próximo
+              <%= image_tag 'next.png' %>
+            </span>
+          <% end -%>
+        </div>
+      </div>
+    </header>
+
+
+    <main>
+      <p><%= h @item.description %></p>
+
+      <%= render format_item_type(@item.type) %>
+    </main>
   </div>
 
-  <h1><%= @item.title %></h1>
-  <p><%= h @item.description %></p>
-
-  <%= render format_item_type(@item.type) %>
-
-  <%= render 'items/discussions/list' %>
+  <%#= render 'items/discussions/list' %>
 </section>

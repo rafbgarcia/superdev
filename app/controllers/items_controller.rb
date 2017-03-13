@@ -4,6 +4,8 @@ class ItemsController < ApplicationController
   def show
     lesson = Lesson.friendly.find(params[:lesson_id])
     @item = Item.for(lesson, params[:item_weight])
+    @course = Course.friendly.find(params[:course_id])
+    @lesson = Lesson.friendly.find(params[:lesson_id])
 
     answer = Answer.includes(:alternative).for(current_user, @item)
     @answered_alternative = answer && answer.alternative.as_json
