@@ -16,6 +16,7 @@ Rails.application.configure do
     storage: :s3,
     s3_credentials: "#{Rails.root}/config/s3.yml",
     s3_host_name: 's3-sa-east-1.amazonaws.com',
+    region: 'sa-east-1',
     default_url: 'missing.png',
   }
 
