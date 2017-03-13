@@ -5,6 +5,20 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# app specific
+  gem 'font-awesome-sass', '~> 4.7.0'
+  gem 'bootstrap', '~> 4.0.0.alpha6'
+  gem 'devise'
+  gem 'omniauth-facebook'
+  gem 'simple_form'
+  gem 'friendly_id', '~> 5.1.0'
+  gem "paperclip", "~> 5.0.0"
+  gem 'aws-sdk-rails'
+
+  source 'https://rails-assets.org' do
+    gem 'rails-assets-tether', '>= 1.3.3'
+  end
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'

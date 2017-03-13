@@ -1,0 +1,18 @@
+<% action = @lesson.new_record? ? admin_lessons_path : admin_lesson_path(@lesson) %>
+
+<%= simple_form_for @lesson, url: action do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :course, include_blank: false %>
+    <%= f.input :name %>
+    <%= f.input :weight %>
+    <%= f.input :free %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Listing', admin_lessons_path %>

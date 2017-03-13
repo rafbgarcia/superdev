@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title || 'Início' %> | Superdev</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+  <%= stylesheet_link_tag 'admin_manifest', media: 'all', 'data-turbolinks-track' => true %>
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:300,400' rel='stylesheet' type='text/css'>
+
+  <%= javascript_include_tag 'admin_manifest', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <%= link_to root_path do %>
+          <%= image_tag 'logo.png', width: 140 %>
+        <% end %>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'Início', admin_path %></li>
+          <li><%= link_to 'Cursos', admin_courses_path %></li>
+          <li><%= link_to 'Lições', admin_lessons_path %></li>
+          <li><%= link_to 'Itens', admin_items_path %></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <%= display_flash %>
+    <%= yield %>
+  </main>
+
+  <footer>
+    Admin area
+  </footer>
+
+  <div id="page-loading">Carregando...</div>
+
+</body>
+</html>

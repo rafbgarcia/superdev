@@ -1,0 +1,32 @@
+<fieldset ng-controller="CodeQuestionCtrl" ng-init="language = '<%= @itemable.language %>'">
+  <legend>Code Question Fields</legend>
+
+  <div class="body">
+    <%= f.input :language, as: :radio_buttons,
+                           collection: [['HTML', 'html'], ['CSS', 'css'], ['JavaScript', 'javascript']],
+                           input_html: {
+                            'ng-model' => 'language',
+                            'ng-change': "changeLanguage(#{@itemable.language})"
+                           } -%>
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="form-group text optional">
+          <label class="text optional control-label">Initial Code</label>
+          <div ng-model="initial_code" ui-ace="ace_options('initial_code', '<%= @itemable.initial_code %>')"></div>
+          <textarea class="hidden" name="code_question[initial_code]">{{initial_code}}</textarea>
+        </div>
+      </div>
+
+
+      <div class="col-sm-6">
+        <div class="form-group text optional">
+          <label class="text required control-label">Expected Answer</label>
+          <div ng-model="expected_answer" ui-ace="ace_options('expected_answer', '<%= @itemable.expected_answer %>')"></div>
+          <textarea class="hidden" name="code_question[expected_answer]">{{expected_answer}}</textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>

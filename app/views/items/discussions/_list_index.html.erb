@@ -1,0 +1,37 @@
+<% @item.discussions.includes(:user).each do |discussion| -%>
+  <div class="discussion">
+
+    <div class="upvotes" ng-controller="UpvoteCtrl">
+      {{upvotes || <%= discussion.upvotes %>}}
+
+      <a href="javascript:;" ng-click="upvote()">
+        <i class="fa fa-arrow-up"></i>
+      </a>
+    </div>
+
+    <% if @discussion == discussion -%>
+      <%= discussion.title %>
+    <% else -%>
+      <%= link_to discussion.title, discussion_path_for(discussion) -%>
+    <% end -%>
+
+    <% if discussion.resolved? -%>
+      <div class="label label-success">
+        <i class="fa fa-check"></i>
+        Resolvido
+      </div>
+    <% end -%>
+
+    <div class="comments-count">
+      <i class="fa fa-comment"></i>
+      <%= discussion.comments.count %>
+    </div>
+
+    <div class="user">
+      <%= image_tag discussion.user.current_avatar, width: 34, class: 'img-circle' %>
+      <%= discussion.user.name %>
+    </div>
+  </div>
+
+  <hr>
+<% end -%>

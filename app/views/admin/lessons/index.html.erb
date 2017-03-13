@@ -1,0 +1,35 @@
+<%= display_flash %>
+
+<h1>Listing Lesson</h1>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Name</th>
+      <th>Weight</th>
+      <th>Free</th>
+      <th width="10%"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lessons.each do |lesson| %>
+      <tr>
+        <td><%= lesson.course %></td>
+        <td><%= lesson.name %></td>
+        <td><%= lesson.weight %></td>
+        <td><%= lesson.free %></td>
+        <td>
+          <%= link_to 'Edit', edit_admin_lesson_path(lesson) %>
+          |
+          <%= link_to 'Delete', admin_lesson_path(lesson), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New lesson', new_admin_lesson_path %>

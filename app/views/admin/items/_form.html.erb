@@ -1,0 +1,31 @@
+<% action = @itemable.new_record? ? admin_items_path(type: params[:type]) : admin_item_path(@itemable, type: params[:type]) %>
+
+
+<%= simple_form_for @itemable, url: action do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <fieldset>
+      <legend>Item</legend>
+      <div class="body">
+        <%= f.fields_for :item, (@itemable.item || Item.new) do |i| %>
+          <%= i.association :lesson, include_blank: false %>
+          <%= i.input :title %>
+          <%= i.input :description %>
+          <%= i.input :weight %>
+          <%= i.input :difficulty %>
+        <% end %>
+      </div>
+    </fieldset>
+
+    <%= render partial: "#{format_item_type(params[:type])}_fields", locals: {f: f} %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-success btn-lg' %>
+    <%= link_to 'Back to Listing', admin_items_path %>
+  </div>
+<% end %>
+
+
+

@@ -1,0 +1,33 @@
+<%= display_flash %>
+
+<h1>Listing Courses</h1>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th width="10%">Image</th>
+      <th width="30%">Name</th>
+      <th width="50%">Description</th>
+      <th width="10%"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= image_tag course.image %></td>
+        <td><%= course.name %></td>
+        <td><%= course.description %></td>
+        <td>
+          <%= link_to 'Edit', edit_admin_course_path(course) %>
+          |
+          <%= link_to 'Delete', admin_course_path(course), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Course', new_admin_course_path %>

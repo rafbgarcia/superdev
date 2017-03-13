@@ -1,0 +1,21 @@
+<div>
+  <a href="javascript:;" class="label label-default" ng-click="show_notifications = !show_notifications">
+    <i class="fa fa-comment"></i>
+    <%= current_user.notifications.reload.count %>
+  </a>
+
+  <ul ng-show="show_notifications" class="notifications-list">
+    <% current_user.notifications.each do |notification| -%>
+      <li class="<%= notification.seen? ? 'seen' : 'unseen' %>">
+        <%= link_to notification_redirect_path(notification) do -%>
+          <%= image_tag notification.current_user.current_avatar, width: 50 %>
+          <%= notification.current_user.first_name %>
+          respondeu sua Pergunta
+
+          <%= notification.created_at %>
+
+        <% end -%>
+      </li>
+    <% end -%>
+  </ul>
+</div>

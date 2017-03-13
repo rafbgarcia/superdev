@@ -1,0 +1,21 @@
+<% alternatives_or_new = @itemable.alternatives.present? ? @itemable.alternatives : Alternative.new %>
+
+<fieldset>
+  <legend>Alternatives</legend>
+
+  <div class="body">
+    <ul class="alternatives">
+      <%= f.nested_fields_for :alternatives, alternatives_or_new do |a| -%>
+        <li>
+          <%= a.input :text %>
+          <%= a.input :correct %>
+          <%= a.input :message %>
+
+          <%= a.remove_nested_fields_link %>
+        </li>
+      <% end -%>
+    </ul>
+
+    <%= f.add_nested_fields_link :alternatives %>
+  </div>
+</fieldset>

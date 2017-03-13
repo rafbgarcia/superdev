@@ -1,0 +1,69 @@
+<script>
+angular.module('Question')
+.value('item_answers_path', '<%= item_answers_path(@item) %>')
+.value('answered_alternative', <%= (@answered_alternative || {}).to_json.html_safe %>);
+</script>
+
+<div ng-controller="ChoiceQuestionCtrl">
+  <div ng-if="error_message" class="alert alert-danger">{{error_message}}</div>
+
+  <section>
+    <% @item.itemable.alternatives.each do |alternative| -%>
+      <div>
+        <input type="radio" ng-model="alternative.id" value="<%= alternative.id %>" ng-disabled="item.answered">
+        <%= alternative.text %>
+      </div>
+    <% end -%>
+  </section>
+
+  <button href="javascript:;" class="btn btn-primary" ng-click="answer()" ng-if="!item.answered">
+    <i class="fa fa-check"></i>
+    Responder
+  </button>
+
+
+  <!-- Correct -->
+
+    <div ng-if="alternative.correct" class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Legal <%= current_user.first_name %>! Você acertou essa questão, parabéns!</h3>
+      </div>
+      <div class="panel-body">
+        <p ng-if="alternative.explanation">{{alternative.explanation}}</p>
+        <%= render 'next_item_link' %>
+      </div>
+      <div class="panel-footer">
+        <p ng-if="item.answered">
+          Ainda ficou com alguma dúvida?
+          <a href="#" class="btn btn-primary btn-sm">Sim, fiquei!</a>
+          <a href="#" class="btn btn-primary btn-sm">Não, entendi direitinho!</a>
+        </p>
+      </div>
+    </div>
+
+
+
+  <!-- Incorrect -->
+
+    <div ng-if="alternative.correct === false" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= current_user.first_name %>, esta resposta está incorreta, veja o por quê:</h3>
+      </div>
+      <div class="panel-body">
+        {{alternative.explanation}}
+      </div>
+      <div class="panel-footer">
+        <p ng-show="!understood_question_answered">
+          Ainda ficou alguma dúvida após a explicação acima?
+          <a href="#" class="btn btn-primary btn-sm">Sim!</a>
+          <a href="#" class="btn btn-primary btn-sm">Não!</a>
+        </p>
+
+        <div>
+          <%= render 'next_item_link' %>
+        </div>
+      </div>
+    </div>
+
+</div>
+

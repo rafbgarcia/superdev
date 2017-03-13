@@ -1,0 +1,24 @@
+<section class="container">
+  <%= link_to 'Voltar para tela do curso', course_path(id: params[:course_id]), class: 'btn btn-default' %>
+
+  <div class="breadcrumbs">
+    <% if @item.has_previous_item? -%>
+      <%= link_to 'Questão anterior', item_path(@item.previous_item), class: 'btn btn-default' %>
+    <% else -%>
+      <span class="btn btn-default" disabled>Questão anterior</span>
+    <% end -%>
+
+    <% if @item.has_next_item? -%>
+      <%= link_to 'Próxima Questão', item_path(@item.next_item), class: 'btn btn-primary' %>
+    <% else -%>
+      <span class="btn btn-primary" disabled>Próxima Questão</span>
+    <% end -%>
+  </div>
+
+  <h1><%= @item.title %></h1>
+  <p><%= h @item.description %></p>
+
+  <%= render format_item_type(@item.type) %>
+
+  <%= render 'items/discussions/list' %>
+</section>

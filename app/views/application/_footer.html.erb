@@ -1,0 +1,59 @@
+<script>
+angular.module('User')
+.value('user_level', {
+  'level': <%= current_user.level %>,
+  'xp': <%= current_user.xp %>,
+  'next_level_needed_xp': <%= current_user.next_level.needed_xp %>,
+
+  <% if current_user.guest? -%>
+    'answers_count': <%= current_user.answers.size %>,
+    'correct_answers_count': <%= current_user.answers.correct.size %>,
+  <% end -%>
+});
+</script>
+
+
+<div class="row" ng-controller="UserLevelCtrl">
+  <div class="col-sm-4">
+    <div class="pull-left">
+      <%= image_tag current_user.current_avatar, width: 50, class: 'img-circle' %>
+    </div>
+    <div>
+      <%= current_user.name %>
+
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <small>(Logout)</small>
+      <% end if !current_user.guest? -%>
+    </div>
+
+    <div class="pull-left" style="width: 70%">
+      <div>
+        Programador Web <small>(Level {{user.level}})</small>
+      </div>
+      <div class="xp">
+        <span class="percentage">{{user.percent_of_xp}}%</span>
+        <div id="js_progressbar" class="progress" style="width: {{user.percent_of_xp}}%"></div>
+      </div>
+    </div>
+  </div>
+
+  <% if current_user.guest? %>
+    <div class="col-sm-8">
+      <section ng-if="user.answers_count >= 3 || user.correct_answers_count >= 2">
+        <h4 class="pull-left">
+          <span class="user-bajuleixon" ng-if="user.correct_answers_count >= 2">
+            WOW! Você já acertou <strong>{{user.correct_answers_count}} questões</strong>!
+            <br>
+            Não perca seu Progresso até aqui!
+          </span>
+
+          <span class="user-bajuleixon" ng-if="user.correct_answers_count < 2">
+            Não perca seu Progresso!
+          </span>
+        </h4>
+        <%= link_to "Registre-se para Salvar seu Progresso", user_omniauth_authorize_path(:facebook), class: 'btn btn-primary btn-lg' %>
+
+      </section>
+    </div>
+  <% end -%>
+</div>

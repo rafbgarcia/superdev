@@ -1,4 +1,23 @@
 Rails.application.configure do
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'superdev.com.br',
+    user_name: 'rafael@superdev.com.br',
+    password: ENV['GMAIL_PW'],
+    authentication: 'plain',
+    enable_starttls_auto: true,
+  }
+  config.action_mailer.raise_delivery_errors = false
+
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: "#{Rails.root}/config/s3.yml",
+    s3_host_name: 's3-sa-east-1.amazonaws.com',
+    default_url: 'missing.png',
+  }
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

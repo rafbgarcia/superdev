@@ -1,0 +1,17 @@
+<% action = @course.new_record? ? admin_courses_path : admin_course_path(@course) %>
+
+<%= simple_form_for @course, url: action do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :image %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Listing', admin_courses_path %>

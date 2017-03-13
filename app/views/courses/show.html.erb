@@ -1,0 +1,28 @@
+<section class="container">
+  <%= image_tag @course.image, width: 100 %>
+  <h1><%= @course.name %></h1>
+  <p><%= h @course.description %></p>
+
+  <h3>Lições</h3>
+  <div>
+    <% @course.lessons.includes(:items).each do |lesson| -%>
+      <div>
+        <%= lesson.weight %>-
+        <%= lesson.name %>
+
+        <% if lesson.free? -%>
+          <span class="label label-success">Grátis</span>
+        <% end -%>
+      </div>
+      <ul>
+        <% lesson.items.each do |item| -%>
+          <li>
+            <i class="fa fa-<%= item.video? ? 'play' : 'list-ul' %>"></i>
+            <%= link_to item.title, item_path(item) %>
+            <%= answer_icon_for(current_user, item) %>
+          </li>
+        <% end -%>
+      </ul>
+    <% end -%>
+  </div>
+</section>

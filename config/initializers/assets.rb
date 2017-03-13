@@ -9,3 +9,14 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+
+
+
+# SuperDev's Custom assets
+Rails.application.config.assets.precompile += %w(
+  admin_manifest.js
+  admin_manifest.css
+  include_tags/**
+  application.css
+  application.js
+)

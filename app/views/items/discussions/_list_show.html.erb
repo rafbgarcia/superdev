@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-sm-4">
+    <%= render 'items/discussions/list_index' %>
+  </div>
+
+  <div class="col-sm-8">
+    <h3><%= @discussion.title %></h3>
+    <div>
+      <%= simple_format @discussion.text %>
+      <div class="autor">
+        <div>
+          <%= image_tag @discussion.user.current_avatar, width: 36, class: 'img-circle' %>
+          <%= @discussion.user.name %>
+          às
+          <%= @discussion.created_at %>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <h4>Comentários</h4>
+    <section>
+      <% @discussion.comments.includes(:user).each do |comment| -%>
+        <div id="comment<%= comment.id %>">
+          <%= simple_format comment.text %>
+          <div>
+            <%= image_tag comment.user.current_avatar, width: 36, class: 'img-circle' %>
+            <%= comment.user.name %>
+            às
+            <%= comment.created_at %>
+          </div>
+        </div>
+        <hr>
+      <% end -%>
+    </section>
+
+    <h4>Deixe uma resposta</h4>
+    <%= simple_form_for @comment do |f| %>
+      <%= f.input :text %>
+      <%= f.submit 'Criar comentário' %>
+    <% end -%>
+  </div>
+</div>

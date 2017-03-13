@@ -1,0 +1,15 @@
+<section class="container" id="user-dashboard">
+  <h1>Dashboard</h1>
+
+  <section class="courses">
+    <% @courses.each do |course| %>
+      <div class="course">
+        <%= link_to course_path(course) do %>
+          <%= course.name %>
+          <br>
+          <%= image_tag course.image, width: 100, alt: "Imagem do curso #{course.name}" %>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+</section>

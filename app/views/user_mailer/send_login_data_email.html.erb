@@ -1,0 +1,32 @@
+<div style="font-size: 15px; color: #333; line-height: 22px;">
+  <p style="font-size: 20px">
+    Seja muito bem vindo(a), <%= @user.first_name %>!
+  </p>
+
+  <p>Para sua conveniencia, abaixo estão seus dados de acesso para o Campus SuperDev:</p>
+  <p>
+    <strong>Email</strong>: <%= @user.email %>
+    <br>
+    <strong>Senha</strong>: <%= @user.password %>
+  </p>
+
+  <p>
+    E este é o link direto para a área do curso:
+    <br>
+    <%= link_to root_url, root_url %>
+  </p>
+
+  <p>
+    Me avisa se tiver alguma dúvida.
+  </p>
+
+  <p>Aproveite!</p>
+
+  <p>
+    Grande Abraço!
+    <br>
+    Rafael Garcia
+    <br>
+    SuperDev
+  </p>
+</div>
