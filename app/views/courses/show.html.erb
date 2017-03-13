@@ -1,28 +1,38 @@
-<section class="container">
-  <%= image_tag @course.image, width: 100 %>
-  <h1><%= @course.name %></h1>
-  <p><%= h @course.description %></p>
-
-  <h3>Lições</h3>
-  <div>
-    <% @course.lessons.includes(:items).each do |lesson| -%>
-      <div>
-        <%= lesson.weight %>-
-        <%= lesson.name %>
-
-        <% if lesson.free? -%>
-          <span class="label label-success">Grátis</span>
-        <% end -%>
+<section class="container smaller">
+  <div class="box">
+    <div class="row">
+      <div class="col-sm-3 text-center">
+        <%= image_tag @course.image %>
       </div>
-      <ul>
-        <% lesson.items.each do |item| -%>
-          <li>
-            <i class="fa fa-<%= item.video? ? 'play' : 'list-ul' %>"></i>
-            <%= link_to item.title, item_path(item) %>
-            <%= answer_icon_for(current_user, item) %>
-          </li>
-        <% end -%>
-      </ul>
-    <% end -%>
+      <div class="col-sm-9">
+        <h3 class="title"><%= @course.name %></h3>
+        <p class="text-muted"><%= h @course.description %></p>
+      </div>
+    </div>
   </div>
+
+
+  <% @course.lessons.each do |lesson| -%>
+    <div class="box no-padding">
+      <h4 class="title">
+        Lição
+        <%= lesson.weight %>:
+        <span class="blue"><%= lesson.name %></span>
+
+        <% if lesson.free? %>
+          <span class="badge badge-success">Grátis</span>
+        <% end %>
+      </h4>
+
+      <section class="questions-list">
+        <% lesson.items.each do |item| %>
+          <%= link_to item_path(item) do %>
+            <%= image_tag "question_type_#{format_item_type(item.type)}.png" %>
+            <span class="title"><%= item.title %></span>
+            <%= answer_icon_for(current_user, item) %>
+          <% end %>
+        <% end -%>
+      </section>
+    </div>
+  <% end -%>
 </section>
