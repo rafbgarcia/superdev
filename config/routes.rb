@@ -5,6 +5,9 @@ Rails.application.routes.draw do
                     controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
 
+  get 'inscreva-se' => 'subscriptions#new', as: :subscribe
+  post 'inscreva-se' => 'subscriptions#create'
+
   ##################
   # Student Routes #
   ##################
