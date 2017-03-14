@@ -1,4 +1,3 @@
-<script type="text/javascript" src="https://js.iugu.com/v2"></script>
 
 <div class="container smaller">
   <div class="box">
@@ -10,6 +9,7 @@
       <button type="submit">Manda</button> -->
     <%# end %>
 
+    <%= @plans.inspect %>
     <div class="row">
       <div class="col-sm-6">
         <table class="table">
@@ -38,6 +38,10 @@
       <div class="col-sm-6 credit-card-payment">
         <%= form_for :subscription, url: subscribe_path, method: :post, id: 'payment-form' do %>
           <input type="hidden" name="mode" value="TEST">
+
+          <input type="text" name="customer[name]" placeholder="Nome">
+          <input type="text" name="customer[email]" placeholder="Email">
+
           <div class="btn-group payment-method-btn-group" data-toggle="buttons">
             <label class="btn btn-default active" id="credit-card-checkbox-label">
               <input checked type="checkbox" id="credit-card-checkbox" name="method" value="">Cartão de Crédito</input>
@@ -88,7 +92,7 @@
 <script>
   $(document).on('turbolinks:load', function () {
 
-    Iugu.setAccountID("AEF33427575F47A981F718E7A4BD9B80");
+    Iugu.setAccountID("30e045b8172796b804714c8423be3d9e");
     Iugu.setTestMode(true);
 
     $('#payment-form').submit(function (evt) {
