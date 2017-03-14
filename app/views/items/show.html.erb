@@ -1,9 +1,5 @@
 <section class="container smaller">
-  <section class="breadcrumbs">
-    <%= link_to @course.name, course_path(@course) %>
-    >
-    <%= @lesson.name %>
-  </section>
+  <%= render 'application/breadcrumbs' %>
 
   <div class="box no-padding">
     <header>

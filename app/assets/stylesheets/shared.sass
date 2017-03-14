@@ -14,8 +14,11 @@ ul
   list-style: none
   padding: 0
 
-.container.smaller
-  max-width: 900px
+.container
+  &.smaller
+    max-width: 900px
+  &.smallest
+    max-width: 450px
 
 .box
   padding: 1rem
@@ -77,3 +80,8 @@ ul
 
 .blue
   color: #66c7ef
+
+
+// form
+textarea.form-control
+  min-height: 10rem

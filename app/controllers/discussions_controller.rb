@@ -10,7 +10,7 @@ class DiscussionsController < ApplicationController
     @discussion.user = current_user
     @discussion.item = @item
 
-    if @discussion.save!
+    if @discussion.save
       redirect_to discussion_path(@item.lesson.course, @item.lesson, @item, @discussion)
     else
       render :new

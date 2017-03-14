@@ -1,5 +1,12 @@
-<%= simple_form_for @discussion do |f| %>
-  <%= f.input :title %>
-  <%= f.input :text %>
-  <%= f.submit 'Fazer pergunta' %>
-<% end -%>
+<div class="container smallest">
+  <div class="box">
+    <h3>Faça sua Pergunta</h3>
+    <br>
+    <%= simple_form_for @discussion do |f| %>
+      <%= f.input :title, label: 'Título' %>
+      <%= f.input :text, label: 'Texto' %>
+      <%= f.submit 'Postar', class: 'btn btn-primary' %>
+      <%= link_to 'Voltar', course_item_path(@item.lesson.course, @item.lesson, @item) %>
+    <% end %>
+  </div>
+</div>
