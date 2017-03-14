@@ -16,7 +16,7 @@
         </div>
         <div class="col-sm-4 text-right">
           <% if @item.has_previous_item? -%>
-            <%= link_to item_path(@item.previous_item), class: 'question-link' do %>
+            <%= link_to course_item_path(item_weight: @item.previous_item.weight), class: 'question-link' do %>
               <%= image_tag 'previous.png' %>
               Anterior
             <% end %>
@@ -30,7 +30,7 @@
           <span>/</span>
 
           <% if @item.has_next_item? -%>
-            <%= link_to item_path(@item.next_item), class: 'question-link' do %>
+            <%= link_to course_item_path(item_weight: @item.next_item.weight), class: 'question-link' do %>
               Próximo
               <%= image_tag 'next.png' %>
             <% end %>
@@ -46,11 +46,11 @@
 
 
     <main>
-      <p><%= h @item.description %></p>
+      <p><%= simple_format @item.description %></p>
 
       <%= render format_item_type(@item.type) %>
     </main>
   </div>
 
-  <%#= render 'items/discussions/list' %>
+  <%= render partial: 'discussions/index', locals: { item: @item }  %>
 </section>

@@ -6,7 +6,7 @@
       </div>
       <div class="col-sm-9">
         <h3 class="box-title"><%= @course.name %></h3>
-        <p class="text-muted"><%= h @course.description %></p>
+        <p class="text-muted"><%= simple_format @course.description %></p>
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@
 
       <section class="questions-list">
         <% lesson.items.each do |item| %>
-          <%= link_to item_path(item) do %>
+          <%= link_to course_item_path(lesson_id: lesson.id, item_weight: item.weight) do %>
             <%= image_tag "question_type_#{format_item_type(item.type)}.png" %>
             <span class="title"><%= item.title %></span>
             <%= answer_icon_for(current_user, item) %>

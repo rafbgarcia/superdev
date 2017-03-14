@@ -15,8 +15,8 @@ class User < ApplicationRecord
 
 
   # Paperclip
-    has_attached_file :avatar, path: "/users-images/:id-:style.:extension"
-    validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+    has_attached_file :avatar, path: "/users-images/:id-:style.:extension", default_url: 'default_avatar.png'
+    validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   def first_name
     name.split(' ').first if name.present?

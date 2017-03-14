@@ -1,4 +1,5 @@
 class DiscussionsController < ApplicationController
+  before_action :set_item
 
   def new
     @discussion = Discussion.new
@@ -7,10 +8,10 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = Discussion.new(discussion_params)
     @discussion.user = current_user
-    @discussion.item = item
+    @discussion.item = @item
 
     if @discussion.save!
-      redirect_to discussion_path(lesson.course, lesson, item, @discussion)
+      redirect_to discussion_path(@item.lesson.course, @item.lesson, @item, @discussion)
     else
       render :new
     end
@@ -22,12 +23,8 @@ private
     params.require(:discussion).permit(:title, :text)
   end
 
-  def item
-    @item ||= Item.for(lesson, params[:item_weight])
-  end
-
-  def lesson
-    @lesson ||= Lesson.friendly.find(params[:lesson_id])
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
 end

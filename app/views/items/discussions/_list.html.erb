@@ -1,8 +1,0 @@
-<hr>
-
-<section>
-  <h3>Perguntas de estudantes</h3>
-  <%= link_to 'Faça uma pergunta', new_discussion_path, class: 'btn btn-default' %>
-
-  <%= render 'items/discussions/list_' + (@discussion.blank? ? 'index' : 'show') %>
-</section>

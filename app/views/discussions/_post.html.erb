@@ -1,0 +1,14 @@
+<div class="box d-flex justify-content-between" id="<%= "comment_#{comment_id}" rescue nil %>">
+  <aside>
+    <div class="avatar"><%= image_tag post.user.avatar.url %></div>
+  </aside>
+  <div class="content">
+    <article>
+      <%= simple_format(post.text)  %>
+    </article>
+
+    <footer>
+      <span class="blue"><%= post.user.name %></span>
+    </footer>
+  </div>
+</div>

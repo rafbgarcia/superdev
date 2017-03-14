@@ -11,7 +11,7 @@ class CoursesController < ApplicationController
   private
 
     def set_course
-      @course = Course.includes(:lessons).friendly.find(params[:id])
+      @course = Course.includes(:lessons).friendly.find(params[:course_id])
     end
 
 end

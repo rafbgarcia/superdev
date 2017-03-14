@@ -1,0 +1,44 @@
+<section class="box d-flex justify-content-between align-items-center" id="posts-list">
+  <h5 class="box-title">
+    <img src="/assets/yellow_post_icon.png">
+    Discutir a Questão
+  </h5>
+
+  <%= link_to 'Faça uma Pergunta', new_discussion_path(item), class: 'btn btn-primary' %>
+</section>
+
+<div class="row">
+  <div class="col-sm-4">
+    <div class="box no-padding post-list">
+      <% @item.discussions.each do |discussion| -%>
+        <%= link_to discussion.title, discussion_path(item.lesson.course, item.lesson, item, discussion, anchor: 'posts-list'), class: "post d-flex align-items-baseline #{'active' if params[:discussion_id] == discussion.slug}" %>
+      <% end %>
+    </div>
+  </div>
+
+
+  <% if @active_discussion.present? %>
+    <div class="col-sm 8 active-post">
+      <%= render partial: 'discussions/post', locals: { post: @active_discussion } %>
+
+      <% @active_discussion.comments.each do |comment| %>
+        <%= render partial: 'discussions/post', locals: { post: comment, comment_id: comment.id } %>
+      <% end %>
+
+      <h5>Adicione uma resposta</h5>
+
+      <div class="box d-flex justify-content-between">
+        <aside>
+          <div class="avatar"><%= image_tag current_user.avatar.url %></div>
+        </aside>
+        <div class="content">
+          <%= simple_form_for @comment, url: create_comment_path do |f| %>
+            <%= f.input :text %>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  <% end %>
+</div>

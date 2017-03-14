@@ -12,31 +12,34 @@ Rails.application.routes.draw do
   # Student Routes #
   ##################
 
-    get 'curso/:id', to: 'courses#show', as: :course
-    get 'curso/:course_id/licao/:lesson_id/item/:item_weight', to: 'items#show', as: :course_item
+    scope 'cursos/:course_id' do
+      get '/' => 'courses#show', as: :course
+      get '/:lesson_id/:item_weight' => 'items#show', as: :course_item
 
-    scope 'curso/:course_id/licao/:lesson_id/item/:item_weight' do
-      scope 'discussao' do
-        get 'nova', to: 'discussions#new', as: :new_discussion
-        post 'nova', to: 'discussions#create', as: :discussions
-
-        get ':discussion_id', to: 'items#show', as: :discussion
-        post ':discussion_id/comments', to: 'comments#create', as: :comments
+      scope '/:lesson_id/:item_weight/post/:discussion_id' do
+        get '/' => 'items#show', as: :discussion
+        post '/comments' => 'items#create_comment', as: :create_comment
       end
-
     end
+
+    scope 'questao/:item_id' do
+      get 'novo-post' => 'discussions#new', as: :new_discussion
+      post 'novo-post' => 'discussions#create', as: :discussions
+    end
+
+
 
     resources :item, only: [] do
       resources :answers, only: [:create]
     end
 
-    get 'notifications/:id/redirect', to: 'notifications#redirect', as: :notification_redirect
+    get 'notifications/:id/redirect' => 'notifications#redirect', as: :notification_redirect
 
   ################
   # Admin Routes #
   ################
 
-    get 'admin', to: 'admin#index'
+    get 'admin' => 'admin#index'
 
     namespace :admin do
       resources :courses

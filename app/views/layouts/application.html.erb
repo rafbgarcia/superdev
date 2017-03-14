@@ -4,6 +4,7 @@
   <title><%= @title || 'Início' %> | Superdev</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link rel="shortcut icon" type="image/png" href="<%= image_path 'favicon.png' %>" />
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600' rel='stylesheet' type='text/css'>
@@ -19,13 +20,17 @@
   <header>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-4 offset-sm-4 text-center">
+        <div class="col-sm-4">
+          <% if user_signed_in? %>
+            Olá, <%= current_user.name %>
+          <% end %>
+        </div>
+        <div class="col-sm-4 text-center">
           <%= link_to root_path do %>
             <%= image_tag 'logo.png', width: '165' %>
           <% end %>
         </div>
         <div class="col-sm-4 text-right">
-          <%#= link_to 'Crie sua conta', new_user_session_path, class: 'btn btn-primary' %>
           <%= link_to 'Inscreva-se', subscribe_path, class: 'btn btn-primary' %>
         </div>
       </div>
