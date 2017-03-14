@@ -90,3 +90,18 @@ body > footer
     border: 1px solid #ededed
     background-color: #ededed
     overflow: hidden
+
+
+// card.js overrides
+
+.jp-card .jp-card-front,.jp-card .jp-card-back
+  background-color: #333 !important
+
+.jp-card .jp-card-front
+  transition: opacity 500ms
+
+.jp-card.jp-card-flipped .jp-card-front
+  opacity: 0
+
+.jp-card .jp-card-back .jp-card-shiny:after
+  content: 'Este cartão é emitido pelo Banco. Se encontrado, favor entregar em qualquer agência do Banco. This card is issued by Banco. If found, please return it to the nearest Banco office.' !important

@@ -3,89 +3,54 @@
   <div class="box">
     <h3>Comece sua jornada no SuperDev Academy</h3>
 
-    <%#= form_for :subscription, method: :post do %>
-      <!-- input type="text" name="customer[name]">
-      <input type="text" name="customer[email]">
-      <button type="submit">Manda</button> -->
-    <%# end %>
+    <%= form_for :subscription, url: subscribe_path, method: :post, id: 'payment-form' do %>
+      <input type="hidden" name="mode" value="TEST">
 
-    <%= @plans.inspect %>
-    <div class="row">
-      <div class="col-sm-6">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Descrição</th>
-              <th class="tar">Valor</th>
-            </tr>
-          </thead>
-          <thead>
-            <tr>
-              <td>Item 1</th>
-              <td class="tar">R$ 59,90</th>
-            </tr>
-            <tr>
-              <td>Item 2</th>
-              <td class="tar">R$ 40,00</th>
-            </tr>
-            <tr class="order-total">
-              <td>TOTAL</th>
-              <td class="tar">R$ 99,90</th>
-            </tr>
-          </thead>
-        </table>
+      <input type="text" name="customer[name]" placeholder="Nome">
+      <input type="text" name="customer[email]" placeholder="Email">
+
+      <div class="btn-group payment-method-btn-group" data-toggle="buttons">
+        <label class="btn btn-default active" id="credit-card-checkbox-label">
+          <input checked type="checkbox" id="credit-card-checkbox" name="method" value="">Cartão de Crédito</input>
+        </label>
+        <label class="btn btn-default" id="bank-slip-checkbox-label">
+          <input type="checkbox" id="bank-slip-checkbox" name="method" value="bank_slip">Boleto Bancário</input>
+        </label>
       </div>
-      <div class="col-sm-6 credit-card-payment">
-        <%= form_for :subscription, url: subscribe_path, method: :post, id: 'payment-form' do %>
-          <input type="hidden" name="mode" value="TEST">
-
-          <input type="text" name="customer[name]" placeholder="Nome">
-          <input type="text" name="customer[email]" placeholder="Email">
-
-          <div class="btn-group payment-method-btn-group" data-toggle="buttons">
-            <label class="btn btn-default active" id="credit-card-checkbox-label">
-              <input checked type="checkbox" id="credit-card-checkbox" name="method" value="">Cartão de Crédito</input>
-            </label>
-            <label class="btn btn-default" id="bank-slip-checkbox-label">
-              <input type="checkbox" id="bank-slip-checkbox" name="method" value="bank_slip">Boleto Bancário</input>
-            </label>
+      <div class="usable-creditcard-form">
+        <div class="wrapper">
+          <div class="input-group nmb_a">
+            <div class="icon ccic-brand"></div>
+            <input autocomplete="off" class="credit_card_number" data-iugu="number" placeholder="Número do Cartão" type="text" value="" />
           </div>
-          <div class="usable-creditcard-form">
-            <div class="wrapper">
-              <div class="input-group nmb_a">
-                <div class="icon ccic-brand"></div>
-                <input autocomplete="off" class="credit_card_number" data-iugu="number" placeholder="Número do Cartão" type="text" value="" />
-              </div>
-              <div class="input-group nmb_b">
-                <div class="icon ccic-cvv"></div>
-                <input autocomplete="off" class="credit_card_cvv" data-iugu="verification_value" placeholder="CVV" type="text" value="" />
-              </div>
-              <div class="input-group nmb_c">
-                <div class="icon ccic-name"></div>
-                <input class="credit_card_name" data-iugu="full_name" placeholder="Titular do Cartão" type="text" value="" />
-              </div>
-              <div class="input-group nmb_d">
-                <div class="icon ccic-exp"></div>
-                <input autocomplete="off" class="credit_card_expiration" data-iugu="expiration" placeholder="MM/AA" type="text" value="" />
-              </div>
-            </div>
-            <div class="footer">
-              <img src="http://storage.pupui.com.br/9CA0F40E971643D1B7C8DE46BBC18396/assets/cc-icons.e8f4c6b4db3cc0869fa93ad535acbfe7.png" alt="Visa, Master, Diners. Amex" border="0" />
-
-              <a class="iugu-btn" href="http://iugu.com" tabindex="-1">
-                <img src="http://storage.pupui.com.br/9CA0F40E971643D1B7C8DE46BBC18396/assets/payments-by-iugu.1df7caaf6958f1b5774579fa807b5e7f.png" alt="Pagamentos por Iugu" border="0" />
-              </a>
-            </div>
+          <div class="input-group nmb_b">
+            <div class="icon ccic-cvv"></div>
+            <input autocomplete="off" class="credit_card_cvv" data-iugu="verification_value" placeholder="CVV" type="text" value="" />
           </div>
-          <input type="hidden" name="token" id="token" value="" readonly="true" size="64" style="text-align:center" />
-          <div class="submit-div">
-              <button type="submit" class="btn btn-primary">Pagar</button>
+          <div class="input-group nmb_c">
+            <div class="icon ccic-name"></div>
+            <input class="credit_card_name" data-iugu="full_name" placeholder="Titular do Cartão" type="text" value="" />
           </div>
+          <div class="input-group nmb_d">
+            <div class="icon ccic-exp"></div>
+            <input autocomplete="off" class="credit_card_expiration" data-iugu="expiration" placeholder="MM/AA" type="text" value="" />
+          </div>
+        </div>
+        <div class="footer">
+          <img src="http://storage.pupui.com.br/9CA0F40E971643D1B7C8DE46BBC18396/assets/cc-icons.e8f4c6b4db3cc0869fa93ad535acbfe7.png" alt="Visa, Master, Diners. Amex" border="0" />
 
-        <% end %>
+          <a class="iugu-btn" href="http://iugu.com" tabindex="-1">
+            <img src="http://storage.pupui.com.br/9CA0F40E971643D1B7C8DE46BBC18396/assets/payments-by-iugu.1df7caaf6958f1b5774579fa807b5e7f.png" alt="Pagamentos por Iugu" border="0" />
+          </a>
+        </div>
       </div>
-    </div>
+      <input type="hidden" name="token" id="token" value="" readonly="true" size="64" style="text-align:center" />
+      <div class="submit-div">
+          <button type="submit" class="btn btn-primary">Pagar</button>
+      </div>
+      <div class="card-wrapper"></div>
 
+    <% end %>
   </div>
 </div>
 
@@ -136,6 +101,43 @@
       cc_checkbox.removeAttr("checked");
       bs_checkbox.attr("checked", "checked");
       credit_card_form.hide();
+    });
+
+
+
+
+    var card = new Card({
+      // a selector or DOM element for the form where users will
+      // be entering their information
+      form: 'form', // *required*
+      // a selector or DOM element for the container
+      // where you want the card to appear
+      container: '.card-wrapper', // *required*
+
+      formSelectors: {
+        numberInput: 'input[data-iugu="number"]', // optional — default input[name="number"]
+        expiryInput: 'input[data-iugu="expiration"]', // optional — default input[name="expiry"]
+        cvcInput: 'input[data-iugu="verification_value"]', // optional — default input[name="cvc"]
+        nameInput: 'input[data-iugu="full_name"]' // optional - defaults input[name="name"]
+      },
+
+      width: 400,
+
+      messages: {
+          validDate: 'valido\naté',
+          monthYear: '', // optional - default 'month/year'
+      },
+
+      // Default placeholders for rendered fields - optional
+      placeholders: {
+          number: '•••• •••• •••• ••••',
+          name: 'Nome no Cartão',
+          expiry: 'MM/AA',
+          cvc: '•••'
+      },
+
+      // if true, will log helpful messages for setting up Card
+      debug: true // optional - default false
     });
   });
 </script>

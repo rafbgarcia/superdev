@@ -1,8 +1,6 @@
 class SubscriptionsController < ApplicationController
 
   def new
-    Iugu.api_key = 'AEF33427575F47A981F718E7A4BD9B80'
-    @plans = Iugu::Plan.fetch
   end
 
   def create
@@ -12,8 +10,6 @@ class SubscriptionsController < ApplicationController
 
     customer = Iugu::Customer.create(params[:customer].to_h)
 
-    byebug
-
     subscription = Iugu::Subscription.create(
       payment_method_key => params[payment_method_key],
       plan_identifier: "superdev_academy_pioneiros",
@@ -21,7 +17,7 @@ class SubscriptionsController < ApplicationController
     )
 
 
-    if charge and charge.success
+    if subscription && subscription.success
       render "new"
     else
       render "failed"
