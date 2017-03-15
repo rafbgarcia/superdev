@@ -6,24 +6,24 @@
     <div class="alert alert-danger"><%= @subscription.errors %>, por favor verifique seu e-mail para mais detalhes</div>
   <% end %>
 
-  <div class="box bigger" ng-init="credit_card = true">
+  <div class="box bigger" ng-init="method = 'credit_card'">
     <h4 class="text-center">Forma de Pagamento</h4>
 
     <%= form_for :subscription, url: subscribe_path, method: :post, html: { id: 'payment-form' } do %>
       <div class="text-center">
-        <label class="btn btn-primary" ng-click="credit_card = true" ng-class="{active: credit_card === true}">
-          <input type="radio" id="credit-card-checkbox" name="method" value="" ng-checked="credit_card === true">
+        <label class="btn btn-primary" ng-class="{active: method === 'credit_card'}">
+          <input type="radio" id="credit-card-checkbox" name="method" value="credit_card" ng-model="method">
           Cartão de Crédito
           <%= icon 'arrow-circle-right', class: 'ml-auto' %>
         </label>
-        <label class="btn btn-primary" ng-click="credit_card = false" ng-class="{active: credit_card === false}">
-          <input type="radio" id="bank-slip-checkbox" name="method" value="bank_slip">
+        <label class="btn btn-primary" ng-click="credit_card = false" ng-class="{active: method !== 'credit_card'}">
+          <input type="radio" id="bank-slip-checkbox" name="method" ng-model="method" value="bank_slip">
           Boleto Bancário
           <%= icon 'arrow-circle-right', class: 'ml-auto' %>
         </label>
       </div>
 
-      <div class="credit-card-info" ng-show="credit_card">
+      <div class="credit-card-info" ng-show="method === 'credit_card'">
         <div class="card-wrapper" style="margin: 2rem 0 1rem"></div>
         <div class="text-center" style="margin-bottom: 2rem">
           <img src="http://storage.pupui.com.br/9CA0F40E971643D1B7C8DE46BBC18396/assets/cc-icons.e8f4c6b4db3cc0869fa93ad535acbfe7.png" alt="Visa, Master, Diners. Amex" border="0" />
@@ -44,12 +44,12 @@
       </div>
 
       <div class="text-center" style="margin-top: 2rem">
-        <button type="submit" class="btn btn-success btn-lg" ng-show="credit_card === false">
+        <button type="submit" class="btn btn-success btn-lg" ng-show="method !== 'credit_card'">
           <%= icon 'check' %>
           Gerar Boleto de R$ 45,00
         </button>
 
-        <button type="submit" class="btn btn-success btn-lg" ng-show="credit_card === true">
+        <button type="submit" class="btn btn-success btn-lg" ng-show="method === 'credit_card'">
           <%= icon 'check' %>
           Assinar por R$ 45,00
         </button>
@@ -66,9 +66,9 @@
     Iugu.setTestMode(true);
 
     $('#payment-form').submit(function () {
-      if ($('#credit-card-checkbox').attr('checked')) {
-        var form = $(this);
+      var form = $(this);
 
+      if ($('#credit-card-checkbox').is(':checked')) {
         var tokenResponseHandler = function (data) {
           if (data.errors) {
             alert("Erro salvando cartão: " + JSON.stringify(data.errors));

@@ -30,24 +30,18 @@ class SubscriptionsController < ApplicationController
   end
 
   def new
-    # customer = Iugu::Customer.fetch("4308910265844FE088573276D1056F5A")
-
-    # customer.payment_methods.create({
-    #   # description: "Primeiro Cartão",
-    #   token: "77C2565F6F064A26ABED4255894224F0"
-    # })
   end
 
   def create
     Iugu.api_key = "30e045b8172796b804714c8423be3d9e"
 
-    payable_with = (params[:token].empty? ? "bank_slip" : "credit_card")
+    payable_with = (subscription_params[:method] == "credit_card" ? "credit_card" : "bank_slip")
 
     subscription_data = {
       payable_with: payable_with,
       plan_identifier: "superdev_academy_pioneiros",
       customer_id: session[:customer_id],
-      expires_at: 2.days.from_now
+      expires_at: 1.day.from_now
     }
 
     if payable_with == 'bank_slip'
@@ -60,7 +54,7 @@ class SubscriptionsController < ApplicationController
       pay_method = Iugu::PaymentMethod.create({
         customer_id: session[:customer_id],
         description: 'Cartão de Crédito',
-        token: params[:token],
+        token: subscription_params[:token],
         set_as_default: true,
       })
 
@@ -88,13 +82,19 @@ class SubscriptionsController < ApplicationController
   end
 
   def complete
+  end
 
+  def waiting_confirmation
   end
 
 private
 
   def customer_params
     params.require(:new_customer).permit(:name, :email).to_h
+  end
+
+  def subscription_params
+    params.permit(:token, :method)
   end
 
 end
