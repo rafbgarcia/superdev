@@ -13,9 +13,13 @@ class SubscriptionsController < ApplicationController
       @errors = { 'Por favor' => 'preencha todos os campos'}
       render :step_2
     else
-      customer = Iugu::Customer.create(customer_params)
+      customer = Iugu::Customer.create({
+        name: customer_params[:name].titleize,
+        email: customer_params[:email]
+      })
 
       if customer.errors
+        # invalid email
         @errors = customer.errors
         render :step_2
       else
@@ -26,40 +30,65 @@ class SubscriptionsController < ApplicationController
   end
 
   def new
-    @customer_id = session[:customer_id]
+    # customer = Iugu::Customer.fetch("4308910265844FE088573276D1056F5A")
+
+    # customer.payment_methods.create({
+    #   # description: "Primeiro Cartão",
+    #   token: "77C2565F6F064A26ABED4255894224F0"
+    # })
   end
 
   def create
     Iugu.api_key = "30e045b8172796b804714c8423be3d9e"
 
-    payment_method_key = (params[:token].empty? ? "method" : "token").to_sym
+    payable_with = (params[:token].empty? ? "bank_slip" : "credit_card")
 
-    customer = Iugu::Customer.create(params[:customer].to_h)
-
-    subscription = Iugu::Subscription.create(
-      payment_method_key => params[payment_method_key],
+    subscription_data = {
+      payable_with: payable_with,
       plan_identifier: "superdev_academy_pioneiros",
-      customer_id: customer.id,
-    )
+      customer_id: session[:customer_id],
+      expires_at: 2.days.from_now
+    }
 
+    if payable_with == 'bank_slip'
+      @subscription = Iugu::Subscription.create(subscription_data)
+      invoice = @subscription.recent_invoices.first
 
-    if subscription && subscription.success
-      render "new"
+      redirect_to invoice['secure_url']
+
     else
-      render "failed"
-    end
+      pay_method = Iugu::PaymentMethod.create({
+        customer_id: session[:customer_id],
+        description: 'Cartão de Crédito',
+        token: params[:token],
+        set_as_default: true,
+      })
 
+      subscription_data[:only_on_charge_success] = true
+
+      @subscription = Iugu::Subscription.create(subscription_data)
+
+      if @subscription.errors
+        render 'new'
+        return
+      end
+
+      invoice = @subscription.recent_invoices.first
+
+      if invoice.present?
+        if invoice['status'] == 'paid'
+          redirect_to subscribed_path
+        elsif invoice['status'] == 'pending'
+          redirect_to subscription_waiting_confirmation_path
+        end
+      else
+        render 'new'
+      end
+    end
   end
 
-  def create_2
-    Iugu.api_key = 'AEF33427575F47A981F718E7A4BD9B80'
+  def complete
 
-    customer = Iugu::Customer.create(params[:customer].to_hash)
-
-    subscription = Iugu::Subscription.create({
-      plan_identifier: "superdev_academy_pioneiros",
-      customer_id: customer.id,
-    })
   end
 
 private

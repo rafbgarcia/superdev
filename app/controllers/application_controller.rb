@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  after_filter :set_csrf_cookie_for_angular_xhr_requests
+  after_action :set_csrf_cookie_for_angular_xhr_requests
 
 protected
 

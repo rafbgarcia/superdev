@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post 'inscreva-se/passo-2' => 'subscriptions#create_customer'
   get 'inscreva-se/passo-3' => 'subscriptions#new', as: :subscribe
   post 'inscreva-se/passo-3' => 'subscriptions#create'
+  get 'aguardando-confirmacao' => 'subscriptions#waiting_confirmation'
+  get 'inscricao-concluida' => 'subscriptions#complete', as: :subscribed
 
   ##################
   # Student Routes #

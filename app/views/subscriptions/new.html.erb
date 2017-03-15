@@ -2,13 +2,17 @@
   <h1 class="text-center" style="font-weight: 100; color: #111; margin-bottom: 1rem;">Comece sua Jornada</h1>
   <h5 class="text-center" style="font-weight: 100; color: #666; margin-bottom: 2rem;">Torne-se um Super Programador</h5>
 
-  <div class="box bigger">
+  <% if @subscription.present? %>
+    <div class="alert alert-danger"><%= @subscription.errors %>, por favor verifique seu e-mail para mais detalhes</div>
+  <% end %>
+
+  <div class="box bigger" ng-init="credit_card = true">
     <h4 class="text-center">Forma de Pagamento</h4>
 
     <%= form_for :subscription, url: subscribe_path, method: :post, html: { id: 'payment-form' } do %>
       <div class="text-center">
         <label class="btn btn-primary" ng-click="credit_card = true" ng-class="{active: credit_card === true}">
-          <input type="radio" id="credit-card-checkbox" name="method" value="">
+          <input type="radio" id="credit-card-checkbox" name="method" value="" ng-checked="credit_card === true">
           Cartão de Crédito
           <%= icon 'arrow-circle-right', class: 'ml-auto' %>
         </label>
@@ -58,10 +62,10 @@
 <script>
   $(document).on('turbolinks:load', function () {
 
-    Iugu.setAccountID("30e045b8172796b804714c8423be3d9e");
+    Iugu.setAccountID("AEF33427575F47A981F718E7A4BD9B80");
     Iugu.setTestMode(true);
 
-    $('#payment-form').submit(function (evt) {
+    $('#payment-form').submit(function () {
       if ($('#credit-card-checkbox').attr('checked')) {
         var form = $(this);
 
@@ -80,28 +84,6 @@
       } else {
         form.get(0).submit();
       }
-    });
-
-    cc_checkbox = $('#credit-card-checkbox')
-    cc_checkbox_label = $('#credit-card-checkbox-label')
-    bs_checkbox = $('#bank-slip-checkbox')
-    bs_checkbox_label = $('#bank-slip-checkbox-label')
-    credit_card_form = $('.usable-creditcard-form')
-
-    cc_checkbox.click(function () {
-      bs_checkbox_label.removeClass("active");
-      cc_checkbox_label.addClass("active");
-      bs_checkbox.removeAttr("checked");
-      cc_checkbox.attr("checked", "checked");
-      credit_card_form.show();
-    });
-
-    bs_checkbox.click(function () {
-      cc_checkbox_label.removeClass("active");
-      bs_checkbox_label.addClass("active");
-      cc_checkbox.removeAttr("checked");
-      bs_checkbox.attr("checked", "checked");
-      credit_card_form.hide();
     });
 
     var card = new Card({
@@ -124,11 +106,13 @@
           monthYear: '', // optional - default 'month/year'
       },
 
+      formatting: false,
+
       // Default placeholders for rendered fields - optional
       placeholders: {
           number: '•••• •••• •••• ••••',
           name: 'Nome no Cartão',
-          expiry: 'MM/AAAA',
+          expiry: 'MM/AA',
           cvc: '•••'
       },
 
