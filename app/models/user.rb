@@ -26,8 +26,9 @@ class User < ApplicationRecord
     (avatar.exists? && avatar.url) || facebook_avatar || 'default_avatar.png'
   end
 
-  def become_a_registered_user(auth)
-    update_attributes!(
+
+  def self.create_from_facebook(auth)
+    self.create!(
       provider: auth.provider,
       uid: auth.uid,
       email: auth.info.email,
@@ -38,7 +39,6 @@ class User < ApplicationRecord
       facebook_link: auth.extra.raw_info.link,
       guest: false,
     )
-    self
   end
 
 private

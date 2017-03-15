@@ -23,6 +23,8 @@
         <div class="col-sm-4">
           <% if user_signed_in? %>
             Olá, <%= current_user.name %>
+            |
+            <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
           <% end %>
         </div>
         <div class="col-sm-4 text-center">
@@ -31,7 +33,7 @@
           <% end %>
         </div>
         <div class="col-sm-4 text-right">
-          <%= link_to 'Inscreva-se', subscribe_path, class: 'btn btn-primary' %>
+          <%= link_to 'Inscreva-se', subscribe_step_1_path, class: 'btn btn-primary' %>
         </div>
       </div>
     </div>

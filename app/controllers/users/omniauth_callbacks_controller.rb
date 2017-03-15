@@ -6,13 +6,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       return
     end
 
-    current_user.become_a_registered_user(request.env["omniauth.auth"])
-    UserMailer.send_welcome_email(current_user).deliver_later
+    user = User.create_from_facebook(request.env["omniauth.auth"])
+    UserMailer.send_welcome_email(user).deliver_later
 
     # When a user have the password updated, warden signs him out by default.
     # That's why we have to bypass warden's callbacks in here.
     # More info at: https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-edit-their-password
-    sign_in(current_user, bypass: true)
+    bypass_sign_in(user)
 
     redirect_to root_path
   end

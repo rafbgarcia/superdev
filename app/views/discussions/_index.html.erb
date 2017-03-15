@@ -29,7 +29,7 @@
 
       <div class="box d-flex justify-content-between">
         <aside>
-          <div class="avatar"><%= image_tag current_user.avatar.url %></div>
+          <div class="avatar"><%= image_tag current_user.current_avatar %></div>
         </aside>
         <div class="content">
           <%= simple_form_for @comment, url: create_comment_path do |f| %>

@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(
       to: %("#{@user.name}" <#{@user.email}>),
-      subject: "[SuperDev] Seja bem vindo, #{@user.first_name}!",
+      subject: "[SuperDev] Bem vindo, #{@user.first_name}!",
     )
   end
 
@@ -12,7 +12,7 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(
       to: %("#{@user.name}" <#{@user.email}>),
-      subject: "[SuperDev] Seja Bem Vindo, #{@user.first_name}!",
+      subject: "[SuperDev] Bem vindo, #{@user.first_name}!",
     )
   end
 
