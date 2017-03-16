@@ -64,18 +64,27 @@ class User < ApplicationRecord
   end
 
   def self.activate_subscription!(subscription)
-    User.where(iugu_customer_id: subscription.customer_id).update_all(
-      has_active_subscription: true,
+    user = User.where(iugu_customer_id: subscription.customer_id).first
+
+    update_data = {
       iugu_subscription_id: subscription.id,
       iugu_subscription_expires_at: subscription.expires_at,
-    )
+    }
+
+    if user.password.blank?
+      update_data[:password] = Devise.friendly_token[0, 10]
+    end
+
+    user.update!(update_data)
+
+    [user, update_data[:password]]
   end
 
 private
 
   def format_name_and_email
-    self.name = self.name.titleize
-    self.email = self.email.downcase
+    self.name = self.name&.titleize
+    self.email = self.email&.downcase
   end
 
   def set_name

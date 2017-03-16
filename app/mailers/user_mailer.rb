@@ -1,11 +1,12 @@
 class UserMailer < ApplicationMailer
 
-  def new_subscription(user, password)
+  def payment_approved(user, new_password)
     @user = user
+    @new_password = new_password
 
     mail(
       to: %("#{@user.name}" <#{@user.email}>),
-      subject: "[SuperDev] Bem vindo, #{@user.first_name}!",
+      subject: "[SuperDev] Pagamento aprovado!",
     )
   end
 

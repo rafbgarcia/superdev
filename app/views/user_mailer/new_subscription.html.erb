@@ -1,79 +1,31 @@
 <div style="font-size: 15px; color: #333; line-height: 22px;">
   <p style="font-size: 20px">
-    Fala, <%= @user.first_name %>!
+    Aí sim, <%= @user.first_name %>!
   </p>
 
-  <p>
-    Você agora faz parte da comunidade de Super Devs!
-  </p>
+  <p>Você deve estar ansioso para começar sua Jornada, então aqui estão seus dados de acesso:</p>
 
   <p>
-    Por comodidade, aqui está o link direto para o SuperDev Academy:
+    <strong>Seu login</strong>: <%= @user.email %>
     <br>
-    <%= link_to root_url, root_url %>
+    <strong>Sua senha</strong>: <%= @new_password %>
+    <br>
+    <strong>Link de acesso</strong>: <%= link_to new_user_session_url, new_user_session_url %>
   </p>
 
   <p>
-    [Importante] <%= @user.first_name %>, quero compartilhar 5 Dicas com você para aproveitar ao máximo sua experiência no Campus:
-    <ul>
-      <li>
-        <p>
-          <strong>Participe da Comunidade!</strong>
-        </p>
-        <p>
-          Faça perguntas, responda dúvidas de seus colegas, crie discussões sobre os assuntos. A interação vai te motivar a aprender cada vez mais!
-        </p>
-      </li>
-      <li>
-        <p>
-          <strong>Procure responder as questões corretamente!</strong>
-        </p>
-        <p>
-          Lembre-se que seu nível aumenta de acordo com suas respostas corretas. Se você tem alguma dúvida sobre aquela questão, faça uma pergunta antes de respondê-la para não perder status. ou faça uma pesquisa no Google.
-          <br>
-          Seu nível será muito importante para definir qual seu aprendizado e te trazer futuras oportunidades.
-        </p>
-      </li>
-      <li>
-        <p>
-          <strong>Pergunte, pergunte e PERGUNTE!</strong>
-        </p>
-        <p>
-          Tire todas as dúvidas que você tiver, caso contrário sua curva de aprendizado será muito mais lenta.
-        </p>
-      </li>
-      <li>
-        <p>
-          <strong>Arrisque-se!</strong>
-        </p>
-        <p>
-          Acha que sabe a resposta para alguma dúvida dos colegas? <strong>Responda!</strong> Não tenha medo de errar, o Campus é um local seguro para você errar no qual todos estamos todos buscando aprender todos os dias.
-        </p>
-      </li>
-      <li>
-        <p>
-          <strong>Divirta-se!</strong>
-        </p>
-        <p>
-          Aprender a Programar não precisa ser chato. Divirta-se enquanto aprende
-        </p>
-      </li>
-    </ul>
+    Quero te agradecer por se juntar a nós nessa iniciativa de impactar milhares de vidas através da Programação, esse é nosso propósito e pode contar com o SuperDev pra te ajudar a alcançar seus objetivos.
   </p>
 
   <p>
-    Me avisa se tiver alguma dúvida.
+    Qualquer dúvida, basta responder a este e-mail.
   </p>
 
   <p>
-    Aproveite!
-  </p>
-
-  <p>
-    Grande Abraço!
+    Abraço!
     <br>
     Rafa Garcia
     <br>
-    SuperDev
+    <%= link_to 'superdev.academy', root_url %>
   </p>
 </div>
