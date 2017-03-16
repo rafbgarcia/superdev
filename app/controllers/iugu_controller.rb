@@ -1,4 +1,4 @@
-class IuguController < ApplicationController
+class IuguController < ActionController::API
   # @see https://iugu.com/referencias/gatilhos
 
   # {
@@ -11,6 +11,8 @@ class IuguController < ApplicationController
   #   "event": "invoice.status_changed"
   # }
   def status_changed
+    return if params['event'].blank?
+
     if params['data']['status'] == 'paid'
       subscription = Iugu::Subscription.fetch('77C8C07177FD46448B5ED18C35DD91A4')
       User.activate_subscription_for(subscription.customer_id)
