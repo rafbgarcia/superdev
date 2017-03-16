@@ -33,8 +33,24 @@ class User < ApplicationRecord
     self.iugu_subscription_expires_at >= Date.today
   end
 
-# class methods
+  def save_iugu_token(token)
+    self.update_attributes(iugu_token: token)
+  end
 
+  def activate_subscription!(subscription)
+    new_password = Devise.friendly_token[0, 10]
+
+    user.update!(
+      iugu_subscription_id: subscription.id,
+      iugu_subscription_expires_at: subscription.expires_at,
+      password: new_password,
+    )
+
+    UserMailer.payment_approved(user, new_password).deliver_later
+  end
+
+
+# class methods
 
   def self.create_from_facebook(auth)
     self.create!(
@@ -66,18 +82,9 @@ class User < ApplicationRecord
   def self.activate_subscription!(subscription)
     user = User.where(iugu_customer_id: subscription.customer_id).first
 
-    update_data = {
-      iugu_subscription_id: subscription.id,
-      iugu_subscription_expires_at: subscription.expires_at,
-    }
-
-    if user.password.blank?
-      update_data[:password] = Devise.friendly_token[0, 10]
+    if !user.has_active_subscription?
+      user.activate_subscription!(subscription)
     end
-
-    user.update!(update_data)
-
-    [user, update_data[:password]]
   end
 
 private

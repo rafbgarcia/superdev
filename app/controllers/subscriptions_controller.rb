@@ -80,13 +80,10 @@ private
     invoice = @subscription.recent_invoices.first
 
     if invoice.present?
-      user.update_attributes(
-        iugu_token: subscription_params[:token],
-        iugu_subscription_id: @subscription.id,
-      )
+      user.save_iugu_token!(subscription_params[:token])
 
       if invoice['status'] == 'paid'
-        user.update_attributes(has_active_subscription: true)
+        user.activate_subscription!(@subscription)
 
         redirect_to subscribed_path
       elsif invoice['status'] == 'pending'
