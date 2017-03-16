@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'aguardando-confirmacao' => 'subscriptions#waiting_confirmation'
   get 'inscricao-concluida' => 'subscriptions#complete', as: :subscribed
 
+  post 'iugu/invoice/status_changed' => 'iugu#status_changed'
+
   ##################
   # Student Routes #
   ##################

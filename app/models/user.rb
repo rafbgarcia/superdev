@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   # Relationships
-    has_many :discussions
-    has_many :answers
+    has_many :discussions, dependent: :nullify
+    has_many :answers, dependent: :destroy
+    has_many :comments, dependent: :nullify
     has_many :notifications, -> { order(created_at: :desc) }
 
   # Devise
@@ -39,6 +40,18 @@ class User < ApplicationRecord
       facebook_link: auth.extra.raw_info.link,
       guest: false,
     )
+  end
+
+  def self.from_customer_data(data)
+    user = where(email: data[:email]).first_or_initialize
+
+    if user.new_record?
+      user.name = data[:name]
+      user.iugu_customer_id = data[:customer_id]
+      user.save!(validate: false)
+    end
+
+    user
   end
 
 private

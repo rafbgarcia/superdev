@@ -13,17 +13,20 @@ class SubscriptionsController < ApplicationController
       @errors = { 'Por favor' => 'preencha todos os campos'}
       render :step_2
     else
-      customer = Iugu::Customer.create({
+      user_data = {
         name: customer_params[:name].titleize,
         email: customer_params[:email]
-      })
+      }
+
+      customer = Iugu::Customer.create(user_data)
 
       if customer.errors
-        # invalid email
-        @errors = customer.errors
+        @errors = customer.errors # invalid email
         render :step_2
       else
-        session[:customer_id] = customer.id
+        user = User.from_customer_data(user_data.merge(customer_id: customer.id))
+
+        session[:user_id] = user.id
         redirect_to subscribe_path
       end
     end
@@ -35,49 +38,10 @@ class SubscriptionsController < ApplicationController
   def create
     Iugu.api_key = "30e045b8172796b804714c8423be3d9e"
 
-    payable_with = (subscription_params[:method] == "credit_card" ? "credit_card" : "bank_slip")
-
-    subscription_data = {
-      payable_with: payable_with,
-      plan_identifier: "superdev_academy_pioneiros",
-      customer_id: session[:customer_id],
-      expires_at: 1.day.from_now
-    }
-
-    if payable_with == 'bank_slip'
-      @subscription = Iugu::Subscription.create(subscription_data)
-      invoice = @subscription.recent_invoices.first
-
-      redirect_to invoice['secure_url']
-
+    if subscription_data[:payable_with] == 'bank_slip'
+      handle_bank_slip
     else
-      pay_method = Iugu::PaymentMethod.create({
-        customer_id: session[:customer_id],
-        description: 'Cartão de Crédito',
-        token: subscription_params[:token],
-        set_as_default: true,
-      })
-
-      subscription_data[:only_on_charge_success] = true
-
-      @subscription = Iugu::Subscription.create(subscription_data)
-
-      if @subscription.errors
-        render 'new'
-        return
-      end
-
-      invoice = @subscription.recent_invoices.first
-
-      if invoice.present?
-        if invoice['status'] == 'paid'
-          redirect_to subscribed_path
-        elsif invoice['status'] == 'pending'
-          redirect_to subscription_waiting_confirmation_path
-        end
-      else
-        render 'new'
-      end
+      handle_credit_card
     end
   end
 
@@ -89,12 +53,77 @@ class SubscriptionsController < ApplicationController
 
 private
 
+  def handle_credit_card
+    user = User.find(session[:user_id])
+
+    if user.iugu_token.blank?
+      payment_method = Iugu::PaymentMethod.create({
+        customer_id: user.iugu_customer_id,
+        description: 'Cartão de Crédito',
+        token: subscription_params[:token],
+        set_as_default: true,
+      })
+    end
+
+    @subscription = Iugu::Subscription.create(
+      subscription_data.merge(
+        only_on_charge_success: true,
+        customer_id: user.iugu_customer_id
+      )
+    )
+
+    if @subscription.errors
+      render 'new'
+      return
+    end
+
+    invoice = @subscription.recent_invoices.first
+
+    if invoice.present?
+      user.update_attributes(
+        iugu_token: subscription_params[:token],
+        iugu_subscription_id: @subscription.id,
+      )
+
+      if invoice['status'] == 'paid'
+        user.update_attributes(has_active_subscription: true)
+
+        redirect_to subscribed_path
+      elsif invoice['status'] == 'pending'
+        redirect_to subscription_waiting_confirmation_path
+      end
+    else
+      render 'new'
+    end
+  end
+
+  def handle_bank_slip
+    user = User.find(session[:user_id])
+
+    @subscription = Iugu::Subscription.create(subscription_data.merge(customer_id: user.iugu_customer_id))
+    invoice = @subscription.recent_invoices.first
+
+    redirect_to invoice['secure_url']
+  end
+
   def customer_params
     params.require(:new_customer).permit(:name, :email).to_h
   end
 
   def subscription_params
     params.permit(:token, :method)
+  end
+
+  def subscription_data
+    @subscription_data ||= begin
+      payable_with = (subscription_params[:method] == "credit_card" ? "credit_card" : "bank_slip")
+
+      {
+        payable_with: payable_with,
+        plan_identifier: "superdev_academy_pioneiros",
+        expires_at: 1.day.from_now
+      }
+    end
   end
 
 end
