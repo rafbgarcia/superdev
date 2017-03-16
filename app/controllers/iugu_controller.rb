@@ -19,7 +19,7 @@ class IuguController < ActionController::API
       user, new_password = User.activate_subscription!(subscription)
 
       if new_password.present?
-        UserMailer.payment_approved(user, new_password).deliver_later
+        UserMailer.payment_approved(user, new_password).deliver_now
       end
 
       Rails.logger.info ">>> NOVO PAGAMENTO: #{subscription.inspect}"

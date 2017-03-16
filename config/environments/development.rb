@@ -1,14 +1,19 @@
 Rails.application.configure do
-  config.action_mailer.delivery_method = :smtp
+  aws_credentials = Aws::Credentials.new(ENV['S3_ACCESS_KEY_ID'], ENV['S3_SECRET_ACCESS_KEY'])
+  Aws::Rails.add_action_mailer_delivery_method(:aws_ses, credentials: aws_credentials, region: 'us-west-2')
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :aws_ses
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
+    address: 'email-smtp.us-west-2.amazonaws',
     port: 587,
-    domain: 'superdev.com.br',
-    user_name: 'rafael@superdev.com.br',
-    password: ENV['GMAIL_PW'],
-    authentication: 'plain',
+    domain: 'superdev.academy',
+    user_name: ENV['SES_USER_NAME'],
+    password: ENV['SES_PASSWORD'],
+    authentication: :login,
     enable_starttls_auto: true,
   }
+
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.asset_host = 'https://superdev.academy'
 
@@ -19,10 +24,6 @@ Rails.application.configure do
     region: 'sa-east-1',
     default_url: 'missing.png',
   }
-
-
-  # Devise
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Settings specified here will take precedence over those in config/application.rb.
 
