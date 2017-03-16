@@ -33,14 +33,29 @@
           <% end %>
         </div>
         <div class="col-sm-4 text-right">
-          <%= link_to 'Inscreva-se', subscribe_step_1_path, class: 'btn btn-primary' %>
+          <%#= link_to 'Inscreva-se', subscribe_step_1_path, class: 'btn btn-primary' %>
         </div>
       </div>
     </div>
   </header>
 
   <main>
-    <div class="container-fluid"><%= yield %></div>
+    <div class="container-fluid">
+      <% if controller_name == 'subscriptions' %>
+        <%= yield  %>
+      <% else %>
+        <div class="text-center">
+          <h1>SuperDev Academy volta após o lançamento no dia 22/03/2017</h1>
+          <br><br>
+          <h6>Inscreva para o webinário de lançamento!</h6>
+          <br>
+          <a href="http://webinario.superdev.academy/aprenda-a-programar" class="btn btn-primary btn-lg">
+            <i class="fa fa-check"></i>
+            Webinário gratuito
+          </a>
+        </div>
+      <% end %>
+    </div>
   </main>
 
   <footer>
