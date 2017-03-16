@@ -10,7 +10,7 @@ class IuguController < ApplicationController
   #   },
   #   "event": "invoice.status_changed"
   # }
-  def status_change
+  def status_changed
     if params['data']['status'] == 'paid'
       subscription = Iugu::Subscription.fetch('77C8C07177FD46448B5ED18C35DD91A4')
       User.activate_subscription_for(subscription.customer_id)
