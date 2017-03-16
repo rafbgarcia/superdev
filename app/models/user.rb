@@ -40,13 +40,13 @@ class User < ApplicationRecord
   def activate_subscription!(subscription)
     new_password = Devise.friendly_token[0, 10]
 
-    user.update!(
+    self.update!(
       iugu_subscription_id: subscription.id,
       iugu_subscription_expires_at: subscription.expires_at,
       password: new_password,
     )
 
-    UserMailer.payment_approved(user, new_password).deliver_later
+    UserMailer.payment_approved(self, new_password).deliver_later
   end
 
 
