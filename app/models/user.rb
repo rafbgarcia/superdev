@@ -33,7 +33,7 @@ class User < ApplicationRecord
     self.iugu_subscription_expires_at >= Date.today
   end
 
-  def save_iugu_token(token)
+  def save_iugu_token!(token)
     self.update_attributes(iugu_token: token)
   end
 
