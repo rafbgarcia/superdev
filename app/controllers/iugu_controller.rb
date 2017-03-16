@@ -15,12 +15,15 @@ class IuguController < ActionController::API
 
     if params['data']['status'] == 'paid'
       subscription = Iugu::Subscription.fetch(params['data']['subscription_id'])
-      User.activate_subscription!(subscription)
 
-      # TODO: send mail
+      new_password = User.activate_subscription!(subscription)
+
+      UserMailer.send_subscribed_email.deliver_later()
 
       Rails.logger.info ">>> NOVO PAGAMENTO: #{subscription.inspect}"
     end
+
+    render status: 200
   end
 
 end

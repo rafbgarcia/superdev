@@ -21,7 +21,7 @@ class SubscriptionsController < ApplicationController
       customer = Iugu::Customer.create(user_data)
 
       if customer.errors
-        @errors = customer.errors # invalid email
+        @errors = customer.errors # possibly "invalid email" error
         render :step_2
       else
         user = User.from_customer_data(user_data.merge(customer_id: customer.id))

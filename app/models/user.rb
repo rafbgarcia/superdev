@@ -28,6 +28,13 @@ class User < ApplicationRecord
     (avatar.exists? && avatar.url) || facebook_avatar || 'default_avatar.png'
   end
 
+  def has_active_subscription?
+    return false if self.iugu_subscription_expires_at.blank?
+    self.iugu_subscription_expires_at >= Date.today
+  end
+
+# class methods
+
 
   def self.create_from_facebook(auth)
     self.create!(
@@ -48,6 +55,7 @@ class User < ApplicationRecord
 
     if user.new_record?
       user.name = data[:name]
+      user.password = Devise.friendly_token[0, 10]
       user.iugu_customer_id = data[:customer_id]
       user.save!(validate: false)
     end
@@ -59,6 +67,7 @@ class User < ApplicationRecord
     User.where(iugu_customer_id: subscription.customer_id).update_all(
       has_active_subscription: true,
       iugu_subscription_id: subscription.id,
+      iugu_subscription_expires_at: subscription.expires_at,
     )
   end
 
