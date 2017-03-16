@@ -55,8 +55,8 @@ class User < ApplicationRecord
     user
   end
 
-  def self.activate_subscription(subscription)
-    User.where(customer_id: subscription.customer_id).update_all(
+  def self.activate_subscription!(subscription)
+    User.where(iugu_customer_id: subscription.customer_id).update_all(
       has_active_subscription: true,
       iugu_subscription_id: subscription.id,
     )

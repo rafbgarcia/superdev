@@ -3,8 +3,6 @@ FactoryGirl.define do
     name "John Doe"
     email "hey@jude.com"
     password "123456"
-    level 1
-    xp 0
   end
 end
 
