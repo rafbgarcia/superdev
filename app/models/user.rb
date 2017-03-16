@@ -19,6 +19,7 @@ class User < ApplicationRecord
     has_attached_file :avatar, path: "/users-images/:id-:style.:extension", default_url: 'default_avatar.png'
     validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
+
   def first_name
     name.split(' ').first if name.present?
   end
@@ -52,6 +53,13 @@ class User < ApplicationRecord
     end
 
     user
+  end
+
+  def self.activate_subscription(subscription)
+    User.where(customer_id: subscription.customer_id).update_attributes(
+      has_active_subscription: true,
+      iugu_subscription_id: subscription.id,
+    )
   end
 
 private
