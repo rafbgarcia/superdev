@@ -7,12 +7,14 @@
           Mapa dos cursos
         </h6>
 
-        <div id="course-map">
-          <% @courses.each do |course| %>
+        <div id="course-map" class="d-flex flex-column align-items-center">
+          <% @courses.each_with_index do |course, index| %>
             <%= link_to course_path(course), class: 'course' do %>
               <%= image_tag course.image, width: 50 %>
               <%= course.name %>
             <% end %>
+
+            <%= content_tag(:div, nil, class: :divider) if index+1 < @courses.count  %>
           <% end %>
         </div>
       </section>
