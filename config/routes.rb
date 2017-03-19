@@ -5,6 +5,10 @@ Rails.application.routes.draw do
                     controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
 
+  # Site
+    get 'sobre' => 'application#about', as: :about
+    get 'contato' => 'application#contact', as: :contact
+
   # SSL Acme challenge
     get '.well-known/acme-challenge/:id' => 'application#acme_challenge'
   # Amazon SES bounce notification

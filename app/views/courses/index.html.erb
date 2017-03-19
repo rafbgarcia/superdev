@@ -1,15 +1,21 @@
 <section>
+  <h3 class="text-center mb-4">
+    <div>Construindo um Cadastro de Cursos</div>
+    <small class="fz-normal badge badge-info">Disponível a partir de 27/03</small>
+  </h3>
+
   <div class="row">
     <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2" role="Course Map">
       <section class="box smaller">
         <h6 class="box-title">
           <%= image_tag 'map_marker.png' %>
-          Mapa dos cursos
+          Etapas do Desenvolvimento
         </h6>
 
         <div id="course-map" class="d-flex flex-column align-items-center">
           <% @courses.each_with_index do |course, index| %>
-            <%= link_to course_path(course), class: 'course' do %>
+            <%#= link_to course_path(course), class: 'course' do %>
+            <%= link_to 'javascript:;', class: 'course' do %>
               <%= image_tag course.image, width: 50 %>
               <%= course.name %>
             <% end %>
@@ -20,6 +26,4 @@
       </section>
     </div>
   </div>
-
-
 </section>
