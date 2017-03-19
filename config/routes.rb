@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   # SSL Acme challenge
   get '.well-known/acme-challenge/:id' => 'application#acme_challenge'
+  # Amazon SES bounce notification
+  post 'amazon_sns/bounce', 'amazon_sns#bounce'
 
 
   get 'inscreva-se/passo-1' => 'subscriptions#step_1', as: :subscribe_step_1
