@@ -135,11 +135,13 @@ body > footer
 #page-sales
   .video-link
     display: block
-    padding: 1rem
+    padding: 1rem 0
     font-size: 1rem
     color: #444
-    border-left: 2px solid #ccc
     transition: all .3s
+
+    &:not(.current) strong
+      color: $blue
 
     &:not(:first-child)
       margin-top: 1rem
@@ -147,8 +149,11 @@ body > footer
     &.inactive
       cursor: not-allowed
 
-    &:hover:not(.inactive)
+    &:hover:not(.inactive, .current)
       background-color: #f3f3f3
 
     &.current
-      border-color: #66c7ef
+      padding: 1rem
+      color: #fff
+      border-radius: 4px
+      background: $blue

@@ -11,14 +11,14 @@
       <div class="col-lg-4" data-turbolinks="false">
         <%= link_to sales_path, class: 'video-link current' do %>
           <div>
-            <strong class="blue">Aula 1</strong>
+            <strong>Aula 1</strong>
           </div>
           <span class="title">Começando do Zero: o Front-end</span>
         <% end %>
 
         <%= link_to 'javascript:;', class: 'video-link inactive' do %>
-          <div class="d-flex align-items-center justify-content-between">
-            <strong class="blue">Aula 2</strong>
+          <div class="d-flex align-items-center">
+            <strong class="mr-2">Aula 2</strong>
             <small class="badge badge-info">Disponível dia 22/03</small>
           </div>
 
@@ -26,8 +26,8 @@
         <% end %>
 
         <%= link_to 'javascript:;', class: 'video-link inactive mb-5' do %>
-          <div class="d-flex align-items-center justify-content-between">
-            <strong class="blue">Aula 3</strong>
+          <div class="d-flex align-items-center">
+            <strong class="mr-2">Aula 3</strong>
             <small class="badge badge-info">Disponível dia 24/03</small>
           </div>
 
@@ -45,7 +45,7 @@
         Faça seu comentário abaixo
       </h2>
       <p class="text-muted">
-        * você está num <span class="text-success">ambiente seguro</span>, toda dúvida é válida :)
+        Você está num <span class="text-success">ambiente seguro</span>, toda dúvida é válida :)
       </p>
 
       <div class="box">
@@ -54,9 +54,15 @@
     </div>
 
     <div class="col-lg-4 testimonials">
-      <h3 class="mb-5">#ImpactoSuperDev</h3>
+      <h2 class="">#ImpactoSuperDev</h2>
+      <p class="text-muted">O impacto é causado no dia a dia, todos os dias</p>
 
-      <%= image_tag 'testimonial.png' %>
+      <%= image_tag 'testimonial.png', class: 'mb-4' %>
+      <%= image_tag 'testimonial2.png', class: 'mb-4' %>
+      <%= image_tag 'testimonial5.png', class: 'mb-4' %>
+      <%= image_tag 'testimonial6.png', class: 'mb-4' %>
+      <%= image_tag 'testimonial3.png', class: 'mb-4' %>
+      <%= image_tag 'testimonial4.png', class: 'mb-4' %>
     </div>
   </div>
 </div>
