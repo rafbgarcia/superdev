@@ -5,7 +5,10 @@ Rails.application.routes.draw do
                     controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
 
+  # SSL Acme challenge
   get '.well-known/acme-challenge/:id' => 'application#acme_challenge'
+
+
   get 'inscreva-se/passo-1' => 'subscriptions#step_1', as: :subscribe_step_1
   get 'inscreva-se/passo-2' => 'subscriptions#step_2', as: :subscribe_step_2
   post 'inscreva-se/passo-2' => 'subscriptions#create_customer'
