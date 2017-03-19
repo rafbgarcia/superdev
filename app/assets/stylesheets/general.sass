@@ -9,6 +9,13 @@ body > main
 body > footer
   border-top: 1px solid #eee
   padding: 1rem 0
+  .divider
+    margin: 0 1rem
+    color: #bbb
+    font-size: 1.4rem
+    line-height: 0
+    position: relative
+    top: -0.1rem
 
 
 // index
@@ -122,3 +129,26 @@ body > footer
   input
     padding: 0.75rem 0.75rem
     margin-bottom: 0.5rem
+
+
+// page sales
+#page-sales
+  .video-link
+    display: block
+    padding: 1rem
+    font-size: 1rem
+    color: #444
+    border-left: 2px solid #ccc
+    transition: all .3s
+
+    &:not(:first-child)
+      margin-top: 1rem
+
+    &.inactive
+      cursor: not-allowed
+
+    &:hover:not(.inactive)
+      background-color: #f3f3f3
+
+    &.current
+      border-color: #66c7ef

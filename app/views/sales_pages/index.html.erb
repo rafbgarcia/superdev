@@ -1,0 +1,62 @@
+<div class="container" id="page-sales">
+  <h1 class="text-center mb-5">Aprenda como Construir Sistemas Web do Zero</h1>
+
+  <div class="box mb-5">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= @video_id %>" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="col-lg-4" data-turbolinks="false">
+        <%= link_to sales_path, class: 'video-link current' do %>
+          <div>
+            <strong class="blue">Aula 1</strong>
+          </div>
+          <span class="title">Começando do Zero: o Front-end</span>
+        <% end %>
+
+        <%= link_to 'javascript:;', class: 'video-link inactive' do %>
+          <div class="d-flex align-items-center justify-content-between">
+            <strong class="blue">Aula 2</strong>
+            <small class="badge badge-info">Disponível dia 22/03</small>
+          </div>
+
+          <span class="title">Back-end: deixando seu site dinâmico</span>
+        <% end %>
+
+        <%= link_to 'javascript:;', class: 'video-link inactive mb-5' do %>
+          <div class="d-flex align-items-center justify-content-between">
+            <strong class="blue">Aula 3</strong>
+            <small class="badge badge-info">Disponível dia 24/03</small>
+          </div>
+
+          <span class="title">Colocando seu site online</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="mb-2">&nbsp;</div>
+
+  <div class="row">
+    <div class="col-lg-8 comments">
+      <h2>
+        <%= icon :heart, class: 'red' %>
+        Faça seu comentário abaixo
+      </h2>
+      <p class="text-muted">
+        * você está num <span class="text-success">ambiente seguro</span>, toda dúvida é válida :)
+      </p>
+
+      <div class="box">
+        <div class="fb-comments" data-order-by="reverse_time" data-href="https://www.facebook.com/superdev.academy/como-construir-sistemas-web" data-mobile="true" data-numposts="10"></div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 testimonials">
+      <h3 class="mb-5">#ImpactoSuperDev</h3>
+
+      <%= image_tag 'testimonial.png' %>
+    </div>
+  </div>
+</div>

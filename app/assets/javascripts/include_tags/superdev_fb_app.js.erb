@@ -1,6 +1,6 @@
 window.fbAsyncInit = function() {
   FB.init({
-    appId      : '1607381742893296',
+    appId      : <%= Rails.env.production? ? '1607378846226919' : '1607381742893296' %>,
     xfbml      : true,
     version    : 'v2.8'
   });
@@ -11,6 +11,6 @@ window.fbAsyncInit = function() {
    var js, fjs = d.getElementsByTagName(s)[0];
    if (d.getElementById(id)) {return;}
    js = d.createElement(s); js.id = id;
-   js.src = "//connect.facebook.net/en_US/sdk.js";
+   js.src = "//connect.facebook.net/pt_BR/sdk.js";
    fjs.parentNode.insertBefore(js, fjs);
- }(document, 'script', 'facebook-jssdk'));
+ }(document, 'script', 'superdev.academy'));
