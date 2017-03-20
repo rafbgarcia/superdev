@@ -7,7 +7,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'email-smtp.us-west-2.amazonaws',
     port: 587,
-    domain: 'superdev.academy',
+    domain: 'www.superdev.academy',
     user_name: ENV['SES_USER_NAME'],
     password: ENV['SES_PASSWORD'],
     authentication: :login,

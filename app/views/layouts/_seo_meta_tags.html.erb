@@ -1,0 +1,18 @@
+<meta name="description" content="Finalmente! Aprenda como Construir Sistemas Web de uma vez por todas, sem blá blá blá" />
+<meta name="keywords" content="curso de programação, construir sites, aprender a programar, html, css, javascript, php, curso de php" />
+
+
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="SuperDev Academy" />
+<meta property="og:description" content="Finalmente! Aprenda como Construir Sistemas Web de uma vez por todas" />
+<meta property="og:site_name" content="Webinário | SuperDev Academy" />
+<meta property="og:url" content="http://webinario.superdev.academy/" />
+
+<% if content_for?(:og) %>
+  <meta property="og:image" content="<%= image_url @og_image %>" />
+  <meta property="og:image:secure_url" content="<%= image_url @og_image %>" />
+<% else %>
+  <meta property="og:image" content="<%= image_url 'og_default.png' %>" />
+  <meta property="og:image:secure_url" content="<%= image_url 'og_default.png' %>" />
+<% end %>
