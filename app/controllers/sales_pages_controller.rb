@@ -4,7 +4,7 @@ class SalesPagesController < ApplicationController
     @video_id =
       case params[:video_id]
       when '2'
-        ''
+        'h8xy9wLYWCs'
       when '3'
         ''
       else
