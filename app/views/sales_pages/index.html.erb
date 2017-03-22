@@ -1,7 +1,13 @@
 <% content_for(:og) { @og_image = 'og_webinario.png' } %>
 
 <div class="container" id="page-sales">
-  <h1 class="text-center mb-5">Aprenda como Construir Sistemas Web do Zero</h1>
+  <h1 class="text-center mb-5">
+    <% if params[:video_id] == '2' %>
+      Avance <strong>MESES</strong> de aprendizado em <strong>apenas 17 minutos</strong>
+    <% else %>
+      Aprenda como Construir Sistemas Web do Zero
+    <% end %>
+  </h1>
 
   <div class="box mb-5">
     <div class="row">
