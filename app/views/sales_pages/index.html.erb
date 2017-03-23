@@ -32,10 +32,9 @@
           <span class="title">Back-end: deixando seu site dinâmico</span>
         <% end %>
 
-        <%= link_to 'javascript:;', class: 'video-link inactive mb-5' do %>
+        <%= link_to sales_path(video_id: '3'), class: "video-link #{'current' if params[:video_id] == '3'} mb-5" do %>
           <div class="d-flex align-items-center">
             <strong class="mr-2">Aula 3</strong>
-            <small class="badge badge-info">Disponível dia 24/03</small>
           </div>
 
           <span class="title">Colocando seu site online</span>
