@@ -12,9 +12,16 @@
   <div class="box mb-5">
     <div class="row">
       <div class="col-lg-8">
-        <div class="embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive embed-responsive-16by9 mb-4">
           <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= @video_id %>?rel=0" frameborder="0" allowfullscreen></iframe>
         </div>
+
+        <% if params[:video_id] == '3' %>
+        <div>
+          * Endereço do site online como fizemos no vídeo:
+          <a href="https://superdev.herokuapp.com" target="superdevheroku">superdev.herokuapp.com</a>
+        </div>
+        <% end %>
       </div>
       <div class="col-lg-4" data-turbolinks="false">
         <%= link_to sales_path, class: "video-link #{'current' if params[:video_id].blank?}" do %>
@@ -42,6 +49,9 @@
       </div>
     </div>
   </div>
+
+
+
   <div class="mb-2">&nbsp;</div>
 
   <div class="row">
