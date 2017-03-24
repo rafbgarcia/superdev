@@ -15,13 +15,16 @@
 <script>
   $(document).on('turbolinks:load', function () {
     var videoContainer = $('.video-container');
+    var body = $('body');
 
     $('.maximize', videoContainer).click(function () {
       videoContainer.addClass('maximized')
+      body.addClass('maximized')
     });
 
     $('.close', videoContainer).click(function () {
       videoContainer.removeClass('maximized')
+      body.removeClass('maximized')
     });
   });
 </script>
