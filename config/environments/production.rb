@@ -18,8 +18,14 @@ Rails.application.configure do
 
   config.paperclip_defaults = {
     storage: :s3,
-    s3_credentials: File.expand_path('../s3.yml', __dir__),
+    s3_credentials: {
+      access_key_id: ENV['S3_ACCESS_KEY_ID'],
+      secret_access_key: ENV['S3_SECRET_ACCESS_KEY'],
+      bucket: 'superdev-academy',
+      s3_region: 'sa-east-1'
+    },
     s3_host_name: 's3-sa-east-1.amazonaws.com',
+    region: 'sa-east-1',
     default_url: 'missing.png',
   }
 
