@@ -9,7 +9,8 @@ class Admin::ItemsController < AdminController
     before_action :set_item, only: [:edit, :update, :destroy]
 
     def index
-      @items = Item.by_lesson.includes(:itemable, lesson: :course).all
+      # @items = Item.by_lesson.includes(:itemable, lesson: :course).all
+      @lessons = Lesson.by_course.includes(:course, items: :itemable).all
     end
 
     def new
@@ -34,6 +35,16 @@ class Admin::ItemsController < AdminController
         redirect_to admin_items_url, notice: 'item was successfully updated.'
       else
         render :edit
+      end
+    end
+
+    def update_weight
+      item = Item.find(params[:item_id])
+
+      if item.update_weight(params[:item][:weight])
+        redirect_to admin_items_url, notice: 'item was successfully updated.'
+      else
+        render :index
       end
     end
 

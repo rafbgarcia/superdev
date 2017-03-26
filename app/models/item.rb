@@ -5,7 +5,7 @@ class Item < ApplicationRecord
     has_many :discussions, -> { order(upvotes: :desc) }
 
   # Validation
-    validates_presence_of :title, :lesson_id, :weight
+    validates_presence_of :title, :lesson_id
 
   # Scopes
     # scope :by_lesson, -> { includes(:lesson).order('lessons.weight ASC, items.weight ASC') }
@@ -38,6 +38,21 @@ class Item < ApplicationRecord
 
   def has_previous_item?
     previous_item.present?
+  end
+
+  def update_weight(new_weight)
+    existing_item = Item.where(lesson_id: self.lesson.id, weight: new_weight).first
+
+    if existing_item.present?
+      existing_item.update_attributes(weight: 999)
+
+      self_weight = self.weight
+
+      self.update_attributes(weight: new_weight)
+      existing_item.update_attributes(weight: self_weight)
+    else
+      self.update_attributes(weight: new_weight)
+    end
   end
 
   # Types

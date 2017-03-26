@@ -26,9 +26,8 @@ class Lesson < ApplicationRecord
   def update_weight(new_weight)
     existing_lesson = Lesson.where(course_id: self.course.id, weight: new_weight).first
 
-      Rails.logger.info '>>> ' + new_weight
     if existing_lesson.present?
-      existing_lesson.update_attributes(weight: -1)
+      existing_lesson.update_attributes(weight: 999)
 
       self_weight = self.weight
 

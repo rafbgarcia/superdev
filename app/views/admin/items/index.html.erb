@@ -1,34 +1,52 @@
-<h1>Listing Items</h1>
+<h3 class="mb-5">Items</h3>
 
-<table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th width="30%">Course/item</th>
-      <th width="40%">Title</th>
-      <th width="10%">Type</th>
-      <th width="10%">Weight</th>
-      <th width="10%">URL</th>
-      <th width="10%"></th>
-    </tr>
-  </thead>
+<% @lessons.each do |lesson| %>
+  <h6>
+    <span class="badge badge-default"><%= lesson.course.name %></span>
+    >
+    <span class="badge badge-success"><%= lesson.weight %> - <%= lesson.name %></span>
+  </h6>
 
-  <tbody>
-    <% @items.each do |item| %>
+  <table class="table table-bordered table-hover mb-5">
+    <thead>
       <tr>
-        <td><%= item.lesson.course %>/<%= item.lesson %></td>
-        <td><%= item.title %></td>
-        <td><%= item.type %></td>
-        <td><%= item.weight %></td>
-        <td><%= item.itemable.try :url %></td>
-        <td>
-          <%= link_to 'Edit', edit_admin_item_path(item.itemable, type: item.itemable.class.name) %>
-          |
-          <%= link_to 'Delete', admin_item_path(item.itemable, type: item.itemable.class.name), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
+        <th width="35%">Título</th>
+        <th width="10%">Tipo</th>
+        <th width="50%">URL</th>
+        <th width="5%"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% lesson.items.each do |item| %>
+        <tr>
+          <td>
+            <div class="d-flex">
+              <%= simple_form_for item, url: admin_item_update_weight_path(item) do |f| %>
+                <input type="hidden" name="item[weight]" value="<%= item.weight - 1 %>">
+                <button class="btn btn-sm btn-default">-1</button>
+              <% end %>
+              &nbsp;
+              <%= simple_form_for item, url: admin_item_update_weight_path(item) do |f| %>
+                <input type="hidden" name="item[weight]" value="<%= item.weight + 1 %>">
+                <button class="btn btn-sm btn-default">+1</button>
+              <% end %>
+              &nbsp;
+              <%= item.weight %> - <%= item.title %>
+            </div>
+          </td>
+          <td><%= item.type %></td>
+          <td><%= item.itemable.try :url %></td>
+          <td>
+            <%= link_to 'Edit', edit_admin_item_path(item.itemable, type: item.itemable.class.name) %>
+            |
+            <%= link_to 'Delete', admin_item_path(item.itemable, type: item.itemable.class.name), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <br>
 

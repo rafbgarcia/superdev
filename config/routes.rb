@@ -68,7 +68,10 @@ Rails.application.routes.draw do
       resources :lessons do
         patch :update_weight
       end
-      resources :items
+
+      resources :items do
+        patch :update_weight
+      end
     end
 
 end

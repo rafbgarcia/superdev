@@ -34,7 +34,7 @@ class Admin::LessonsController < AdminController
       if @lesson.update_weight(lesson_params[:weight])
         redirect_to admin_lessons_url, notice: 'lesson was successfully updated.'
       else
-        render :edit
+        render :index
       end
     end
 
