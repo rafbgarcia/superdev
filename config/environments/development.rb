@@ -15,11 +15,11 @@ Rails.application.configure do
   }
 
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.asset_host = 'https://superdev.academy'
+  config.action_mailer.asset_host = 'https://www.superdev.academy'
 
   config.paperclip_defaults = {
     storage: :s3,
-    s3_credentials: "#{Rails.root}/config/s3.yml",
+    s3_credentials: File.expand_path('../s3.yml', __dir__),
     s3_host_name: 's3-sa-east-1.amazonaws.com',
     region: 'sa-east-1',
     default_url: 'missing.png',

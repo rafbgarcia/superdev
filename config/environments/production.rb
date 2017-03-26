@@ -18,7 +18,7 @@ Rails.application.configure do
 
   config.paperclip_defaults = {
     storage: :s3,
-    s3_credentials: "#{Rails.root}/config/s3.yml",
+    s3_credentials: File.expand_path('../s3.yml', __dir__),
     s3_host_name: 's3-sa-east-1.amazonaws.com',
     default_url: 'missing.png',
   }
