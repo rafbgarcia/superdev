@@ -12,7 +12,7 @@
         </div>
         <div class="col-sm-4 text-right">
           <% if @item.has_previous_item? -%>
-            <%= link_to course_item_path(lesson_id: @item.previous_item.lesson.slug, item_weight: @item.previous_item.weight), class: 'question-link' do %>
+            <%= link_to item_path(@item.previous_item), class: 'question-link' do %>
               <%= image_tag 'previous.png' %>
               Anterior
             <% end %>
@@ -26,7 +26,7 @@
           <span>/</span>
 
           <% if @item.has_next_item? -%>
-            <%= link_to course_item_path(lesson_id: @item.next_item.lesson.slug, item_weight: @item.next_item.weight), class: 'question-link' do %>
+            <%= link_to item_path(@item.next_item), class: 'question-link' do %>
               Próximo
               <%= image_tag 'next.png' %>
             <% end %>
