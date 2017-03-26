@@ -18,15 +18,11 @@
         Lição
         <%= lesson.weight %>:
         <span class="blue"><%= lesson.name %></span>
-
-        <% if lesson.free? %>
-          <span class="badge badge-success">Grátis</span>
-        <% end %>
       </h4>
 
       <section class="questions-list">
         <% lesson.items.each do |item| %>
-          <%= link_to course_item_path(lesson_id: lesson.id, item_weight: item.weight) do %>
+          <%= link_to course_item_path(lesson_id: lesson.slug, item_weight: item.weight) do %>
             <%= image_tag "question_type_#{format_item_type(item.type)}.png" %>
             <span class="title"><%= item.title %></span>
             <%= answer_icon_for(current_user, item) %>

@@ -8,15 +8,28 @@ class Item < ApplicationRecord
     validates_presence_of :title, :lesson_id, :weight
 
   # Scopes
+    # scope :by_lesson, -> { includes(:lesson).order('lessons.weight ASC, items.weight ASC') }
     scope :by_lesson, -> { order(:lesson_id, :weight) }
+
+  before_create :set_weight
 
 
   def previous_item
-    Item.where(lesson_id: lesson_id, weight: weight - 1).first
+    lesson = Lesson.find(lesson_id)
+
+    item = lesson.items.where(weight: weight - 1).first
+    return item if item.present?
+
+    lesson.previous_lesson&.items&.last
   end
 
   def next_item
-    Item.where(lesson_id: lesson_id, weight: weight + 1).first
+    lesson = Lesson.find(lesson_id)
+
+    item = lesson.items.where(weight: weight + 1).first
+    return item if item.present?
+
+    lesson.next_lesson&.items&.last
   end
 
   def has_next_item?
@@ -46,6 +59,12 @@ class Item < ApplicationRecord
     def for(lesson, weight)
       where(lesson: lesson, weight: weight).first
     end
+  end
+
+private
+
+  def set_weight
+    self.weight = Item.where(lesson_id: self.lesson.id).order(:weight).last.weight + 1
   end
 
 end

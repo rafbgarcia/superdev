@@ -65,7 +65,9 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :courses
-      resources :lessons
+      resources :lessons do
+        patch :update_weight
+      end
       resources :items
     end
 
