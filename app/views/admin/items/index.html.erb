@@ -9,7 +9,7 @@
       <th width="40%">Title</th>
       <th width="10%">Type</th>
       <th width="10%">Weight</th>
-      <th width="10%">Difficulty</th>
+      <th width="10%">URL</th>
       <th width="10%"></th>
     </tr>
   </thead>
@@ -21,7 +21,7 @@
         <td><%= item.title %></td>
         <td><%= item.type %></td>
         <td><%= item.weight %></td>
-        <td><%= item.difficulty %></td>
+        <td><%= item.itemable.try :url %></td>
         <td>
           <%= link_to 'Edit', edit_admin_item_path(item.itemable, type: item.itemable.class.name) %>
           |
