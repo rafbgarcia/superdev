@@ -10,6 +10,15 @@ class Course < ApplicationRecord
     validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
 
+  def previous_course
+    Course.where('id < ?', self.id).limit(1).first
+  end
+
+  def next_course
+    Course.where('id > ?', self.id).limit(1).first
+  end
+
+
   def to_s
     name
   end

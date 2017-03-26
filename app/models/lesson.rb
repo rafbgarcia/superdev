@@ -16,11 +16,17 @@ class Lesson < ApplicationRecord
   before_create :set_weight
 
   def previous_lesson
-    Lesson.where(course_id: self.course_id, weight: self.weight - 1).first
+    lesson = course.lessons.where(weight: weight - 1).first
+    return lesson if lesson.present?
+
+    course.previous_course&.lessons&.first
   end
 
   def next_lesson
-    Lesson.where(course_id: self.course_id, weight: self.weight + 1).first
+    lesson = course.lessons.where(weight: weight + 1).first
+    return lesson if lesson.present?
+
+    course.next_course&.lessons&.first
   end
 
   def update_weight(new_weight)

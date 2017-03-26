@@ -15,21 +15,17 @@ class Item < ApplicationRecord
 
 
   def previous_item
-    lesson = Lesson.find(lesson_id)
-
-    item = lesson.items.where(weight: weight - 1).first
+    item = self.lesson.items.where(weight: weight - 1).first
     return item if item.present?
 
-    lesson.previous_lesson&.items&.last
+    self.lesson.previous_lesson&.items&.last
   end
 
   def next_item
-    lesson = Lesson.find(lesson_id)
-
-    item = lesson.items.where(weight: weight + 1).first
+    item = self.lesson.items.where(weight: weight + 1).first
     return item if item.present?
 
-    lesson.next_lesson&.items&.last
+    self.lesson.next_lesson&.items&.first
   end
 
   def has_next_item?
