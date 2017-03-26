@@ -2,7 +2,7 @@ class Admin::CoursesController < AdminController
     before_action :set_course, only: [:edit, :update, :destroy]
 
     def index
-      @courses = Course.all
+      @courses = Course.by_weight
     end
 
     def new
@@ -42,7 +42,7 @@ class Admin::CoursesController < AdminController
     end
 
     def course_params
-      params[:course]
+      params.require(:course).permit(:name, :image, :weight, :description, :available_at)
     end
 
 end
