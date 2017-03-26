@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  before_action :require_subscription, only: [:show]
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -8,10 +9,12 @@ class CoursesController < ApplicationController
   def show
   end
 
-  private
+private
 
-    def set_course
-      @course = Course.includes(:lessons).friendly.find(params[:course_id])
-    end
+  def set_course
+    @course = Course.includes(:lessons).friendly.find(params[:course_id])
+  end
+
+
 
 end

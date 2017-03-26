@@ -1,10 +1,9 @@
 class ItemsController < ApplicationController
-  before_filter :set_vars
-  before_filter :set_discussion_variables
+  before_action :require_subscription
+  before_action :set_vars
+  before_action :set_discussion_variables
 
   def show
-    # answer = Answer.for(current_user, @item)
-    # @answered_alternative = answer && answer.alternative.as_json
   end
 
   def create_comment

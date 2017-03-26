@@ -1,4 +1,5 @@
 class DiscussionsController < ApplicationController
+  before_action :require_subscription
   before_action :set_item
 
   def new

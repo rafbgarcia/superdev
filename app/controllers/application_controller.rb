@@ -17,4 +17,10 @@ protected
     super || valid_authenticity_token?(session, request.headers['X-XSRF-TOKEN'])
   end
 
+  def require_subscription
+    if !user_signed_in? || !current_user.has_active_subscription?
+      render 'users/needs_subscription'
+    end
+  end
+
 end

@@ -30,7 +30,7 @@ class User < ApplicationRecord
 
   def has_active_subscription?
     return false if self.iugu_subscription_expires_at.blank?
-    self.iugu_subscription_expires_at >= Date.today
+    self.iugu_subscription_expires_at > Date.today
   end
 
   def save_iugu_token!(token)
