@@ -25,6 +25,7 @@ Rails.application.configure do
       bucket: 'superdev-academy-dev',
       s3_region: 'sa-east-1',
     },
+    s3_protocol: :https,
     s3_host_name: 's3-sa-east-1.amazonaws.com',
     region: 'sa-east-1',
     default_url: 'missing.png',
