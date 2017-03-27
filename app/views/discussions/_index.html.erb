@@ -11,7 +11,7 @@
   <div class="col-sm-4">
     <div class="box no-padding post-list">
       <% @item.discussions.each do |discussion| -%>
-        <%= link_to discussion.title, discussion_path(item.lesson.course, item.lesson, item, discussion, anchor: 'posts-list'), class: "post d-flex align-items-baseline #{'active' if params[:discussion_id] == discussion.slug}" %>
+        <%= link_to discussion.title, anchor_discussion_path(discussion), class: "post d-flex align-items-baseline #{'active' if params[:discussion_id] == discussion.slug}" %>
       <% end %>
     </div>
   </div>

@@ -12,8 +12,6 @@ class ItemsController < ApplicationController
     @comment.discussion = Discussion.friendly.find(params[:discussion_id])
 
     if @comment.save
-      # NotifyNewCommentOnDiscussionJob.perform_later(@comment.id)
-
       redirect_to action: :show, anchor: "comment_#{@comment.id}"
     else
       render :show

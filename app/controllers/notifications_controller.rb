@@ -7,13 +7,7 @@ class NotificationsController < ApplicationController
     comment = notification.notificable
     discussion = comment.discussion
 
-    redirect_to discussion_path(
-      discussion.item.lesson.course,
-      discussion.item.lesson,
-      discussion.item,
-      discussion,
-      anchor: "comment#{comment.id}",
-    )
+    redirect_to anchor_discussion_path(discussion)
   end
 
 end

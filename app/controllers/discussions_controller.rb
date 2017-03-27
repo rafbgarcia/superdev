@@ -12,7 +12,7 @@ class DiscussionsController < ApplicationController
     @discussion.item = @item
 
     if @discussion.save
-      redirect_to discussion_path(@item.lesson.course, @item.lesson, @item, @discussion)
+      redirect_to anchor_discussion_path(@discussion)
     else
       render :new
     end

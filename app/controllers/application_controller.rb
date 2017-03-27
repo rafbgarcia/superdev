@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
+
   protect_from_forgery with: :exception
 
   after_action :set_csrf_cookie_for_angular_xhr_requests

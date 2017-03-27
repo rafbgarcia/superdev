@@ -2,12 +2,12 @@ Rails.application.configure do
   aws_credentials = Aws::Credentials.new(ENV['S3_ACCESS_KEY_ID'], ENV['S3_SECRET_ACCESS_KEY'])
   Aws::Rails.add_action_mailer_delivery_method(:aws_ses, credentials: aws_credentials, region: 'us-west-2')
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: ENV['PORT'] }
   config.action_mailer.delivery_method = :aws_ses
   config.action_mailer.smtp_settings = {
     address: 'email-smtp.us-west-2.amazonaws',
     port: 587,
-    domain: 'superdev.academy',
+    domain: 'www.superdev.academy',
     user_name: ENV['SES_USER_NAME'],
     password: ENV['SES_PASSWORD'],
     authentication: :login,
