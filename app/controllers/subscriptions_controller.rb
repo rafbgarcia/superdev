@@ -35,6 +35,9 @@ class SubscriptionsController < ApplicationController
   end
 
   def new
+    if session[:user_id].blank?
+      redirect_to action: :step_1
+    end
     @step_3 = true
   end
 
