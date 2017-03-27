@@ -1,4 +1,4 @@
-<%= simple_form_for @discussion, url: edit_discussion_path(@item, @discussion) do |f| %>
+<%= simple_form_for @discussion, url: @discussion.persisted? && edit_discussion_path(@item, @discussion) do |f| %>
   <%= f.input :title, label: 'Título' %>
   <%= f.input :text, label: 'Texto' %>
   <%= f.submit 'Postar', class: 'btn btn-primary' %>

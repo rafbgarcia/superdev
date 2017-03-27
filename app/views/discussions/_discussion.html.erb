@@ -12,8 +12,11 @@
         <span class="blue"><%= discussion.user.name %></span>
         <small class="text-muted"><%= relative_time discussion.created_at %></small>
       </div>
-      <%= link_to edit_discussion_path(@item, discussion), class: 'btn btn-sm btn-secondary' do %>
-        <small><%= icon 'pencil' %> Editar</small>
+
+      <% if discussion.belongs_to?(current_user) %>
+        <%= link_to edit_discussion_path(@item, discussion), class: 'btn btn-sm btn-secondary' do %>
+          <small><%= icon 'pencil' %> Editar</small>
+        <% end %>
       <% end %>
     </footer>
 

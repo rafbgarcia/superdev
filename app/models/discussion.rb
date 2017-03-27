@@ -12,6 +12,10 @@ class Discussion < ApplicationRecord
     friendly_id :slug_candidates, use: :slugged
 
 
+  def belongs_to?(user)
+    self.user.id == user.id
+  end
+
 private
 
   def slug_candidates
