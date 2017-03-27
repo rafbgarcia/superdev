@@ -12,8 +12,12 @@ module ApplicationHelper
     )
   end
 
-  def datefy(date)
-    l(date, format: '%d de %B')
+  DATE_FORMATS = {
+    dB: '%d de %B',
+    dBY: '%d de %B de %Y',
+  }.freeze
+  def datefy(date, format = :dB)
+    l(date, format: DATE_FORMATS[format])
   end
 
   def display_flash(*keys)

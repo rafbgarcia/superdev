@@ -4,7 +4,7 @@
 
     <p>Olá, <%= current_user.name %></p>
     <% if current_user.has_active_subscription? %>
-      <p>Sua inscrição expira em: <%= datefy current_user.iugu_subscription_expires_at %></p>
+      <p>Sua inscrição expira em <u><%= datefy current_user.iugu_subscription_expires_at, :dBY %></u></p>
     <% end %>
   </div>
 </div>
