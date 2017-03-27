@@ -25,6 +25,10 @@ class Course < ApplicationRecord
     Time.now > available_at
   end
 
+  def show_available_at?
+    (Time.now + 10.days) > available_at
+  end
+
   def to_s
     name
   end
