@@ -1,21 +1,7 @@
 module ApplicationHelper
 
-  def post_body(body)
-    raw(h(body.html_safe).gsub(/\n/, "<br>\n"))
-  end
-
-  def menu_item(text, path)
-    item  = '<li'
-    item += ' class="active"' if request.path == path
-    item += '>'
-    item += link_to(text, path)
-    item += '</li>'
-
-    item.html_safe
-  end
-
-  def is_page?(page)
-    params[:controller] == 'site' && params[:action] == page
+  def datefy(date)
+    date.strftime('%d/%m/%Y')
   end
 
   def display_flash(*keys)

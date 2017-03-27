@@ -55,6 +55,10 @@ Rails.application.routes.draw do
       resources :answers, only: [:create]
     end
 
+    scope :user, controller: 'users', as: 'user' do
+      get :dashboard
+    end
+
     get 'notifications/:id/redirect' => 'notifications#redirect', as: :notification_redirect
 
   ################
