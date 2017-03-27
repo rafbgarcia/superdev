@@ -11,7 +11,10 @@ class IuguController < ActionController::API
   #   "event": "invoice.status_changed"
   # }
   def status_changed
-    return if params['event'].blank?
+    if params['event'].blank?
+      head 200
+      return
+    end
 
     if params['data']['status'] == 'paid'
       subscription = Iugu::Subscription.fetch(params['data']['subscription_id'])
@@ -21,7 +24,7 @@ class IuguController < ActionController::API
       Rails.logger.info ">>> NOVO PAGAMENTO: #{subscription.inspect}"
     end
 
-    render status: 200
+    head 200
   end
 
 end
