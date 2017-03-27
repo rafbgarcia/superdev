@@ -1,0 +1,21 @@
+<div class="box d-flex justify-content-between" id="<%= "comment_#{comment_id}" rescue nil %>">
+  <aside>
+    <div class="avatar"><%= image_tag discussion.user.current_avatar %></div>
+  </aside>
+  <div class="content">
+    <article class="mb-4">
+      <%= html_text discussion.text %>
+    </article>
+
+    <footer class="d-flex justify-content-between align-items-center">
+      <div>
+        <span class="blue"><%= discussion.user.name %></span>
+        <small class="text-muted"><%= relative_time discussion.created_at %></small>
+      </div>
+      <%= link_to edit_discussion_path(@item, discussion), class: 'btn btn-sm btn-secondary' do %>
+        <small><%= icon 'pencil' %> Editar</small>
+      <% end %>
+    </footer>
+
+  </div>
+</div>

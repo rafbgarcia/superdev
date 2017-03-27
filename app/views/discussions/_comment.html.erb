@@ -1,0 +1,18 @@
+<div class="box d-flex justify-content-between" id="<%= "comment_#{comment_id}" rescue nil %>">
+  <aside>
+    <div class="avatar"><%= image_tag comment.user.current_avatar %></div>
+  </aside>
+  <div class="content">
+    <article class="mb-4">
+      <%= html_text comment.text %>
+    </article>
+
+    <footer>
+      <span class="blue"><%= comment.user.name %></span>
+      <small class="text-muted"><%= relative_time comment.created_at %></small>
+    </footer>
+
+    <% if false# comment.belongs_to?(current_user) %>
+    <% end %>
+  </div>
+</div>

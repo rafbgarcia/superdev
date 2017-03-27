@@ -47,6 +47,9 @@ Rails.application.routes.draw do
     scope 'questao/:item_id' do
       get 'novo-post' => 'discussions#new', as: :new_discussion
       post 'novo-post' => 'discussions#create', as: :discussions
+
+      get '/:discussion_id/edit' => 'discussions#edit', as: :edit_discussion
+      patch '/:discussion_id/edit' => 'discussions#update'
     end
 
 

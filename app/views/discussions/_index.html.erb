@@ -19,10 +19,10 @@
 
   <% if @active_discussion.present? %>
     <div class="col-sm 8 active-post">
-      <%= render partial: 'discussions/post', locals: { post: @active_discussion } %>
+      <%= render partial: 'discussions/discussion', locals: { discussion: @active_discussion } %>
 
       <% @active_discussion.comments.each do |comment| %>
-        <%= render partial: 'discussions/post', locals: { post: comment, comment_id: comment.id } %>
+        <%= render partial: 'discussions/comment', locals: { comment: comment, comment_id: comment.id } %>
       <% end %>
 
       <h5>Adicione uma resposta</h5>
