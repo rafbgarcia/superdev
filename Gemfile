@@ -7,6 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 # app specific
+  gem 'airbrake', '~> 6.0'
   gem 'iugu'
   gem 'font-awesome-sass', '~> 4.7.0'
   gem 'bootstrap', '~> 4.0.0.alpha6'
