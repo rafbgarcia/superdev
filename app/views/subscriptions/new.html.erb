@@ -64,7 +64,7 @@
     $(document).on('turbolinks:load', function () {
 
       Iugu.setAccountID("AEF33427575F47A981F718E7A4BD9B80");
-      Iugu.setTestMode(true);
+      Iugu.setTestMode(<%= Rails.env.production? ? false : true %>)
 
       $('#payment-form').submit(function () {
         var form = $(this);
