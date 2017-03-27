@@ -5,6 +5,9 @@ class SubscriptionsController < ApplicationController
 
   def step_2
     @step_2 = true
+    if session[:user_id].present?
+      redirect_to action: :new
+    end
   end
 
   def create_customer
