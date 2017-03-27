@@ -36,9 +36,15 @@ body > footer
     img
       margin-right: .6rem
 
-    &:hover
+    &:not(.unavailable):hover
       text-decoration: none
       box-shadow: 0 0 10px -1px #e5e6e6
+
+    &.unavailable
+      background-color: $blue
+      border-color: $blue
+      color: #fff
+      padding: 8px 40px
 
   .divider
     border-right: 1px solid #daf4f2

@@ -18,11 +18,11 @@
               <% end %>
             <% else %>
               <span class="course unavailable d-flex align-items-center">
-                <%= image_tag course.image, width: 50 %>
+                <%= image_tag 'white_lock.png', width: 30 %>
                 <div class="text-left">
                   <%= course.name %>
                   <br>
-                  <small class="text-gray"><%= datefy course.available_at %></small>
+                  <small><%= datefy course.available_at %></small>
                 </div>
               </span>
             <% end %>
