@@ -69,12 +69,7 @@ private
       })
     end
 
-    @subscription = Iugu::Subscription.create(
-      subscription_data.merge(
-        only_on_charge_success: true,
-        customer_id: user.iugu_customer_id
-      )
-    )
+    @subscription = create_subscription_for(user)
 
     if @subscription.errors
       render 'new'
@@ -101,7 +96,7 @@ private
   def handle_bank_slip
     user = User.find(session[:user_id])
 
-    @subscription = Iugu::Subscription.create(subscription_data.merge(customer_id: user.iugu_customer_id))
+    @subscription = create_subscription_for(user)
     invoice = @subscription.recent_invoices.first
 
     redirect_to invoice['secure_url']
@@ -115,16 +110,21 @@ private
     params.permit(:token, :method)
   end
 
-  def subscription_data
-    @subscription_data ||= begin
-      payable_with = (subscription_params[:method] == "credit_card" ? "credit_card" : "bank_slip")
+  def create_subscription_for(user)
+    data = {
+      customer_id: user.iugu_customer_id,
+      plan_identifier: "superdev_academy_pioneiros",
+    }
 
-      {
-        payable_with: payable_with,
-        plan_identifier: "superdev_academy_pioneiros",
-        expires_at: 1.day.from_now
-      }
+    if payable_with_credit_card?
+      data[:only_on_charge_success] = true
     end
+
+    Iugu::Subscription.create(data)
+  end
+
+  def payable_with_credit_card?
+    subscription_params[:method] == "credit_card"
   end
 
 end
