@@ -1,12 +1,12 @@
-<div class="row">
-  <div class="col-sm-4 col-sm-offset-4">
+<div class="container smallest">
+  <div class="box bigger">
     <h2 style="font-weight: 300;">Faça Login</h2>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= f.input :email, label: 'Email', autofocus: true %>
       <%= f.input :password, label: 'Senha' %>
       <%= f.input :remember_me, label: 'Lembrar de mim', as: :boolean if devise_mapping.rememberable? %>
 
-      <%= f.button :submit, "Logar" %>
+      <%= f.button :submit, "Acessar", class: 'btn btn-primary' %>
     <% end %>
 
     <%= render "devise/shared/links" %>

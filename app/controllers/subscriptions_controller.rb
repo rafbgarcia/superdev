@@ -50,6 +50,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def complete
+    redirect_to root_path if !user_signed_in?
   end
 
   def waiting_confirmation
@@ -83,6 +84,7 @@ private
 
       if invoice['status'] == 'paid'
         user.activate_subscription!(@subscription)
+        sign_in(user)
 
         redirect_to subscribed_path
       elsif invoice['status'] == 'pending'

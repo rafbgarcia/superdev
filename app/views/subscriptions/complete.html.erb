@@ -2,9 +2,14 @@
   <h1 class="text-center" style="font-weight: 100; color: #111; margin-bottom: 1rem;">Comece sua Jornada</h1>
   <h5 class="text-center" style="font-weight: 100; color: #666; margin-bottom: 2rem;">Torne-se um Super Programador</h5>
 
-  <%= @subscription.inspect if @subscription.present? %>
-  <div class="box bigger" ng-init="credit_card = true">
-    <h4 class="text-center text-success">Parabéns! Inscrição Concluída</h4>
+  <div class="box bigger">
+    <h3 class="text-success mb-3">Parabéns <%= current_user&.first_name %>!</h3>
+
+    <p class="mb-5">Sua inscrição está feita!</p>
+
+    <div class="text-center">
+      <%= link_to 'Acesse o conteúdo', root_path, class: 'btn btn-success btn-lg d-block' %>
+    </div>
 
   </div>
 </div>
