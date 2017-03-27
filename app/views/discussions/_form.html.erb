@@ -2,5 +2,5 @@
   <%= f.input :title, label: 'Título' %>
   <%= f.input :text, label: 'Texto' %>
   <%= f.submit 'Postar', class: 'btn btn-primary' %>
-  <%= link_to 'Voltar', item_path(@item) %>
+  <%= link_to 'Voltar', @discussion.persisted? ? anchor_discussion_path(@discussion) : item_path(@item) %>
 <% end %>

@@ -5,7 +5,7 @@
     <%= simple_form_for @comment do |f| %>
       <%= f.input :text, label: 'Texto' %>
       <%= f.submit 'Salvar', class: 'btn btn-primary' %>
-      <%= link_to 'Voltar', item_path(@comment.discussion.item) %>
+      <%= link_to 'Voltar', anchor_discussion_path(@comment.discussion) %>
     <% end %>
   </div>
 </div>
