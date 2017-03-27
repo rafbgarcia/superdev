@@ -23,11 +23,6 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-4">
-          <% if user_signed_in? %>
-            Olá, <%= current_user.first_name %>
-            |
-            <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
-          <% end %>
         </div>
         <div class="col-sm-4 text-center">
           <%= link_to root_path do %>
@@ -35,8 +30,13 @@
           <% end %>
         </div>
         <div class="col-sm-4 text-right">
-          <% if !current_user || !current_user.has_active_subscription? %>
+          <% if user_signed_in? %>
+            Olá, <%= current_user.first_name %>
+            |
+            <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+          <% else %>
             <%= link_to 'Inscreva-se', subscribe_step_1_path, class: 'btn btn-primary' %>
+            <%= link_to 'Faça Login', new_user_session_path %>
           <% end %>
         </div>
       </div>
