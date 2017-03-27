@@ -42,7 +42,7 @@
 
 
     <main>
-      <p><%= simple_format @item.description %></p>
+      <p><%= html_text @item.description %></p>
 
       <%= render format_item_type(@item.type) %>
     </main>

@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def html_text(string)
+    simple_format(h(string))
+  end
+
   def anchor_discussion_path(discussion)
     item = discussion.item
 

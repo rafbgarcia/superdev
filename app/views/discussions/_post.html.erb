@@ -3,8 +3,8 @@
     <div class="avatar"><%= image_tag post.user.current_avatar %></div>
   </aside>
   <div class="content">
-    <article>
-      <%= simple_format(post.text)  %>
+    <article class="mb-4">
+      <%= html_text post.text  %>
     </article>
 
     <footer>
