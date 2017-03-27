@@ -35,7 +35,9 @@
           <% end %>
         </div>
         <div class="col-sm-4 text-right">
-          <%#= link_to 'Inscreva-se', subscribe_step_1_path, class: 'btn btn-primary' %>
+          <% if !current_user || !current_user.has_active_subscription? %>
+            <%= link_to 'Inscreva-se', subscribe_step_1_path, class: 'btn btn-primary' %>
+          <% end %>
         </div>
       </div>
     </div>

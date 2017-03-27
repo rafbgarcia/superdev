@@ -1,32 +1,3 @@
-<% if true %>
-  <section>
-    <div class="row">
-      <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2" role="Course Map">
-        <section class="box smaller">
-          <h6 class="box-title">
-            <%= image_tag 'map_marker.png' %>
-            <span class="blue">Projeto 1</span>
-            Cadastro de Cursos - desde o Zero
-          </h6>
-
-          <div id="course-map" class="d-flex flex-column justify-content-center align-items-center" style="min-height: 30vw">
-              <small class="mt-auto fz-normal badge badge-warning">Disponível a partir de 27/03</small>
-
-              <div class="mt-auto">
-                <h5 class="mb-4 text-muted lh-24">Enquanto isso,<br> aprenda como Construir Sistemas Web do Zero</h5>
-
-                <%= link_to sales_path, class: 'btn btn-success btn-lg', 'data-turbolinks': false do %>
-                  <%= icon 'video-camera' %>
-                  Assistir Aulas Gratuitas
-                <% end %></div>
-          </div>
-        </section>
-      </div>
-    </div>
-  </section>
-
-<% else %>
-
 <section>
   <div class="row">
     <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2" role="Course Map">
@@ -52,4 +23,3 @@
     </div>
   </div>
 </section>
-<% end %>
