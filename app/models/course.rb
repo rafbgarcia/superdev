@@ -21,6 +21,9 @@ class Course < ApplicationRecord
     Course.where('id > ?', self.id).limit(1).first
   end
 
+  def available?
+    Time.now > available_at
+  end
 
   def to_s
     name

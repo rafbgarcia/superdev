@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def datefy(date)
-    date.strftime('%d/%m/%Y')
+    date.strftime('%d de %B')
   end
 
   def display_flash(*keys)

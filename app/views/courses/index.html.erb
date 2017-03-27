@@ -11,9 +11,20 @@
 
         <div id="course-map" class="d-flex flex-column align-items-center">
           <% @courses.each_with_index do |course, index| %>
-            <%= link_to course_path(course), class: 'course' do %>
-              <%= image_tag course.image, width: 50 %>
-              <%= course.name %>
+            <% if course.available? %>
+              <%= link_to course_path(course), class: 'course' do %>
+                <%= image_tag course.image, width: 50 %>
+                <%= course.name %>
+              <% end %>
+            <% else %>
+              <span class="course unavailable d-flex align-items-center">
+                <%= image_tag course.image, width: 50 %>
+                <div class="text-left">
+                  <%= course.name %>
+                  <br>
+                  <small class="text-gray"><%= datefy course.available_at %></small>
+                </div>
+              </span>
             <% end %>
 
             <%= content_tag(:div, nil, class: :divider) if index+1 < @courses.count  %>
