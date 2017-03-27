@@ -42,10 +42,10 @@ class SubscriptionsController < ApplicationController
     @step_3 = true
     Iugu.api_key = ENV['IUGU_API_KEY'] || "30e045b8172796b804714c8423be3d9e"
 
-    if subscription_data[:payable_with] == 'bank_slip'
-      handle_bank_slip
-    else
+    if payable_with_credit_card?
       handle_credit_card
+    else
+      handle_bank_slip
     end
   end
 
