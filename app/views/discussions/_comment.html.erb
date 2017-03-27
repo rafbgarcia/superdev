@@ -7,12 +7,22 @@
       <%= html_text comment.text %>
     </article>
 
-    <footer>
-      <span class="blue"><%= comment.user.name %></span>
-      <small class="text-muted"><%= relative_time comment.created_at %></small>
-    </footer>
+    <footer class="d-flex justify-content-between align-items-center">
+      <% if comment.belongs_to?(current_user) %>
+        <div>
+          <span class="badge badge-info">Eu</span>
+          <small class="text-muted"><%= relative_time comment.created_at %></small>
+        </div>
 
-    <% if false# comment.belongs_to?(current_user) %>
-    <% end %>
+        <%= link_to edit_comment_path(comment), class: 'btn btn-sm btn-secondary' do %>
+          <small><%= icon 'pencil' %> Editar</small>
+        <% end %>
+      <% else %>
+        <div>
+          <span class="blue"><%= comment.user.name %></span>
+          <small class="text-muted"><%= relative_time comment.created_at %></small>
+        </div>
+      <% end %>
+    </footer>
   </div>
 </div>

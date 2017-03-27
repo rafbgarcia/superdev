@@ -1,0 +1,11 @@
+<div class="container smallest">
+  <div class="box bigger">
+    <h3 class="mb-5">Edite seu Comentário</h3>
+
+    <%= simple_form_for @comment do |f| %>
+      <%= f.input :text, label: 'Texto' %>
+      <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+      <%= link_to 'Voltar', item_path(@comment.discussion.item) %>
+    <% end %>
+  </div>
+</div>

@@ -7,6 +7,11 @@ class Comment < ApplicationRecord
 
   after_create :notify_new_comment
 
+
+  def belongs_to?(user)
+    self.user.id == user.id
+  end
+
 private
 
   def notify_new_comment

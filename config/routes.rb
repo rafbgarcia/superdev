@@ -64,6 +64,8 @@ Rails.application.routes.draw do
 
     get 'notifications/:id/redirect' => 'notifications#redirect', as: :notification_redirect
 
+    resources :comments, only: [:edit, :update]
+
   ################
   # Admin Routes #
   ################
