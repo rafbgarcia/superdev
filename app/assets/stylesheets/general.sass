@@ -80,23 +80,20 @@ body > footer
 .post-list
   .post
     padding: 18px 12px 15px
-    cursor: pointer
-    background-image: linear-gradient(#66c7ef,#66c7ef)
-    background-size: 2px 0
-    background-position: 100%
-    background-repeat: no-repeat
-    transition: background-size .3s ease-in-out
+    transition: background .3s
     display: block
     color: #464646
 
     &:not(:first-child)
       border-top: 1px solid #eaeaea
 
-    &:hover, &.active
-      background-color: #fbfbfb
+    &:hover
+      background-color: #ecf9ff
 
     &.active
-      background-size: 2px 100%
+      background: #66c7ef
+      color: #fff
+      box-shadow: 0 0 5px 0 #66c7ef
 
 .active-post
   aside
