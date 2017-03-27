@@ -104,7 +104,7 @@ private
   def handle_bank_slip
     user = User.find(session[:user_id])
 
-    @subscription = create_subscription_for(user)
+    @subscription = create_subscription_for(user, payable_with: :bank_slip, expires_at: 1.day.from_now)
     invoice = @subscription.recent_invoices.first
 
     redirect_to invoice['secure_url']
@@ -118,11 +118,11 @@ private
     params.permit(:token, :method)
   end
 
-  def create_subscription_for(user)
-    data = {
+  def create_subscription_for(user, extra_data = {})
+    data = extra_data.merge(
       customer_id: user.iugu_customer_id,
       plan_identifier: "superdev_academy_pioneiros",
-    }
+    )
 
     if payable_with_credit_card?
       data[:only_on_charge_success] = true
