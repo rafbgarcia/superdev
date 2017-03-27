@@ -4,7 +4,7 @@ module ItemsHelper
     has_passed_one_day = 1.day.ago > date
 
     if has_passed_one_day
-      date.strftime('dia %d/%m às %H:%M')
+      l(date, format: 'dia %d/%m às %H:%M')
     else
       time_ago_in_words date, include_seconds: true
     end
