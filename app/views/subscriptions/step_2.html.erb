@@ -1,27 +1,20 @@
-<div class="container smallest">
-  <h1 class="text-center" style="font-weight: 100; color: #111; margin-bottom: 1rem;">Comece sua Jornada</h1>
-  <h5 class="text-center" style="font-weight: 100; color: #666; margin-bottom: 2rem;">Torne-se um Super Programador</h5>
-
-  <div class="box bigger">
-    <h4 class="text-center">SuperDev Academy</h4>
-    <h6 class="text-center">Pioneiros</h6>
-
-    <% if @errors.present? %>
-      <% @errors.each do |field_name, error_messages| %>
-        <div class="alert alert-danger"><%= field_name.to_s.titleize %> <%= error_messages.join(' ou ') %></div>
-      <% end %>
+<% content_for :subscription do %>
+  <% if @errors.present? %>
+    <% @errors.each do |field_name, error_messages| %>
+      <div class="alert alert-danger"><%= field_name.to_s.titleize %> <%= error_messages.join(' ou ') %></div>
     <% end %>
-    <%= simple_form_for :new_customer, url: subscribe_step_2_path, method: :post, html: { style: 'margin-top: 3rem'} do |f| %>
-      <%= f.input 'name', label: 'Digite seu Nome Completo', input_html: { value: params.dig(:new_customer, :name) } %>
-      <%= f.input 'email', label: 'Digite seu E-mail principal', input_html: { value: params.dig(:new_customer, :email) } %>
+  <% end %>
+  <%= simple_form_for :new_customer, url: subscribe_step_2_path, method: :post, html: { style: 'margin-top: 3rem'} do |f| %>
+    <%= f.input 'name', label: 'Digite seu Nome Completo', input_html: { value: params.dig(:new_customer, :name) } %>
+    <%= f.input 'email', label: 'Digite seu E-mail principal', input_html: { value: params.dig(:new_customer, :email) } %>
 
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-success d-flex align-items-center">
-          <span style="margin-right: 0.5rem">Continuar</span>
-          <%= icon 'chevron-right' %>
-        </button>
-      </div>
-    <% end %>
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-success d-flex align-items-center">
+        <span style="margin-right: 0.5rem">Continuar</span>
+        <%= icon 'chevron-right' %>
+      </button>
+    </div>
+  <% end %>
+<% end %>
 
-  </div>
-</div>
+<%= render 'template' %>

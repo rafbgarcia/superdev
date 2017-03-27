@@ -1,13 +1,10 @@
-<div class="container smallest">
-  <h1 class="text-center" style="font-weight: 100; color: #111; margin-bottom: 1rem;">Comece sua Jornada</h1>
-  <h5 class="text-center" style="font-weight: 100; color: #666; margin-bottom: 2rem;">Torne-se um Super Programador</h5>
-
+<% content_for :subscription do %>
   <% if @subscription.present? %>
     <div class="alert alert-danger"><%= @subscription.errors %>, por favor verifique seu e-mail para mais detalhes</div>
   <% end %>
 
-  <div class="box bigger" ng-init="method = 'credit_card'">
-    <h4 class="text-center">Forma de Pagamento</h4>
+  <div ng-init="method = 'credit_card'">
+    <h4 class="text-center">Selecione a Forma de Pagamento</h4>
 
     <%= form_for :subscription, url: subscribe_path, method: :post, html: { id: 'payment-form' } do %>
       <div class="text-center">
@@ -43,81 +40,87 @@
         <input type="hidden" name="token" id="token" value="" readonly="true" size="64">
       </div>
 
-      <div class="text-center" style="margin-top: 2rem">
+
+      <div class="text-center mb-3" style="margin-top: 2rem">
         <button type="submit" class="btn btn-success btn-lg" ng-show="method !== 'credit_card'">
           <%= icon 'check' %>
-          Gerar Boleto de R$ 45,00
+          Gerar Boleto de <del>R$ 65,00</del> R$ 35,00 *
         </button>
 
         <button type="submit" class="btn btn-success btn-lg" ng-show="method === 'credit_card'">
           <%= icon 'check' %>
-          Assinar por R$ 45,00
+          Assinar por <del>R$ 65,00</del> R$ 35,00 *
         </button>
       </div>
+      <p class="text-center">
+        * Desconto por tempo limitado
+      </p>
     <% end %>
 
   </div>
-</div>
 
-<script>
-  $(document).on('turbolinks:load', function () {
 
-    Iugu.setAccountID("AEF33427575F47A981F718E7A4BD9B80");
-    Iugu.setTestMode(true);
+  <script>
+    $(document).on('turbolinks:load', function () {
 
-    $('#payment-form').submit(function () {
-      var form = $(this);
+      Iugu.setAccountID("AEF33427575F47A981F718E7A4BD9B80");
+      Iugu.setTestMode(true);
 
-      if ($('#credit-card-checkbox').is(':checked')) {
-        var tokenResponseHandler = function (data) {
-          if (data.errors) {
-            alert("Erro salvando cartão: " + JSON.stringify(data.errors));
-          } else {
-            $("#token").val(data.id);
-            form.get(0).submit();
+      $('#payment-form').submit(function () {
+        var form = $(this);
+
+        if ($('#credit-card-checkbox').is(':checked')) {
+          var tokenResponseHandler = function (data) {
+            if (data.errors) {
+              alert("Erro salvando cartão: " + JSON.stringify(data.errors));
+            } else {
+              $("#token").val(data.id);
+              form.get(0).submit();
+            }
           }
+
+          Iugu.createPaymentToken(this, tokenResponseHandler);
+
+          return false;
+        } else {
+          form.get(0).submit();
         }
+      });
 
-        Iugu.createPaymentToken(this, tokenResponseHandler);
+      var card = new Card({
+        form: '#payment-form',
+        // a selector or DOM element for the container
+        // where you want the card to appear
+        container: '.card-wrapper', // *required*
 
-        return false;
-      } else {
-        form.get(0).submit();
-      }
+        formSelectors: {
+          numberInput: 'input[data-iugu="number"]', // optional — default input[name="number"]
+          expiryInput: 'input[data-iugu="expiration"]', // optional — default input[name="expiry"]
+          cvcInput: 'input[data-iugu="verification_value"]', // optional — default input[name="cvc"]
+          nameInput: 'input[data-iugu="full_name"]' // optional - defaults input[name="name"]
+        },
+
+        width: 350,
+
+        messages: {
+            validDate: 'valido\naté',
+            monthYear: '', // optional - default 'month/year'
+        },
+
+        formatting: false,
+
+        // Default placeholders for rendered fields - optional
+        placeholders: {
+            number: '•••• •••• •••• ••••',
+            name: 'Nome no Cartão',
+            expiry: 'MM/AA',
+            cvc: '•••'
+        },
+
+        // if true, will log helpful messages for setting up Card
+        debug: true // optional - default false
+      });
     });
-
-    var card = new Card({
-      form: '#payment-form',
-      // a selector or DOM element for the container
-      // where you want the card to appear
-      container: '.card-wrapper', // *required*
-
-      formSelectors: {
-        numberInput: 'input[data-iugu="number"]', // optional — default input[name="number"]
-        expiryInput: 'input[data-iugu="expiration"]', // optional — default input[name="expiry"]
-        cvcInput: 'input[data-iugu="verification_value"]', // optional — default input[name="cvc"]
-        nameInput: 'input[data-iugu="full_name"]' // optional - defaults input[name="name"]
-      },
-
-      width: 350,
-
-      messages: {
-          validDate: 'valido\naté',
-          monthYear: '', // optional - default 'month/year'
-      },
-
-      formatting: false,
-
-      // Default placeholders for rendered fields - optional
-      placeholders: {
-          number: '•••• •••• •••• ••••',
-          name: 'Nome no Cartão',
-          expiry: 'MM/AA',
-          cvc: '•••'
-      },
-
-      // if true, will log helpful messages for setting up Card
-      debug: true // optional - default false
-    });
-  });
-</script>
+  </script>
+  <% end %>
+<%= render 'template' %>

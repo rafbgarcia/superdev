@@ -1,24 +1,38 @@
-<div class="container smallest">
-  <h1 class="text-center" style="font-weight: 100; color: #111; margin-bottom: 1rem;">Comece sua Jornada</h1>
-  <h5 class="text-center" style="font-weight: 100; color: #666; margin-bottom: 2rem;">Torne-se um Super Programador</h5>
+<% content_for(:subscription) do %>
+  <div class="mb-5">
+    <h5>1. Como funciona?</h5>
+    <p>O SuperDev Academy é um programa totalmente diferenciado no Brasil, com foco total em te ensinar o que dá <strong><u>resultados do modo mais efetivo</u></strong>.</p>
+    <p>Vamos construir projetos reais desde o zero e, nesse processo, aprender todas as tecnologias envolvidas no desenvolvimento de sistemas web.</p>
+    <p>Toda semana serão liberados novos conteúdos planejados, que vão agregar ao seu conhecimento atual, te levando naturalmente a um aprendizado efetivo.</p>
+    <p class="mb-5">O SuperDev Academy é um programa contínuo de aprendizado, por isso temos uma assinatura mensal que garante acesso ao conteúdo e área de discussão apenas para quem tem real interesse, garantindo, assim, a qualidade do serviço.</p>
 
-  <div class="box bigger">
-    <h4 class="text-center">SuperDev Academy</h4>
-    <h6 class="text-center">Pioneiros</h6>
+    <h5>2. Garantia Incondicional</h5>
+    <p class="mb-5">
+      Estou ciente de que minha satisfação é prioridade.
+      <br><br>
+      Por isso, terei 30 dias, a partir da aprovação do pagamento, para pedir <u><strong>reembolso TOTAL do meu investimento</strong></u> por qualquer motivo que seja, bastando apenas enviar um e-mail para <a href="mailto:rafael@superdev.academy">rafael@superdev.academy</a> solicitando o reembolso.
+      <br><br>
+      Simples e sem burocracias
+    </p>
 
-    <ul class="list" style="margin: 2rem 0; font-size: 1rem">
-      <li>Estou ciente de que minha satisfação com o SuperDev Academy é extremamente importante, por isso terei até 30 dias, a partir de hoje, para pedir reembolso TOTAL do meu investimento, caso eu decida por isso, bastando apenas envar um e-mail para rafael@superdev.academy solicitando o reembolso.</li>
-      <li>Estou ciente de que sou pioneiro nessa iniciativa do SuperDev, e, por isso, terei um <strong>desconto único por tempo indeterminado</strong> na mensalidade, até que eu cancele minha inscrição.</li>
-      <li>Estou ciente de que terei até 30 dias para pedir reembolso total do meu investimento, por <strong>qualquer que seja o motivo</strong>.</li>
-      <li>Estou ciente de que aprenderei a Programar do zero ao avançado, construindo projetos reais que me prepararão para o mercado de trabalho.</li>
-      <li>Estou ciente de que preciso estudar e praticar os exercícios para que eu consiga ter sucesso como Programador.</li>
-    </ul>
-
-    <div class="d-flex justify-content-center">
-      <%= link_to subscribe_step_2_path, class: 'btn btn-success' do %>
-        <span style="margin-right: 0.5rem">Concordar e Prosseguir</span>
-        <%= icon 'chevron-right' %>
-      <% end %>
+    <h5>3. Desconto único para Pioneiros</h5>
+    <p class="mb-5">
+      Estou ciente de que sou pioneiro nesta iniciativa do SuperDev, e, por isso, terei um <u><strong>desconto único</strong></u>* na mensalidade até o momento em que eu cancele minha inscrição.
+    </p>
+    <div style="padding: 1rem; background: #f4f4f4; border-radius: 1rem">
+      <p>* A maioria dos cursos de Programação são caros, custando entre uma mensalidade de R$ 400,00 até cursos de R$ 2000,00.</p>
+      <p>O intuito do SuperDev Academy é ser extremamente acessível para impactar o máximo de pessoas, portanto, nossa mensalidade normal é de apenas R$ 65,00.</p>
+      <p>Para os primeiros inscritos, é ainda mais acessível: <u><strong>apenas R$ 35,00</strong></u>.</p>
+      <p>Acredito que esse valor pode ser facilmente pago com o conhecimento adquirido.</p>
     </div>
   </div>
-</div>
+
+  <div class="d-flex justify-content-center">
+    <%= link_to subscribe_step_2_path, class: 'btn btn-success' do %>
+      <span style="margin-right: 0.5rem">Concordar e Prosseguir</span>
+      <%= icon 'chevron-right' %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render 'template' %>

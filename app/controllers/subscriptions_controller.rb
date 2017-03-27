@@ -4,13 +4,15 @@ class SubscriptionsController < ApplicationController
   end
 
   def step_2
+    @step_2 = true
   end
 
   def create_customer
+    @step_2 = true
     Iugu.api_key = "30e045b8172796b804714c8423be3d9e"
 
     if customer_params.any? { |field_name, value| value.blank?}
-      @errors = { 'Por favor' => 'preencha todos os campos'}
+      @errors = { '' => ['Por favor, preencha todos os campos'] }
       render :step_2
     else
       user_data = {
@@ -33,9 +35,11 @@ class SubscriptionsController < ApplicationController
   end
 
   def new
+    @step_3 = true
   end
 
   def create
+    @step_3 = true
     Iugu.api_key = "30e045b8172796b804714c8423be3d9e"
 
     if subscription_data[:payable_with] == 'bank_slip'

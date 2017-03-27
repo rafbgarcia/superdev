@@ -161,3 +161,42 @@ body > footer
 @media(max-width: 991px)
   .video-link:first-child
     margin-top: 1rem
+
+
+// page subscription
+.steps
+  margin-bottom: 1.5rem
+
+  > *
+    opacity: .4
+
+  a
+    color: #555
+    border-radius: 50%
+    border: 1px solid #ddd
+    background-color: #FFF
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 2rem
+    height: 2rem
+
+    &.active
+      opacity: 1
+      border-color: $blue
+      color: $blue
+
+    &.done
+      opacity: 1
+      border-color: $blue
+      background: $blue
+      color: #fff
+
+
+  span
+    height: 1px
+    background-color: #ddd
+    flex-grow: 1
+
+    &.active
+      background-color: $blue
