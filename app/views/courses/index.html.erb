@@ -12,9 +12,13 @@
         <div id="course-map" class="d-flex flex-column align-items-center">
           <% @courses.each_with_index do |course, index| %>
             <% if course.available? %>
-              <%= link_to course_path(course), class: 'course' do %>
+              <%= link_to course_path(course), class: 'course available d-flex align-items-center' do %>
                 <%= image_tag course.image, width: 50 %>
-                <%= course.name %>
+                <div class="text-left">
+                  <%= course.name %>
+                  <br>
+                  <small class="text-success"><%= icon 'check' %> Disponível</small>
+                </div>
               <% end %>
             <% else %>
               <span class="course unavailable d-flex align-items-center">
@@ -23,7 +27,7 @@
                   <%= course.name %>
                   <% if course.show_available_at? %>
                     <br>
-                    <small><%= datefy course.available_at %></small>
+                    <small><%= icon 'calendar' %> <%= datefy course.available_at %></small>
                   <% end %>
                 </div>
               </span>

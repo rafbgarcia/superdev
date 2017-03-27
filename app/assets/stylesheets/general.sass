@@ -30,19 +30,21 @@ body > footer
     color: #464646
     border-radius: 50px
     padding: 6px 40px 6px 25px
-    transition: box-shadow .2s
-    border: 1px solid #e5e6e6
+    transition: box-shadow .3s
+    border: 2px solid #e5e6e6
 
     img
       margin-right: .6rem
 
-    &:not(.unavailable):hover
-      text-decoration: none
-      box-shadow: 0 0 10px -1px #e5e6e6
+    &.available
+      border-color: #81e5ad
+      &:hover
+        box-shadow: 0 0 10px -1px #81e5ad
+
 
     &.unavailable
-      background-color: $blue
-      border-color: $blue
+      background-color: #7cd2f7
+      border-color: #62c6f1
       color: #fff
       padding: 8px 40px
 
