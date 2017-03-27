@@ -17,11 +17,13 @@ class IuguController < ActionController::API
     end
 
     if params['data']['status'] == 'paid'
-      subscription = Iugu::Subscription.fetch(params['data']['subscription_id'])
-
-      User.activate_subscription!(subscription)
-
-      Rails.logger.info ">>> NOVO PAGAMENTO: #{subscription.inspect}"
+      begin
+        subscription = Iugu::Subscription.fetch(params['data']['subscription_id'])
+        User.activate_subscription!(subscription)
+      rescue Iugu::ObjectNotFound
+        head 404
+        return
+      end
     end
 
     head 200
