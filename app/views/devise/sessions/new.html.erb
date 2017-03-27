@@ -1,6 +1,6 @@
 <div class="container smallest">
   <div class="box bigger">
-    <h2 style="font-weight: 300;">Faça Login</h2>
+    <h2 style="font-weight: 300;" class="mb-5">Faça Login</h2>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= f.input :email, label: 'Email', autofocus: true %>
       <%= f.input :password, label: 'Senha' %>
