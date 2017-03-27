@@ -4,6 +4,11 @@ class ItemsController < ApplicationController
   before_action :set_discussion_variables
 
   def show
+    if params[:discussion_id].blank?
+      discussion = @item.discussions.first
+
+      redirect_to anchor_discussion_path(discussion, anchor: false) if discussion.present?
+    end
   end
 
   def create_comment

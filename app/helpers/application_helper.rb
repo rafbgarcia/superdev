@@ -4,16 +4,19 @@ module ApplicationHelper
     simple_format(h(string))
   end
 
-  def anchor_discussion_path(discussion)
+  def anchor_discussion_path(discussion, anchor: true)
     item = discussion.item
 
-    discussion_url(
+    path_params = {
       course_id: item.lesson.course,
       lesson_id: item.lesson,
       item_weight: item.weight,
       discussion_id: discussion,
-      anchor: 'posts-list'
-    )
+    }
+
+    path_params[:anchor] = 'posts-list' if anchor
+
+    discussion_url(path_params)
   end
 
   DATE_FORMATS = {
