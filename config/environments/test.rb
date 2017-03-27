@@ -4,7 +4,7 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     port: 587,
     domain: 'superdev.com.br',
-    user_name: 'rafael@superdev.com.br',
+    user_name: 'rafael@superdev.academy',
     password: ENV['GMAIL_PW'],
     authentication: 'plain',
     enable_starttls_auto: true,
