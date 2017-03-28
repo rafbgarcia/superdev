@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326223358) do
+ActiveRecord::Schema.define(version: 20170328111948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,6 +171,11 @@ ActiveRecord::Schema.define(version: 20170326223358) do
     t.string   "iugu_customer_id"
     t.string   "iugu_subscription_id"
     t.date     "iugu_subscription_expires_at"
+    t.integer  "sign_in_count",                default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

@@ -8,7 +8,7 @@ class User < ApplicationRecord
   # Devise
     devise :omniauthable, :omniauth_providers => [:facebook]
     devise :database_authenticatable, :recoverable, :rememberable,
-           :validatable#, :registerable
+           :validatable, :trackable
 
   # Callbacks
     before_save :set_name
