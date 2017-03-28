@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   after_action :set_csrf_cookie_for_angular_xhr_requests
+  after_action :clear_flash
 
   def acme_challenge
     render text: 'LJvIFUW0yHXTNEGGr6YPwdRt8HxPB2UK7ZLKmW3w5IQ.BALPitwZqtD4Fya9BP5w6jnmDZlP6S0iYEuXkZjoY9k'
@@ -24,5 +25,13 @@ protected
       render 'users/needs_subscription'
     end
   end
+
+  # This clears flash after login and logout, it was showing up on weird scenarios:
+  # - After user login and access his dashboard
+  # - After user logout and access login page
+  def clear_flash
+    flash.clear
+  end
+
 
 end

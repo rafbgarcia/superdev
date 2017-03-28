@@ -16,9 +16,8 @@ class UsersController < ApplicationController
     # devise logs out the user when the password is changed
     # so we need to log in again... >_>
 
-    user = User.find(current_user.id)
-
-    if user.update(password_params)
+    if current_user.update(password_params)
+      user = User.find(current_user.id)
       bypass_sign_in(user)
       redirect_to edit_password_users_path, notice: 'Senha alterada com sucesso'
     else
