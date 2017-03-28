@@ -1,5 +1,6 @@
 <% content_for :user_dashboard do %>
   <%= simple_form_for current_user, url: update_profile_users_path do |f| %>
+    <%= f.input :email, label: 'Email', disabled: true %>
     <%= f.input :name, label: 'Nome' %>
     <%= f.input :avatar, as: :file %>
     <%= f.submit 'Salvar', class: 'btn btn-primary' %>
