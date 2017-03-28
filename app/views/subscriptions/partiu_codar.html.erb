@@ -1,0 +1,93 @@
+<style>
+  h1,h4,h5,h3 { font-weight: 100; color: #111; }
+  p { font-size: 1rem }
+</style>
+
+<div class="container smallest">
+  <div class="text-center">
+    <h1 class="mb-2">Comece sua Jornada</h1>
+    <h5 class="mb-4 text-muted">Torne-se um Super Programador</h5>
+  </div>
+
+  <div class="box bigger">
+    <h3 class="mb-3 text-center">
+      Campanha
+      <strong>#PartiuCodar</strong>
+      <br>
+    </h3>
+
+    <hr>
+
+    <p class="mb-0">
+      Junte-se a dezenas de aprendizes nesta iniciativa de incentivo à Programação.
+      <br><br>
+      Ganhe <u><strong>31% off</strong></u> na sua inscrição,
+      de <del>R$ 65,00</del> por apenas R$ 45,00.
+    </p>
+  </div>
+
+  <div class="box smallest">
+    <h5 class="text-center mb-3">
+      Termos da campanha
+    </h5>
+
+    <hr>
+
+    <p>
+      <%= icon 'check', class: 'text-success' %>
+      Estou ciente de que tenho uma <strong>Garantia Incondicional de Risco ZERO</strong>, e terei os primeiros 30 dias para decidir se desejo continuar ou pedir reembolso total do meu investimento.
+    </p>
+    <p>
+      <%= icon 'check', class: 'text-success' %>
+      Estou ciente de que minha inscrição terá o <strong>valor exclusivo de R$ 45,00</strong>, que permanecerá o mesmo após o fim da campanha.
+    </p>
+    <p>
+      <%= icon 'check', class: 'text-success' %>
+      Estou ciente de que posso cancelar minha inscrição a qualquer momento, e de que este valor pode não estar mais disponível para uma nova inscrição.
+    </p>
+    <p class="mb-0">
+      <%= icon 'check', class: 'text-success' %>
+      Estou ciente de que terei acesso imediato ao conteúdo exlusivo do SuperDev Academy quando meu pagamento for aprovado.
+    </p>
+  </div>
+
+  <div class="box smallest">
+    <h5 class="mb-3 text-center">Seus dados</h5>
+    <hr>
+    <%= simple_form_for :new_customer, url: partiu_codar_path, method: :post do |f| %>
+      <%= f.input 'name', label: 'Digite seu Nome Completo', input_html: { value: params.dig(:new_customer, :name) } %>
+      <%= f.input 'email', label: 'Digite seu E-mail principal', input_html: { value: params.dig(:new_customer, :email) } %>
+      <div class="form-group mb-5" ng-init="method = 'credit_card'">
+        <div class="mb-2">
+          <abbr title="required">*</abbr> Forma de pagamento
+        </div>
+        <label class="form-check-label mb-2">
+          <input type="radio" name="method" value="credit_card" ng-model="method" class="form-check-input method">
+          Cartão de Crédito
+        </label>
+        <br>
+        <label class="form-check-label">
+          <input type="radio" name="method" value="bank_slip" ng-model="method" class="form-check-input method">
+          Boleto Bancário
+        </label>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-success btn-lg">
+          <%= icon 'check' %>
+          <span ng-if="method === 'credit_card'">Informar dados do Cartão</span>
+          <span ng-if="method === 'bank_slip'">Gerar Boleto de R$ 45,00</span>
+        </button>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+
+<script>
+$(document).on('turbolinks:load', function () {
+  $('.method').change(function () {
+    console.log($(this).val())
+  })
+});
+</script>

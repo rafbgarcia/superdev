@@ -1,5 +1,10 @@
 class SubscriptionsController < ApplicationController
 
+  def partiu_codar
+    if request.post?
+    end
+  end
+
   def step_1
   end
 

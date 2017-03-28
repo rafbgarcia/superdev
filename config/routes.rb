@@ -20,13 +20,15 @@ Rails.application.routes.draw do
   post 'iugu/invoice/status_changed' => 'iugu#status_changed'
 
 # Subscription
-  get 'inscreva-se/passo-1' => 'subscriptions#step_1', as: :subscribe_step_1
+  get 'inscreva-se/passo-1' => 'subscriptions#step_1'#, as: :subscribe_step_1
   get 'inscreva-se/passo-2' => 'subscriptions#step_2', as: :subscribe_step_2
   post 'inscreva-se/passo-2' => 'subscriptions#create_customer'
   get 'inscreva-se/passo-3' => 'subscriptions#new', as: :subscribe
   post 'inscreva-se/passo-3' => 'subscriptions#create'
   get 'aguardando-confirmacao' => 'subscriptions#waiting_confirmation'
   get 'inscricao-concluida' => 'subscriptions#complete', as: :subscribed
+  get 'partiu-codar' => 'subscriptions#partiu_codar', as: :subscribe_step_1
+  post 'partiu-codar' => 'subscriptions#partiu_codar', as: :partiu_codar
 
 # Sales pages
   get 'como-programar-do-zero(/:video_id)' => 'sales_pages#index', as: :sales
