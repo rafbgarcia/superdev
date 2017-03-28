@@ -6,13 +6,24 @@ class UsersController < ApplicationController
 
   def update_profile
     if current_user.update(profile_params)
-      redirect_to action: :profile
+      redirect_to profile_users_path, notice: 'Dados alterados com sucesso'
     else
       render :profile
     end
   end
 
   def update_password
+    # devise logs out the user when the password is changed
+    # so we need to log in again... >_>
+
+    user = User.find(current_user.id)
+
+    if user.update(password_params)
+      bypass_sign_in(user)
+      redirect_to edit_password_users_path, notice: 'Senha alterada com sucesso'
+    else
+      render :edit_password
+    end
   end
 
   def dashboard

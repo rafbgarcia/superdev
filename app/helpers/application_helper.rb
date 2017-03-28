@@ -27,20 +27,11 @@ module ApplicationHelper
     l(date, format: DATE_FORMATS[format])
   end
 
-  def display_flash(*keys)
-    keys = keys.empty? ? [:notice, :alert, :success, :error] : keys
-
-    html = keys.collect do |key|
+  def display_flash
+    html = [:notice, :alert].collect do |key|
       if flash[key]
-        if key == :alert
-          k = 'warning'
-        elsif key == :notice
-          k = 'info'
-        else
-          k = key
-        end
-
-        content_tag(:div, flash[key], :class => "alert alert-#{k}")
+        class_name = key == :alert ? 'warning' : 'info'
+        content_tag(:div, flash[key], class: "alert alert-#{class_name}")
       end
     end
 
