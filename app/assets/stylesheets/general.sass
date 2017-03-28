@@ -105,11 +105,16 @@ body > footer
   .content
     width: calc(90% - 2rem)
 
-  .avatar
-    border-radius: 50%
-    border: 1px solid #ededed
-    background-color: #ededed
-    overflow: hidden
+.avatar
+  border-radius: 50%
+  border: 1px solid #ededed
+  background-color: #ededed
+  overflow: hidden
+  width: 65px
+  height: 65px
+  @extend .d-flex
+  @extend .align-items-center
+  @extend .justify-content-center
 
 
 // card.js overrides

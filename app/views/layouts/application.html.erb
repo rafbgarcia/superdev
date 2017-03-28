@@ -31,7 +31,7 @@
         </div>
         <div class="col-sm-4 text-right">
           <% if user_signed_in? %>
-            Olá, <%= link_to current_user.first_name, user_dashboard_path %>
+            Olá, <%= link_to current_user.first_name, dashboard_users_path %>
             |
             <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
           <% else %>

@@ -1,10 +1,11 @@
-<div class="container smaller">
-  <div class="box bigger">
-    <h3 class="mb-5">Dashboard</h3>
+<% content_for :user_dashboard do %>
+  <p>
+    <strong>Aê, <%= current_user.first_name %>!</strong>
+  </p>
 
-    <p>Olá, <%= current_user.name %></p>
-    <% if current_user.has_active_subscription? %>
-      <p>Sua inscrição expira em <u><%= datefy current_user.iugu_subscription_expires_at, :dBY %></u></p>
-    <% end %>
-  </div>
-</div>
+  <p>Espero que esteja aprendendo bastante!</p>
+
+  <p>Qualquer dúvida é só <%= link_to 'entrar em contato', contact_path %> :)</p>
+<% end %>
+
+<%= render 'template' %>

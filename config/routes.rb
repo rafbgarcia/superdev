@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' },
                     controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
-
-
 # Site
   get 'sobre' => 'application#about', as: :about
   get 'contato' => 'application#contact', as: :contact
@@ -55,14 +53,20 @@ Rails.application.routes.draw do
     patch '/:discussion_id/edit' => 'discussions#update'
   end
 
-
-
   resources :item, only: [] do
     resources :answers, only: [:create]
   end
 
-  scope :user, controller: 'users', as: 'user' do
-    get :dashboard
+  resources :users, only: [:update] do
+    collection do
+      get :edit_password
+      patch :update_password
+
+      get :profile
+      patch :update_profile
+
+      get :dashboard
+    end
   end
 
   get 'notifications/:id/redirect' => 'notifications#redirect', as: :notification_redirect

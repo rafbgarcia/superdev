@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
 
   # Paperclip
-    has_attached_file :avatar, path: "/users-images/:id-:style.:extension", default_url: 'default_avatar.png'
+    has_attached_file :avatar, styles: { medium: "300x300#", small: "100x100#" }, path: "/users-images/:id-:style.:extension", default_url: 'default_avatar.png'
     validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
 
@@ -25,7 +25,7 @@ class User < ApplicationRecord
   end
 
   def current_avatar
-    (avatar.exists? && avatar.url) || facebook_avatar || 'default_avatar.png'
+    (avatar.exists? && avatar.url(:small)) || facebook_avatar || 'default_avatar.png'
   end
 
   def has_active_subscription?

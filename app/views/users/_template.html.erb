@@ -1,0 +1,28 @@
+<div class="container smaller">
+  <div class="box bigger">
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="d-flex align-items-center mb-4">
+          <div class="avatar mr-2"><%= image_tag current_user.current_avatar %></div>
+          <h4><%= current_user.first_name %></h4>
+        </div>
+
+        <ul class="nav flex-column nav-pills">
+          <li class="nav-item">
+            <%= link_to 'Dashboard', dashboard_users_path, class: "nav-link #{'active' if request.path.include?(dashboard_users_path)}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Meus Dados', profile_users_path, class: "nav-link #{'active' if request.path.include?(profile_users_path)}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Trocar Senha', edit_password_users_path, class: "nav-link #{'active' if request.path.include?(edit_password_users_path)}" %>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-8">
+        <%= content_for :user_dashboard %>
+      </div>
+    </div>
+  </div>
+</div>
