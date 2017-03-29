@@ -61,15 +61,25 @@
   <div class="box bigger">
     <h5 class="mb-3 text-center">Seus dados</h5>
     <hr>
-    <%= simple_form_for :new_customer, url: partiu_codar_path, method: :post, html: { id: 'payment-form' } do |f| %>
-      <%= f.input 'name', label: 'Digite seu Nome Completo', input_html: { value: params.dig(:new_customer, :name) } %>
-      <%= f.input 'email', label: 'Digite seu E-mail principal', input_html: { value: params.dig(:new_customer, :email) } %>
+    <%= simple_form_for :new_customer, url: partiu_codar_path, method: :post, html: { id: 'payment-form', name: 'payment_form', novalidate: false } do |f| %>
+      <%= f.input 'name', label: 'Digite seu Nome Completo', required: true, input_html: {
+        value: params.dig(:new_customer, :name),
+        'ng-model' => 'name'
+      } %>
+      <%= f.input 'email', label: 'Digite seu E-mail principal', required: true, input_html: {
+        value: params.dig(:new_customer, :email),
+        'ng-model' => 'email'
+      } %>
 
-      <div class="text-center">
-        <a href="javascript:;" class="open_credit_card_info btn btn-success btn-lg">
+      <div class="text-center mt-4">
+        <a href="javascript:;" class="open_credit_card_info btn btn-success btn-lg" ng-class="{disabled: payment_form.$invalid}">
           Continuar
           <%= icon 'arrow-right' %>
         </a>
+
+        <div class="mt-3" ng-if="payment_form.$invalid">
+          <small class="text-muted">* Preencha os dados corretamente para prosseguir</small>
+        </div>
       </div>
 
       <%= render 'credit_card' %>
