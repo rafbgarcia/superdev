@@ -1,0 +1,33 @@
+<% if @subscription.present? %>
+  <div class="alert alert-danger"><%= @subscription.errors %> (talvez tenha mais detalhes no seu e-mail, caso não tiver, envie um e-mail para <a href="mailto:rafael@superdev.academy">rafael@superdev.academy</a>)</div>
+<% end %>
+
+<% if @errors.present? %>
+  <% @errors.each do |field_name, error_messages| %>
+    <div class="alert alert-danger"><%= field_name.to_s.titleize %> <%= error_messages.join(' ou ') %></div>
+  <% end %>
+<% end %>
+
+<%= simple_form_for :new_customer, url: partiu_codar_path, method: :post, html: { id: 'payment-form', name: 'payment_form', novalidate: false } do |f| %>
+  <%= f.input 'name', label: 'Digite seu Nome Completo', required: true, input_html: {
+    value: params.dig(:new_customer, :name),
+    'ng-model' => 'name'
+  } %>
+  <%= f.input 'email', label: 'Digite seu E-mail principal', required: true, input_html: {
+    value: params.dig(:new_customer, :email),
+    'ng-model' => 'email'
+  } %>
+
+  <div class="text-center mt-4">
+    <a href="javascript:;" class="open_credit_card_info btn btn-success btn-lg" ng-class="{disabled: payment_form.$invalid}">
+      Continuar
+      <%= icon 'arrow-right' %>
+    </a>
+
+    <div class="mt-3" ng-if="payment_form.$invalid">
+      <small class="text-muted">* Preencha os dados corretamente para prosseguir</small>
+    </div>
+  </div>
+
+  <%= render 'payment_methods' %>
+<% end %>

@@ -1,0 +1,59 @@
+<style>
+  h1,h4,h5,h3 { font-weight: 100; color: #111; }
+  p { font-size: 1rem }
+  .campanha {
+    background: #51b8e2;
+    box-shadow: 0 0 15px #66c7ef;
+  }
+  .campanha * {
+    color: #fff;
+  }
+</style>
+
+<div class="container smallest">
+  <div class="text-center">
+    <h1 class="mb-2">Comece sua Jornada</h1>
+    <h5 class="mb-4 text-muted">Torne-se um Super Programador</h5>
+  </div>
+
+  <div class="box bigger campanha">
+    <h3 class="mb-3 text-center">
+      <%= @plan.title %>
+    </h3>
+    <hr>
+    <%= @plan.description %>
+  </div>
+
+  <div class="box bigger">
+    <h5 class="text-center mb-3">
+      Termos
+    </h5>
+
+    <hr>
+
+    <p>
+      <%= icon 'check', class: 'text-success' %>
+      Estou ciente de que tenho uma <strong>Garantia Incondicional de Risco ZERO</strong>, na qual terei os primeiros 30 dias, após o pagamento, para decidir se desejo continuar ou pedir <u>reembolso total</u> do meu investimento.
+    </p>
+    <p>
+      <%= icon 'check', class: 'text-success' %>
+      Estou ciente de que minha inscrição terá o <strong>valor exclusivo de <%= @plan.price %></strong>, que permanecerá inalterado, mesmo após o fim da campanha.
+    </p>
+    <p>
+      <%= icon 'check', class: 'text-success' %>
+      Estou ciente de que posso cancelar minha inscrição a qualquer momento, e de que este valor pode não estar mais disponível caso eu queira me inscrever novamente no futuro.
+    </p>
+    <p class="mb-0">
+      <%= icon 'check', class: 'text-success' %>
+      Estou ciente de que terei acesso imediato ao conteúdo exlusivo do SuperDev Academy quando meu pagamento for aprovado.
+    </p>
+  </div>
+
+  <div class="box bigger">
+    <h5 class="mb-3 text-center">Seus dados</h5>
+    <hr>
+
+    <%= render 'payment_form' %>
+
+  </div>
+</div>

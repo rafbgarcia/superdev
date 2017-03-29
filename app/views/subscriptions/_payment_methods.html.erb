@@ -61,7 +61,13 @@
 
   <section ng-show="method === 'none'" class="d-flex align-items-center vh">
     <div style="flex-grow: 1">
-      <h3 class="mb-5 text-center">Qual a forma de pagamento?</h3>
+      <div class="text-center mb-5">
+        <h3>Qual a forma de pagamento?</h3>
+        <div class="text-gray">
+          Valor total:
+          <span class="blue"><%= @plan.price %></span>
+        </div>
+      </div>
 
       <div class="d-flex flex-column btn-group-vertical">
         <label ng-click="method = 'credit_card'" class="btn btn-primary btn-lg d-flex justify-content-between align-items-center">
@@ -89,7 +95,7 @@
       <div style="flex-grow: 1" class="d-flex flex-column">
         <h3 class="mb-5 text-center">Gerar boleto</h3>
         <button type="submit" class="p-4 btn btn-primary btn-lg d-flex align-items-center justify-content-between" style="flex-grow: 1;">
-          Gerar Boleto de R$ 45,00
+          Gerar Boleto de <%= @plan.price %>
           <%= icon 'arrow-right' %>
         </button>
       </div>
