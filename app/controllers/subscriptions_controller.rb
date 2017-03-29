@@ -41,7 +41,7 @@ class SubscriptionsController < ApplicationController
         user.activate_subscription!(subscription)
         sign_in(user)
 
-        redirect_to dashboard_users_path
+        redirect_to subscribed_path
       elsif invoice['status'] == 'pending'
         redirect_to subscription_waiting_confirmation_path
       end
