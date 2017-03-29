@@ -11,3 +11,4 @@
 //= require ./ace/ui-ace
 
 //= require_tree ./angular/modules
+//= require_tree ./general
