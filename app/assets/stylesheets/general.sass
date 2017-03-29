@@ -4,7 +4,15 @@ body > header
 body > main
   min-height: 75vh
   background-color: #f3f9f9
-  padding: 1.8rem 1rem
+  padding-top: 1.8rem
+  padding-bottom: 1.8rem
+
+  @media(min-width: 500px)
+    padding: 1.8rem 1rem
+
+.container-fluid
+  @media(max-width: 500px)
+    padding: 0
 
 body > footer
   border-top: 1px solid #eee
@@ -134,7 +142,7 @@ body > footer
 #payment-form
   margin-top: 2rem
 
-  input[type='radio']
+  .btn input[type='radio']
     position: absolute
     left: -9999rem
     top: -9999rem

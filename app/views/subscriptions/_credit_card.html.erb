@@ -1,0 +1,152 @@
+<style>
+#credit-card-container .vh {
+  height: 80vh;
+}
+#credit-card-container .btn {
+  cursor: pointer;
+}
+#credit-card-container .btn-group-vertical .btn {
+  text-align: left;
+  transition: font-size ease-out .35s;
+  height: 6rem;
+}
+#credit-card-container .back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 2rem 1rem;
+}
+#credit-card-container .btn-group-vertical .btn:hover {
+  font-size: 1.6rem;
+}
+#credit-card-container .btn-group-vertical .btn:last-child {
+  border-top: 1px solid #025aa5;
+}
+#credit-card-container {
+  display: none;
+  background: rgba(0,0,0, 0.95);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  overflow: auto;
+}
+#credit-card-container .close {
+  color: #fff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 1rem 1.3rem;
+  font-size: 34px;
+  z-index: 10;
+}
+#credit-card-container > section {
+  padding: 2rem 1.5rem;
+  max-width: 460px;
+  margin: auto;
+}
+#credit-card-container h3 {
+  color: #fff;
+}
+</style>
+
+<div id="credit-card-bg"></div>
+<div id="credit-card-container" ng-init="method = 'none'">
+  <button type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+  <section ng-show="method === 'none'" class="d-flex align-items-center vh">
+    <div style="flex-grow: 1">
+      <h3 class="mb-5 text-center">Qual a forma de pagamento?</h3>
+
+      <div class="d-flex flex-column btn-group-vertical">
+        <button ng-click="method = 'credit_card'" type="button" class="btn btn-primary btn-lg d-flex justify-content-between align-items-center">
+          <input type="radio" name="method" value="credit_card" ng-model="method">
+          Cartão de Crédito
+          <%= icon 'arrow-circle-right' %>
+        </button>
+
+        <button ng-click="method = 'bank_slip'" type="button" class="btn btn-primary btn-lg d-flex justify-content-between align-items-center">
+          <input type="radio" name="method" value="bank_slip" ng-model="method">
+          Boleto Bancário
+          <%= icon 'arrow-circle-right' %>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section ng-show="method !== 'none'">
+    <a href="javascript:;" ng-click="method = 'none'" class="back text-gray">
+      <%= icon 'arrow-left' %>
+      Voltar
+    </a>
+
+    <div ng-show="method === 'bank_slip'" class="d-flex align-items-center vh">
+      <div style="flex-grow: 1" class="d-flex flex-column">
+        <h3 class="mb-5 text-center">Gerar boleto</h3>
+        <button type="submit" class="p-4 btn btn-primary btn-lg d-flex align-items-center justify-content-between" style="flex-grow: 1;">
+          Gerar Boleto de R$ 45,00
+          <%= icon 'arrow-right' %>
+        </button>
+      </div>
+    </div>
+
+    <div ng-show="method === 'credit_card'">
+      <h3 class="mb-5 text-center">Informe seus dados do cartão</h3>
+
+      <div class="card-wrapper" style="margin: 2rem 0 1rem"></div>
+      <div class="text-center" style="margin-bottom: 2rem">
+        <%= image_tag 'credit_cards.png', alt: "Visa, Master, Diners. Amex" %>
+      </div>
+
+      <input class="form-control" data-iugu="number" placeholder="Número do Cartão" type="text" autocomplete="off">
+      <input class="form-control" data-iugu="full_name" placeholder="Nome (igual no cartão)" type="text" value="" />
+      <div class="row">
+        <div class="col-7">
+          <input class="form-control" data-iugu="expiration" placeholder="Validade (MM/AA)" type="text" autocomplete="off">
+        </div>
+        <div class="col-5">
+          <input class="form-control" data-iugu="verification_value" placeholder="CVV" type="text" autocomplete="off">
+        </div>
+      </div>
+
+      <input type="hidden" name="token" id="token" value="" readonly="true" size="64">
+
+
+      <div class="text-center mt-2 d-flex">
+        <button type="submit" class="p-4 btn btn-primary btn-lg d-flex align-items-center justify-content-between" style="flex-grow: 1;">
+          Começar a Estudar
+          <%= icon 'arrow-right' %>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="d-flex align-items-center justify-content-between mt-4">
+    <small class="text-muted p-4">
+      <%= icon 'lock' %> Você está em uma conexão segura
+    </small>
+    <div class="p-4">
+      <%= link_to 'https://www.sslshopper.com/ssl-checker.html#hostname=www.superdev.academy', target: '_blank' do %>
+        <%= image_tag 'site_blindado.png', height: 55 %>
+     <% end %>
+    </div>
+  </footer>
+</div>
+
+<script>
+  $(document).on('turbolinks:load', function () {
+    $('.open_credit_card_info').click(function () {
+      $('#credit-card-container').fadeIn(100);
+      $('body').addClass('of-hidden');
+    });
+
+    $('#credit-card-container .close').click(function () {
+      $('#credit-card-container').fadeOut(100);
+      $('body').removeClass('of-hidden');
+    })
+  });
+</script>
