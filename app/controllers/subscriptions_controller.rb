@@ -6,10 +6,15 @@ class SubscriptionsController < ApplicationController
       return render
     end
 
+    if customer_params.any? { |field_name, value| value.blank?}
+      @errors = { '' => ['Por favor, preencha todos os campos'] }
+    end
+
     user = User.from_name_and_email(customer_params)
     customer = user.create_customer_account
 
-    if !customer
+    if customer.errors
+      @errors = customer.errors
       return render
     end
 

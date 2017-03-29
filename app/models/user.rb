@@ -57,7 +57,10 @@ class User < ApplicationRecord
       email: self.email,
     )
 
-    self.update!(iugu_customer_id: customer.id)
+    if !customer.errors
+      self.update!(iugu_customer_id: customer.id)
+    end
+
     customer
   end
 

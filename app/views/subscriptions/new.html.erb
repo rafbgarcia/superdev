@@ -2,6 +2,11 @@
   <% if @subscription.present? %>
     <div class="alert alert-danger"><%= @subscription.errors %>, por favor verifique seu e-mail para mais detalhes</div>
   <% end %>
+  <% if @errors.present? %>
+    <% @errors.each do |field_name, error_messages| %>
+      <div class="alert alert-danger"><%= field_name.to_s.titleize %> <%= error_messages.join(' ou ') %></div>
+    <% end %>
+  <% end %>
 
   <div ng-init="method = 'credit_card'">
     <h4 class="text-center">Selecione a Forma de Pagamento</h4>

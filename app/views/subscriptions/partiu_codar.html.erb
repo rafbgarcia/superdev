@@ -62,6 +62,11 @@
   <div class="box bigger">
     <h5 class="mb-3 text-center">Seus dados</h5>
     <hr>
+
+    <% if @subscription.present? %>
+      <div class="alert alert-danger"><%= @subscription.errors %> (talvez tenha mais detalhes no seu e-mail, caso não tiver, envie um e-mail para <a href="mailto:rafael@superdev.academy">rafael@superdev.academy</a>)</div>
+    <% end %>
+
     <%= simple_form_for :new_customer, url: partiu_codar_path, method: :post, html: { id: 'payment-form', name: 'payment_form', novalidate: false } do |f| %>
       <%= f.input 'name', label: 'Digite seu Nome Completo', required: true, input_html: {
         value: params.dig(:new_customer, :name),
