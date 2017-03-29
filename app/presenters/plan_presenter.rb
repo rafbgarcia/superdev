@@ -18,12 +18,9 @@ class PlanPresenter < BasePresenter
     when 'superdev_academy_pioneiros'
       %{
         <p class="mb-0 text-center">
-          * Vagas 90% esgotadas.
-          <br>Inscrições podem fechar a qualquer momento.
-          <br><br>
           <u>Quase <strong>50% OFF</strong></u> na mensalidade.
           <br>
-          De <del>R$ 65,00</del> por apenas <%= @plan.price %>.
+          De <del>R$ 65,00</del> por apenas #{self.price}.
         </p>
       }.html_safe
 
@@ -34,7 +31,7 @@ class PlanPresenter < BasePresenter
           <br><br>
           Ganhe <u><strong>31% OFF</strong></u> nas mensalidades.
           <br>
-          De <del>R$ 65,00</del> por apenas R$ 45,00.
+          De <del>R$ 65,00</del> por apenas #{self.price}.
         </p>
       }.html_safe
     end
