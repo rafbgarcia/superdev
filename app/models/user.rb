@@ -38,6 +38,8 @@ class User < ApplicationRecord
   end
 
   def activate_subscription!(subscription)
+    return if user.has_active_subscription?
+
     new_password = Devise.friendly_token[0, 10]
 
     self.update!(
@@ -103,10 +105,7 @@ class User < ApplicationRecord
 
   def self.activate_subscription!(subscription)
     user = User.where(iugu_customer_id: subscription.customer_id).first
-
-    if !user.has_active_subscription?
-      user.activate_subscription!(subscription)
-    end
+    user.activate_subscription!(subscription)
   end
 
 private
