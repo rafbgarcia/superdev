@@ -21,7 +21,7 @@ class PlanPresenter < BasePresenter
           * Vagas 90% esgotadas.
           <br>Inscrições podem fechar a qualquer momento.
           <br><br>
-          <u><strong>54% OFF</strong></u> nas mensalidades.
+          <u>Quase <strong>50% OFF</strong></u> na mensalidade.
           <br>
           De <del>R$ 65,00</del> por apenas <%= @plan.price %>.
         </p>
