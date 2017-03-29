@@ -49,6 +49,16 @@ class User < ApplicationRecord
     UserMailer.payment_approved(self, new_password).deliver_later
   end
 
+  def create_customer_account
+    customer = Iugu::Customer.create(
+      name: self.name,
+      email: self.email,
+    )
+
+    self.update!(iugu_customer_id: customer.id)
+    customer
+  end
+
 
 # class methods
 
@@ -64,6 +74,18 @@ class User < ApplicationRecord
       facebook_link: auth.extra.raw_info.link,
       guest: false,
     )
+  end
+
+  def self.from_name_and_email(params)
+    user = where(email: params[:email]).first_or_initialize
+
+    if user.new_record?
+      user.name = params[:name]
+      user.password = Devise.friendly_token[0, 10]
+      user.save!
+    end
+
+    user
   end
 
   def self.from_customer_data(data)

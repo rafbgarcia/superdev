@@ -65,7 +65,7 @@
 
       <div class="d-flex flex-column btn-group-vertical">
         <label ng-click="method = 'credit_card'" class="btn btn-primary btn-lg d-flex justify-content-between align-items-center">
-          <input type="radio" name="method" value="credit_card" ng-model="method">
+          <input type="radio" name="method" value="credit_card" ng-model="method" id="payment_method">
           Cartão de Crédito
           <%= icon 'arrow-circle-right' %>
         </label>
@@ -116,7 +116,6 @@
 
       <input type="hidden" name="token" id="token" value="" readonly="true" size="64">
 
-
       <div class="text-center mt-2 d-flex">
         <button type="submit" class="p-4 btn btn-primary btn-lg d-flex align-items-center justify-content-between" style="flex-grow: 1;">
           Começar a Estudar
@@ -139,15 +138,77 @@
 </div>
 
 <script>
-  $(document).on('turbolinks:load', function () {
-    $('.open_credit_card_info').click(function () {
-      $('#credit-card-container').fadeIn(100);
-      $('body').addClass('of-hidden');
-    });
-
-    $('#credit-card-container .close').click(function () {
-      $('#credit-card-container').fadeOut(100);
-      $('body').removeClass('of-hidden');
-    })
+$(document).on('turbolinks:load', function () {
+  $('.open_credit_card_info').click(function () {
+    $('#credit-card-container').fadeIn(100);
+    $('body').addClass('of-hidden');
   });
+
+  $('#credit-card-container .close').click(function () {
+    $('#credit-card-container').fadeOut(100);
+    $('body').removeClass('of-hidden');
+  })
+});
+</script>
+
+
+<script>
+$(document).on('turbolinks:load', function () {
+  Iugu.setAccountID("AEF33427575F47A981F718E7A4BD9B80");
+  Iugu.setTestMode(<%= Rails.env.production? ? false : true %>)
+
+  $('#payment-form').submit(function () {
+    var form = $(this);
+    var paymentMethod = $('#payment_method').val();
+
+    if (paymentMethod === 'credit_card') {
+      Iugu.createPaymentToken(this, function (data) {
+        if (data.errors) {
+          alert("Erro salvando cartão: " + JSON.stringify(data.errors));
+        } else {
+          $("#token").val(data.id);
+          form.get(0).submit();
+        }
+      });
+
+      return false;
+    } else {
+      form.get(0).submit();
+    }
+  });
+
+  var card = new Card({
+    form: '#payment-form',
+    // a selector or DOM element for the container
+    // where you want the card to appear
+    container: '.card-wrapper', // *required*
+
+    formSelectors: {
+      numberInput: 'input[data-iugu="number"]', // optional — default input[name="number"]
+      expiryInput: 'input[data-iugu="expiration"]', // optional — default input[name="expiry"]
+      cvcInput: 'input[data-iugu="verification_value"]', // optional — default input[name="cvc"]
+      nameInput: 'input[data-iugu="full_name"]' // optional - defaults input[name="name"]
+    },
+
+    width: 350,
+
+    messages: {
+        validDate: 'valido\naté',
+        monthYear: '', // optional - default 'month/year'
+    },
+
+    formatting: false,
+
+    // Default placeholders for rendered fields - optional
+    placeholders: {
+        number: '•••• •••• •••• ••••',
+        name: 'Nome no Cartão',
+        expiry: 'MM/AA',
+        cvc: '•••'
+    },
+
+    // if true, will log helpful messages for setting up Card
+    debug: <%= Rails.env.production? ? false : true %>
+  });
+});
 </script>
