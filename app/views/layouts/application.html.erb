@@ -21,22 +21,20 @@
 
   <header>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-4 text-center">
-          <%= link_to root_path do %>
-            <%= image_tag 'logo.png', width: '165' %>
-          <% end %>
-        </div>
-        <div class="col-sm-4 text-right">
+      <div class="d-flex justify-content-between align-items-center">
+        <%= link_to root_path, class: 'ml-2' do %>
+          <%= image_tag 'logo.png', width: '165' %>
+        <% end %>
+        <div class="mr-3 d-flex flex-wrap justify-content-end align-items-center">
           <% if user_signed_in? %>
-            Olá, <%= link_to current_user.first_name, dashboard_users_path %>
-            |
-            <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+            <div>
+              Olá, <%= link_to current_user.first_name, dashboard_users_path %></div>
+              <span class="m-1">|</span>
+              <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+            </div>
           <% else %>
             <%= link_to 'Inscreva-se', subscribe_step_1_path, class: 'btn btn-primary' %>
-            <%= link_to 'Faça Login', new_user_session_path %>
+            <%= link_to 'Faça Login', new_user_session_path, class: 'ml-2' %>
           <% end %>
         </div>
       </div>
