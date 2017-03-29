@@ -12,6 +12,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
+    @plan = PlanPresenter.new(Iugu::Plan.fetch(params[:plan]))
+
     if customer_params.any? { |field_name, value| value.blank?}
       @errors = { '' => ['Por favor, preencha todos os campos'] }
     end
@@ -32,7 +34,7 @@ class SubscriptionsController < ApplicationController
       })
 
       sub_params = {
-        plan_identifier: 'partiu_codar',
+        plan_identifier: @plan.identifier,
         customer_id: customer.id,
         only_on_charge_success: true,
       }
@@ -57,7 +59,7 @@ class SubscriptionsController < ApplicationController
       end
     else
       subscription = Iugu::Subscription.create(
-        plan_identifier: 'partiu_codar',
+        plan_identifier: @plan.identifier,
         customer_id: customer.id,
         payable_with: :bank_slip,
         expires_at: 1.day.from_now,

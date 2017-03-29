@@ -71,7 +71,7 @@
 
       <div class="d-flex flex-column btn-group-vertical">
         <label ng-click="method = 'credit_card'" class="btn btn-primary btn-lg d-flex justify-content-between align-items-center">
-          <input type="radio" name="method" value="credit_card" ng-model="method" id="payment_method">
+          <input type="radio" name="method" value="credit_card" ng-model="method" id="credit_card_method">
           Cartão de Crédito
           <%= icon 'arrow-circle-right' %>
         </label>
@@ -154,20 +154,15 @@ $(document).on('turbolinks:load', function () {
     $('#credit-card-container').fadeOut(100);
     $('body').removeClass('of-hidden');
   })
-});
-</script>
 
-
-<script>
-$(document).on('turbolinks:load', function () {
   Iugu.setAccountID("AEF33427575F47A981F718E7A4BD9B80");
   Iugu.setTestMode(<%= Rails.env.production? ? false : true %>)
 
   $('#payment-form').submit(function () {
     var form = $(this);
-    var paymentMethod = $('#payment_method').val();
+    var creditCardMethod = $('#credit_card_method');
 
-    if (paymentMethod === 'credit_card') {
+    if (creditCardMethod.is(':checked')) {
       Iugu.createPaymentToken(this, function (data) {
         if (data.errors) {
           alert("Erro salvando cartão: " + JSON.stringify(data.errors));

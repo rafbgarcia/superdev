@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 # Subscription
   get 'pioneiros' => 'subscriptions#pioneiros', as: :pioneiros
   get 'partiu-codar' => 'subscriptions#partiu_codar', as: :subscribe_step_1
-  post 'partiu-codar' => 'subscriptions#partiu_codar', as: :partiu_codar
+  post :create, controller: 'subscriptions', as: :create_subscription
 
   get 'aguardando-confirmacao' => 'subscriptions#waiting_confirmation'
   get 'inscricao-concluida' => 'subscriptions#complete', as: :subscribed

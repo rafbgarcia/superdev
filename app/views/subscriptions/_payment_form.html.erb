@@ -8,7 +8,9 @@
   <% end %>
 <% end %>
 
-<%= simple_form_for :new_customer, url: partiu_codar_path, method: :post, html: { id: 'payment-form', name: 'payment_form', novalidate: false } do |f| %>
+<%= simple_form_for :new_customer, url: create_subscription_path, method: :post, html: { id: 'payment-form', name: 'payment_form', novalidate: false } do |f| %>
+  <input type="hidden" name="plan" value="<%= @plan.id %>">
+
   <%= f.input 'name', label: 'Digite seu Nome Completo', required: true, input_html: {
     value: params.dig(:new_customer, :name),
     'ng-model' => 'name'
