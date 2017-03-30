@@ -1,0 +1,19 @@
+<% action = @blog_post.new_record? ? admin_blog_posts_path : admin_blog_post_path(@blog_post) %>
+
+<%= simple_form_for @blog_post, url: action do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :asked_by, label: 'Pergunta feita por', disabled: true %>
+
+    <%= f.input :title, label: 'Título' %>
+    <%= f.input :body, label: 'Texto' %>
+    <%= f.input :posted_at, label: 'Postar em' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Listing', admin_blog_posts_path %>

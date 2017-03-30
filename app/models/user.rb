@@ -93,6 +93,19 @@ class User < ApplicationRecord
     user
   end
 
+  def self.find_or_create_by(params)
+    user = User.where(email: params[:email].downcase).first_or_initialize
+
+    if user.persisted? && !user.valid_password?(params[:password])
+      user.errors.add(:password, 'Esta senha não confere com o e-mail')
+      return user
+    end
+
+    user.attributes = params
+    user.save
+    user
+  end
+
   def self.from_customer_data(data)
     user = where(email: data[:email]).first_or_initialize
 

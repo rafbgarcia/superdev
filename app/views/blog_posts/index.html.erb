@@ -1,0 +1,48 @@
+<div class="container">
+  <section class="box d-flex justify-content-between align-items-center" id="posts-list">
+    <h5 class="box-title">
+      <%= image_tag 'yellow_post_icon.png' %>
+      Perguntas e Respostas sobre Programação
+    </h5>
+
+    <%= link_to 'Faça uma Pergunta', new_blog_post_path, class: 'btn btn-primary' %>
+  </section>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="box no-padding post-list">
+        <% @blog_posts.each do |blog_post| -%>
+          <%= link_to blog_post_path(blog_post), class: "post #{'active' if params[:id] == blog_post.slug}" do %>
+            <div class="mb-2"><%= blog_post.title %></div>
+            <small><%= relative_time @current_post.posted_at %></small>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+
+    <% if @current_post.present? %>
+      <div class="col-sm-8 active-post">
+        <% if @current_post.pending_approval? %>
+          <div class="alert alert-info">
+            * Seu post vai aparecer assim que for respondido :)
+          </div>
+          <% if user_signed_in? %>
+            <p>Vou te avisar no e-mail <u><strong><%= current_user.email %></strong></u></p>
+          <% end %>
+        <% else %>
+          <div class="box d-flex justify-content-between">
+            <aside class="text-center">
+              <div class="avatar"><%= image_tag 'rafa.jpg' %></div>
+              <small>Rafa Garcia</small>
+            </aside>
+            <article class="content">
+              <%= render_md @current_post.body %>
+            </article>
+          </div>
+        <% end %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

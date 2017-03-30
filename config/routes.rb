@@ -72,6 +72,9 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:edit, :update]
 
+  resources :blog_posts, only: [:new, :create]
+  get '/blog_posts(/:id)' => 'blog_posts#index', as: :blog_post # precisa ficar depois
+
 ################
 # Admin Routes #
 ################
@@ -80,6 +83,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :courses
+    resources :blog_posts do
+      patch :approve
+    end
     resources :lessons do
       patch :update_weight
     end

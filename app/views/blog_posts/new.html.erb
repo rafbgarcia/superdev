@@ -1,0 +1,81 @@
+<div class="container smallest">
+  <div class="box bigger">
+    <h3 class="mb-5">Faça sua pergunta</h3>
+    <% if user_signed_in? %>
+      <p class="mb-5">Opa <%= current_user.first_name %>! Pode deixar que te aviso por e-mail assim que responder sua pergunta</p>
+    <% end %>
+    <%= simple_form_for @blog_post do |f| %>
+      <%= f.input :title, label: 'Sua pergunta' %>
+
+      <% if user_signed_in? %>
+        <div class="text-center">
+          <%= f.submit :Postar, class: 'btn btn-primary' %>
+          <%= link_to 'Voltar', blog_posts_path %>
+        </div>
+      <% else %>
+
+        <div class="form-group">
+          <label class="required">
+            <abbr title="required"> *</abbr>
+            Quer que eu te avise quando responder?
+          </label>
+          <div class="custom-controls-stacked" ng-init="receive_email = '<%= params.dig(:receive_email) %>'">
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" name="receive_email" ng-model="receive_email" value="1">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Claro que sim!</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" name="receive_email" ng-model="receive_email" value="0">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Não... não estou tão interessado.</span>
+            </label>
+          </div>
+        </div>
+
+        <div ng-if="receive_email === '1'">
+          <div class="mb-3" style="padding: 1rem; box-shadow: 0 0 10px 0 #ddd">
+            <h6 class="mb-3 text-center">Show! Então cria uma conta* rápida</h6>
+            <hr>
+            <p class="alert alert-info">* Dessa forma, eu consigo te notificar e você pode gerenciar suas perguntas</p>
+
+            <ul class="nav nav-tabs" ng-init="new_account = '1'">
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:;" ng-click="new_account = '1'" ng-class="{active: new_account === '1'}">Criar conta</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:;" ng-click="new_account = '0'" ng-class="{active: new_account === '0'}">Fazer login</a>
+              </li>
+            </ul>
+            <div class="p-2 mt-2">
+              <%= f.simple_fields_for @blog_post.asked_by do |u| %>
+                <div ng-if="new_account === '1'">
+                  <%= u.input :name, label: 'Seu Nome' %>
+                </div>
+                <%= u.input :email, label: 'Seu E-mail' %>
+                <%= u.input :password, label: 'Digite uma senha' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="receive_email === '0'">
+          <div class="mb-3" style="padding: 1rem; box-shadow: 0 0 10px 0 #ddd">
+            <p>Mano, se não tá tão interessado na resposta, pra que postar?</p>
+            <p>Só lembrando que esse é um ambiente seguro pra qualquer pergunta.</p>
+            <p class="mb-0">Mas se realmente não se sentir confortável, pode ir em frente.</p>
+          </div>
+        </div>
+
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary" ng-disabled="receive_email.length === 0" ng-class="{disabled: receive_email.length === 0}">
+            Postar
+          </button>
+
+          <%= link_to 'Voltar', blog_posts_path %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

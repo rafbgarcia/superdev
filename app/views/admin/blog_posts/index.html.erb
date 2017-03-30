@@ -1,0 +1,35 @@
+<h1>Blog Posts</h1>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th width="25%">Título</th>
+      <th width="15%">Postado em</th>
+      <th width="15%">Status</th>
+      <th width="30%">Feita por</th>
+      <th width="10%"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @blog_posts.each do |blog_post| %>
+      <tr>
+        <td><%= blog_post.title %></td>
+        <td><%= relative_time blog_post.posted_at %></td>
+        <td><%= blog_post.aasm_state %></td>
+        <td><%= blog_post.asked_by&.name %></td>
+        <td>
+          <%= link_to 'Approve', admin_blog_post_approve_path(blog_post), method: :patch %>
+          |
+          <%= link_to 'Edit', edit_admin_blog_post_path(blog_post) %>
+          |
+          <%= link_to 'Delete', admin_blog_post_path(blog_post), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Blog Post', new_admin_blog_post_path %>

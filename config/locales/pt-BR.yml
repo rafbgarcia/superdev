@@ -270,6 +270,7 @@ pt-BR:
 
   errors:
     messages:
+      invalid: "valor inválido"
       blank: "campo obrigatório"
       already_confirmed: "já foi confirmado"
       confirmation_period_expired: "precisa ser confirmada em até %{period}, por favor, solicite uma nova"
