@@ -25,7 +25,6 @@
           <%= link_to course_item_path(lesson_id: lesson.slug, item_weight: item.weight) do %>
             <%= image_tag "question_type_#{format_item_type(item.type)}.png" %>
             <span class="title"><%= item.title %></span>
-            <%= answer_icon_for(current_user, item) %>
           <% end %>
         <% end -%>
       </section>
