@@ -68,7 +68,7 @@ class Item < ApplicationRecord
 
   class << self
     def for(lesson, weight)
-      where(lesson: lesson, weight: weight).first
+      includes(discussions: [:item, :user]).where(lesson: lesson, weight: weight).first
     end
   end
 

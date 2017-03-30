@@ -61,6 +61,9 @@ GEM
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.4.19)
     builder (3.2.3)
+    bullet (5.5.1)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     byebug (9.0.6)
     climate_control (0.1.0)
     cocaine (0.5.8)
@@ -251,6 +254,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    uniform_notifier (1.10.0)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.4.0)
@@ -270,6 +274,7 @@ DEPENDENCIES
   aws-sdk (~> 2)
   aws-sdk-rails
   bootstrap (~> 4.0.0.alpha6)
+  bullet
   byebug
   devise
   factory_girl_rails

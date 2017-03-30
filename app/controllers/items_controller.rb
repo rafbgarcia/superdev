@@ -32,7 +32,7 @@ private
   def set_discussion_variables
     return if params[:discussion_id].blank?
     @comment = Comment.new
-    @active_discussion = Discussion.friendly.find(params[:discussion_id])
+    @active_discussion = Discussion.includes(:user, comments: :user).friendly.find(params[:discussion_id])
   end
 
   def set_vars
