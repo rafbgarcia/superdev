@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
 
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :exception, prepend: true
 
-  after_action :set_csrf_cookie_for_angular_xhr_requests
+  # after_action :set_csrf_cookie_for_angular_xhr_requests
   after_action :clear_flash
 
   def acme_challenge
@@ -12,13 +12,9 @@ class ApplicationController < ActionController::Base
 
 protected
 
-  def set_csrf_cookie_for_angular_xhr_requests
-    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
-  end
-
-  def verified_request?
-    super || valid_authenticity_token?(session, request.headers['X-XSRF-TOKEN'])
-  end
+  # def set_csrf_cookie_for_angular_xhr_requests
+  #   cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
+  # end
 
   def require_subscription
     if !user_signed_in? || !current_user.has_active_subscription?
