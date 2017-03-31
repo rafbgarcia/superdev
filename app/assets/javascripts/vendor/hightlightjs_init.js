@@ -1,1 +1,4 @@
-$(document).on('turbolinks:load', hljs.initHighlightingOnLoad);
+$(document).on('turbolinks:load', function () {
+  hljs.initHighlighting.called = false;
+  hljs.initHighlighting();
+});

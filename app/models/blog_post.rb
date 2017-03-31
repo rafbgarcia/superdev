@@ -6,7 +6,7 @@ class BlogPost < ApplicationRecord
   friendly_id :title, use: :slugged
 
   # Scopes
-  scope :published, -> { where('posted_at <= ?', Time.now) }
+  scope :published, -> { includes(:asked_by).where('posted_at <= ?', Time.now) }
 
   validates_presence_of :title
   accepts_nested_attributes_for :asked_by
