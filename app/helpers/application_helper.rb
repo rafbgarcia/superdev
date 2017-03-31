@@ -64,4 +64,15 @@ module ApplicationHelper
     html.join.html_safe if html.present?
   end
 
+  def active_link_to(*args)
+    if args.second.in?(request.path)
+      args.last[:class] ||= ''
+      args.last[:class] += ' active'
+
+      link_to *args
+    else
+      link_to *args
+    end
+  end
+
 end

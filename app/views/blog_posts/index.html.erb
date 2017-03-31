@@ -5,7 +5,7 @@
   <section class="box d-flex justify-content-between align-items-center" id="posts-list">
     <h5 class="box-title">
       <%= image_tag 'yellow_post_icon.png' %>
-      Perguntas e Respostas sobre Programação
+      DevQuestions <small>- Perguntas de Desenvolvedores</small>
     </h5>
 
     <%= link_to 'Faça uma Pergunta', new_blog_post_path, class: 'btn btn-primary' %>
@@ -16,9 +16,11 @@
       <div class="box no-padding post-list">
         <% @blog_posts.each do |blog_post| -%>
           <%= link_to blog_post_path(blog_post), class: "post #{'active' if params[:id] == blog_post.slug}" do %>
-            <div class="mb-2"><%= blog_post.title %></div>
+            <div><%= blog_post.title %></div>
             <% if blog_post.asked_by.present? %>
-              <small>Por <%= blog_post.asked_by.name %></small>
+              <div class="mt-2">
+                <small>Por <%= blog_post.asked_by.name %></small>
+              </div>
             <% end %>
           <% end %>
         <% end %>
