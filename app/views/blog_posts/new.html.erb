@@ -2,11 +2,14 @@
 <% seo_description 'Tire suas dúvidas sobre programação, o SuperDev te responde!' %>
 
 <div class="container smallest">
+  <p class="alert alert-info"><%= icon 'heart' %> Obrigado, sua pergunta pode ajudar muitas pessoas</p>
   <div class="box bigger">
     <h3 class="mb-5">Faça sua pergunta</h3>
+
     <% if user_signed_in? %>
       <p class="mb-5">Opa <%= current_user.first_name %>! Pode deixar que te aviso por e-mail assim que responder sua pergunta</p>
     <% end %>
+
     <%= simple_form_for @blog_post do |f| %>
       <%= f.input :title, label: 'Sua pergunta' %>
 
@@ -64,7 +67,6 @@
 
         <div ng-if="receive_email === '0'">
           <div class="mb-3" style="padding: 1rem; box-shadow: 0 0 10px 0 #ddd">
-            <p>Mano, se não tá tão interessado na resposta, pra que postar?</p>
             <p>Só lembrando que esse é um ambiente seguro pra qualquer pergunta.</p>
             <p class="mb-0">Mas se realmente não se sentir confortável, pode ir em frente.</p>
           </div>

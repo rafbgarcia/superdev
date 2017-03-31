@@ -2,16 +2,20 @@
 <% seo_description(@current_post.body) %>
 
 <div class="container">
-  <h1 class="text-center box">
-    <div>
-    #DevQuestions
-      <!-- <span class="badge badge-primary"></span> -->
-    </div>
-    <div>
+  <div class="box">
+    <h1 class="text-center">
+      <div>#DevQuestions</div>
       <small class="fz-1 text-muted">Você pergunta. Eu respondo. <u><strong>Todos aprendemos</strong></u>.</small>
+    </h1>
+    <div class="mt-3 text-center">
+      <div>
+        <%= link_to new_blog_post_path, class: 'btn btn-primary' do %>
+          <%= icon 'heart' %> Contribua. Faça sua Pergunta
+        <% end %>
+      </div>
+      <small class="text-gray">Sua dúvida pode ajudar muitos outros <%= icon 'thumbs-up' %></small>
     </div>
-    <div class="mt-3"><%= link_to 'Faça sua Pergunta', new_blog_post_path, class: 'btn btn-primary' %></div>
-  </h1>
+  </div>
 
   <div class="row">
     <div class="col-sm-4">
