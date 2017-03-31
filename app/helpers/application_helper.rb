@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def title(title)
+    content_for(:page_title) { title }
+  end
+
+  def seo_description(text)
+    content_for(:seo_description) { text }
+  end
+
   def render_md(markdown)
     markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, fenced_code_blocks: true)
     markdown_renderer.render(markdown).html_safe

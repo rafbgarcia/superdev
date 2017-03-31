@@ -1,3 +1,9 @@
+<% page_title_suffix = "#{@item.title} | #{@lesson.name} | #{@course.name}" %>
+
+<% title "#{@active_discussion&.title} #{page_title_suffix}" %>
+
+<% @active_discussion && seo_description("#{@active_discussion.title}, #{page_title_suffix}") %>
+
 <section class="container smaller">
   <%= render 'application/breadcrumbs' %>
 
