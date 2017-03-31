@@ -14,7 +14,7 @@
         <% @blog_posts.each do |blog_post| -%>
           <%= link_to blog_post_path(blog_post), class: "post #{'active' if params[:id] == blog_post.slug}" do %>
             <div class="mb-2"><%= blog_post.title %></div>
-            <small><%= relative_time @current_post.posted_at %></small>
+            <small><%= relative_time blog_post.posted_at %></small>
           <% end %>
         <% end %>
       </div>
