@@ -1,0 +1,7 @@
+<h5>Faça um Comentário</h5>
+
+<% @current_post.comments.each do |comment| %>
+  <%= render 'discussions/comment', locals: { comment: comment } %>
+<% end %>
+
+<%= render partial: 'comments/new', locals: { url: blog_post_comments_path(@current_post), user_field: @comment.user } %>

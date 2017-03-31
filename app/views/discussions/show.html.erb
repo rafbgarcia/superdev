@@ -10,7 +10,7 @@
 <div class="row">
   <div class="col-sm-4">
     <div class="box no-padding post-list">
-      <% @item.discussions.each do |discussion| -%>
+      <% @item.discussions.each do |discussion| %>
         <%= link_to anchor_discussion_path(discussion),
           class: "post #{'active' if params[:discussion_id] == discussion.slug}" do
         %>
@@ -36,23 +36,12 @@
       <%= render partial: 'discussions/discussion', locals: { discussion: @active_discussion } %>
 
       <% @active_discussion.comments.each do |comment| %>
-        <%= render partial: 'discussions/comment', locals: { comment: comment, comment_id: comment.id } %>
+        <%= render partial: 'discussions/comment', locals: { comment: comment } %>
       <% end %>
 
       <h5>Adicione uma resposta</h5>
 
-      <div class="box d-flex justify-content-between">
-        <aside>
-          <div class="avatar"><%= image_tag current_user.current_avatar %></div>
-        </aside>
-        <div class="content">
-          <%= simple_form_for @comment, url: create_comment_path do |f| %>
-            <%= f.input :text, label: 'Digite sua resposta' %>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-          <% end %>
-        </div>
-      </div>
-
+      <%= render partial: 'comments/new', locals: { url: create_comment_path } %>
     </div>
   <% end %>
 </div>

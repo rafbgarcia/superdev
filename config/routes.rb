@@ -72,7 +72,9 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:edit, :update]
 
-  resources :blog_posts, only: [:new, :create]
+  resources :blog_posts, only: [:new, :create] do
+    post :comments
+  end
   get '/blog_posts(/:id)' => 'blog_posts#index', as: :blog_post # precisa ficar depois
 
 ################

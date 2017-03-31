@@ -1,0 +1,16 @@
+<div class="box d-flex justify-content-between">
+  <aside>
+    <div class="avatar"><%= image_tag current_user&.current_avatar || 'default_avatar.png' %></div>
+  </aside>
+  <div class="content">
+    <%= simple_form_for @comment, url: url do |f| %>
+      <%= f.input :text, label: false, input_html: { 'ng-model' => 'comment_text'} %>
+
+      <div ng-show="comment_text.length > 3" class="mt-4">
+        <%= render partial: 'users/signup_or_login', locals: { f: f, user_field: user_field } if local_assigns[:user_field].present? %>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    <% end %>
+  </div>
+</div>

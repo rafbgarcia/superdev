@@ -3,17 +3,27 @@
 
 <div class="container">
   <div class="box">
-    <h1 class="text-center">
-      <div>#DevQuestions</div>
-      <small class="fz-1 text-muted">Você pergunta. Eu respondo. <u><strong>Todos aprendemos</strong></u>.</small>
-    </h1>
-    <div class="mt-3 text-center">
-      <div>
-        <%= link_to new_blog_post_path, class: 'btn btn-primary' do %>
-          <%= icon 'heart' %> Contribua. Faça sua Pergunta
-        <% end %>
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6 d-flex align-items-center justify-content-center flex-column text-center">
+        <h1 class="mb-2">
+          #DevQuestions
+        </h1>
+        <div class="fz-1 text-muted lh-24 mb-3">
+          Você pergunta. Eu respondo.
+          <br>
+          <u><strong>Todos aprendemos</strong></u>
+        </div>
       </div>
-      <small class="text-gray">Sua dúvida pode ajudar muitas pessoas <%= icon 'thumbs-up' %></small>
+      <div class="col-lg-3 d-flex align-items-center justify-content-center">
+        <div class="floating-box">
+          <h6 class="text-danger"><%= icon 'heart' %> Contribua!</h6>
+          <p>Sua dúvida pode ajudar muita gente</p>
+          <%= link_to new_blog_post_path, class: 'btn btn-primary btn-sm' do %>
+            <%= icon 'heart' %> Faça sua Pergunta
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -50,11 +60,13 @@
           </aside>
           <article class="content">
             <%= render_md @current_post.body %>
+            <!-- <hr>
+            <footer>Isso lhe foi útil? Vote e faça um comentário!</footer> -->
           </article>
         </div>
+
+        <%= render 'comments' %>
       <% end %>
-
     </div>
-
   </div>
 </div>

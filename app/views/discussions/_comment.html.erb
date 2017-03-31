@@ -1,6 +1,6 @@
-<div class="box d-flex justify-content-between" id="<%= "comment_#{comment_id}" rescue nil %>">
+<div class="box d-flex justify-content-between" id="<%= "comment_#{comment.id}" rescue nil %>">
   <aside>
-    <div class="avatar"><%= image_tag comment.user.current_avatar %></div>
+    <div class="avatar"><%= image_tag comment&.user&.current_avatar ||'default_avatar.png' %></div>
   </aside>
   <div class="content">
     <article class="mb-4">

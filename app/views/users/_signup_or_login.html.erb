@@ -1,0 +1,20 @@
+<% if !user_signed_in? %>
+  <ul class="nav nav-tabs" ng-init="new_account = '1'">
+    <li class="nav-item">
+      <a class="nav-link" href="javascript:;" ng-click="new_account = '1'" ng-class="{active: new_account === '1'}">Não tenho conta</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="javascript:;" ng-click="new_account = '0'" ng-class="{active: new_account === '0'}">Já tenho conta</a>
+    </li>
+  </ul>
+
+  <div class="p-2 mt-2">
+    <%= f.simple_fields_for user_field do |u| %>
+      <div ng-if="new_account === '1'">
+        <%= u.input :name, label: 'Seu Nome' %>
+      </div>
+      <%= u.input :email, label: 'Seu E-mail' %>
+      <%= u.input :password, label: 'Digite uma senha' %>
+    <% end %>
+  </div>
+<% end %>

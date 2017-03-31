@@ -1,12 +1,15 @@
 class BlogPost < ApplicationRecord
   include AASM
+
   belongs_to :asked_by, class_name: 'User'
+  has_many :comments, class_name: 'PostComment'
+
   # Slug
   extend FriendlyId
   friendly_id :title, use: :slugged
 
   # Scopes
-  scope :published, -> { includes(:asked_by).where('posted_at <= ?', Time.now) }
+  scope :published, -> { includes(:asked_by).where('posted_at <= ?', Time.now).order(posted_at: :desc) }
 
   validates_presence_of :title
   accepts_nested_attributes_for :asked_by

@@ -45,23 +45,7 @@
             <hr>
             <p class="alert alert-info">* Dessa forma, eu consigo te notificar e você pode gerenciar suas perguntas</p>
 
-            <ul class="nav nav-tabs" ng-init="new_account = '1'">
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:;" ng-click="new_account = '1'" ng-class="{active: new_account === '1'}">Criar conta</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:;" ng-click="new_account = '0'" ng-class="{active: new_account === '0'}">Fazer login</a>
-              </li>
-            </ul>
-            <div class="p-2 mt-2">
-              <%= f.simple_fields_for @blog_post.asked_by do |u| %>
-                <div ng-if="new_account === '1'">
-                  <%= u.input :name, label: 'Seu Nome' %>
-                </div>
-                <%= u.input :email, label: 'Seu E-mail' %>
-                <%= u.input :password, label: 'Digite uma senha' %>
-              <% end %>
-            </div>
+            <%= render partial: 'users/signup_or_login', locals: { f: f, user_field: @blog_post.asked_by } %>
           </div>
         </div>
 

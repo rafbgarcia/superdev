@@ -94,6 +94,7 @@ class User < ApplicationRecord
   end
 
   def self.find_or_create_by(params)
+    return if params.blank?
     user = User.where(email: params[:email].downcase).first_or_initialize
 
     if user.persisted? && !user.valid_password?(params[:password])
