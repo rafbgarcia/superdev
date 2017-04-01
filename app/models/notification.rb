@@ -15,7 +15,7 @@ class Notification < ApplicationRecord
     end
 
     def new_comment(comment)
-      users_with_comments = [comment.commentable.user_id]
+      users_with_comments = [comment.commentable.user_id, User.admin&.id]
       users_with_comments += comment.commentable.comments.map(&:user_id).compact.uniq
 
       users_to_notify = users_with_comments - [comment.user_id]

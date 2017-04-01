@@ -64,9 +64,12 @@
           </aside>
           <article class="content markdown">
             <%= render_md @current_post.body %>
-            <!-- <hr>
-            <footer>Isso lhe foi útil? Vote e faça um comentário!</footer> -->
           </article>
+        </div>
+
+        <div class="m-4 fz-1 text-center">
+          <p class="mb-1 text-success"><strong><u>Isso foi útil? Ficou alguma dúvida</u></strong></p>
+          <p>Contribua com seu comentário!</p>
         </div>
 
         <%= render 'comments' %>

@@ -131,6 +131,10 @@ class User < ApplicationRecord
     user.activate_subscription!(subscription)
   end
 
+  def self.admin
+    User.where(email: 'rafbgarcia@gmail.com').first
+  end
+
 private
 
   def format_name_and_email
