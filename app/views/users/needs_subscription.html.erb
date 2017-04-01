@@ -5,11 +5,13 @@
     <h4 class="mb-5">Você precisa de uma inscrição para continuar</h4>
 
     <%= link_to subscribe_step_1_path, class: 'btn btn-primary btn-lg' do %>
-      Inscreva-se
+      <%= icon 'heart' %> Inscreva-se
     <% end %>
 
-    <span style="font-size: 22px; margin: 0 1rem">ou</span>
+    <% if !user_signed_in? %>
+      <span style="font-size: 22px; margin: 0 1rem">ou</span>
 
-    <%= link_to 'Faça Login', new_user_session_path, class: 'btn btn-primary btn-lg' %>
+      <%= link_to 'Faça Login', new_user_session_path, class: 'btn btn-primary btn-lg' %>
+    <% end %>
   </div>
 </section>
