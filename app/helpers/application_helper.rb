@@ -67,13 +67,28 @@ module ApplicationHelper
   end
 
   def active_link_to(*args)
-    if args.second.in?(request.path)
-      args.last[:class] ||= ''
-      args.last[:class] += ' active'
+    path = args.second.is_a?(Hash) ? args.first : args.second
+    block = -> { yield } if block_given?
+    exact_match = args.last.fetch(:exact_match, false)
 
-      link_to *args
+    if exact_match
+      if path == request.path
+        args.last[:class] ||= ''
+        args.last[:class] += ' active'
+
+        link_to *args, &block
+      else
+        link_to *args, &block
+      end
     else
-      link_to *args
+      if path.in?(request.path)
+        args.last[:class] ||= ''
+        args.last[:class] += ' active'
+
+        link_to *args, &block
+      else
+        link_to *args, &block
+      end
     end
   end
 
