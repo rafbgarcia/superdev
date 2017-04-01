@@ -64,6 +64,10 @@ class User < ApplicationRecord
     customer
   end
 
+  def client?
+    self.iugu_subscription_id.present?
+  end
+
 
 # class methods
 

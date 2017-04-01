@@ -65,6 +65,7 @@ Rails.application.routes.draw do
       patch :update_profile
 
       get :dashboard
+      get :subscription
     end
   end
 

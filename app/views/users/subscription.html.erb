@@ -1,0 +1,37 @@
+<% title 'Inscrição' %>
+
+<% content_for :user_dashboard do %>
+  <% if !current_user.client? %>
+    <p><%= current_user.first_name %>, você ainda não está inscrito.</p>
+
+    <p>Não perca tempo, comece sua jornada agora mesmo!</p>
+
+    <p>Daqui a 1 ano, <u><strong>você vai agradecer a si</strong></u> mesmo por ter tomado esta decisão de investir no seu futuro.</p>
+
+    <%= link_to subscribe_step_1_path, class: 'btn btn-primary' do %>
+      <%= icon 'heart' %> Inscreva-se para começar a estudar
+    <% end %>
+  <% else %>
+    <% if current_user.has_active_subscription? %>
+      <p>
+        <%= current_user.first_name %>,
+        sua inscrição vai até
+        <strong><u><%= datefy current_user.iugu_subscription_expires_at %></u></strong>.
+      </p>
+      <p>Espero que esteja curtindo, nosso objetivo é tornar essa experiência o melhor possível para você.</p>
+      <p>Se tiver críticas ou sugestões, <strong><u>estamos realmente interessados em ouví-las</u></strong>.</p>
+      <p>Fazendo isso você nos ajuda a melhorar e impactar cada vez mais pessoas.</p>
+    <% else %>
+      <p>Fala <%= current_user.first_name %>!</p>
+      <p><strong><u>Sua inscrição expirou dia <%= datefy current_user.iugu_subscription_expires_at %>.</u></strong></p>
+      <p>Você pode ativá-la agora mesmo para voltar à sua jornada em alcançar seus objetivos.</p>
+      <p>Você vai agradecer a si mesmo daqui a 1 ano por ter tomado essa decisão de investir no seu futuro.</p>
+
+      <%= link_to subscribe_step_1_path, class: 'btn btn-primary' do %>
+        <%= icon 'heart' %> Inscreva-se para começar a estudar
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= render 'template' %>
