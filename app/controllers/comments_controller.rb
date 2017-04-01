@@ -32,12 +32,7 @@ private
   end
 
   def set_back_to_url
-    @back_to_url =
-      if @comment.from_discussion?
-        anchor_discussion_path(@comment.commentable)
-      elsif @comment.from_blog_post?
-        blog_post_path(@comment.commentable)
-      end
+    @back_to_url = commentable_url(@comment.commentable)
   end
 
 

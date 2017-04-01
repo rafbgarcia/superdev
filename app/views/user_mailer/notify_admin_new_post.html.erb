@@ -1,0 +1,18 @@
+<div style="font-size: 15px; color: #333; line-height: 22px;">
+  <p style="font-size: 20px">
+    Ei tchê! <%= @commentable.user&.first_name %> criou uma discussão:
+  </p>
+
+  <hr>
+
+  <i><h4><%= @commentable.title %></h4></i>
+  <i><p><%= html_text(@commentable.text) if @commentable.text %></p></i>
+
+  <hr>
+
+  <p>
+    <%= link_to 'Ver Post', commentable_url(@commentable) %>
+  </p>
+
+  <p>SuperDev</p>
+</div>

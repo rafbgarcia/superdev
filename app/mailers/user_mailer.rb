@@ -14,6 +14,7 @@ class UserMailer < ApplicationMailer
   def new_comment(user, comment)
     @user = user
     @comment = comment
+
     mail(
       from: 'SuperDev <noreply@superdev.academy>',
       to: %("#{@user.name}" <#{@user.email}>),
@@ -27,16 +28,16 @@ class UserMailer < ApplicationMailer
 
     mail(
       to: %("#{@user.name}" <#{@user.email}>),
-      subject: "Sua pergunta foi respondida",
+      subject: "Acabei de reponder sua pergunta!",
     )
   end
 
-  def notify_admin(discussion)
-    @discussion = discussion
+  def notify_admin_new_post(commentable)
+    @commentable = commentable
     mail(
       from: 'SuperDev <noreply@superdev.academy>',
       to: %("Rafael Garcia" <rafael@superdev.academy>),
-      subject: "Nova discussão",
+      subject: "Novo post",
     )
   end
 

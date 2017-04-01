@@ -97,4 +97,12 @@ module ApplicationHelper
     %{<div class="fb-comments" data-order-by="reverse_time" data-href="#{url}" data-mobile="true" data-numposts="10"></div>}.html_safe
   end
 
+  def commentable_url(commentable)
+    if commentable.is_a?(Discussion)
+      anchor_discussion_path(commentable)
+    elsif commentable.is_a?(BlogPost)
+      blog_post_url(commentable)
+    end
+  end
+
 end

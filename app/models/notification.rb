@@ -11,7 +11,11 @@ class Notification < ApplicationRecord
   class << self
 
     def new_discussion(discussion)
-      UserMailer.notify_admin(discussion).deliver_later
+      UserMailer.notify_admin_new_post(discussion).deliver_later
+    end
+
+    def new_post(commentable)
+      UserMailer.notify_admin_new_post(commentable).deliver_later
     end
 
     def new_comment(comment)

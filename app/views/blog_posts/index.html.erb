@@ -1,5 +1,5 @@
 <% title(@current_post.title) %>
-<% seo_description(@current_post.body) %>
+<% seo_description(@current_post.text) %>
 
 <div class="container">
   <div class="box">
@@ -70,7 +70,7 @@
             <small>Rafa Garcia</small>
           </aside>
           <article class="content markdown">
-            <%= render_md @current_post.body %>
+            <%= render_md @current_post.text %>
           </article>
         </div>
 

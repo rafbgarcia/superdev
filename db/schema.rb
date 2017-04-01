@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401162835) do
+ActiveRecord::Schema.define(version: 20170401212608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20170401162835) do
   create_table "blog_posts", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
-    t.text     "body"
+    t.text     "text"
     t.datetime "posted_at"
     t.string   "aasm_state", default: "pending_approval"
     t.datetime "created_at",                              null: false
