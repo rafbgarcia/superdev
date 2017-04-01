@@ -13,7 +13,7 @@ class Lesson < ApplicationRecord
     extend FriendlyId
     friendly_id :name, use: :slugged
 
-  before_create :set_weight
+  before_save :set_weight, if: :need_new_weight?
 
   def previous_lesson
     lesson = course.lessons.where(weight: weight - 1).first
@@ -53,6 +53,11 @@ private
   def set_weight
     current_weight = Lesson.where(course_id: self.course.id).order(:weight).last&.weight || 0
     self.weight = current_weight + 1
+  end
+
+  def need_new_weight?
+    return true if self.new_record?
+    Lesson.where(course_id: self.course_id, weight: self.weight).exists?
   end
 
 end

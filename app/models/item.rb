@@ -11,7 +11,7 @@ class Item < ApplicationRecord
     # scope :by_lesson, -> { includes(:lesson).order('lessons.weight ASC, items.weight ASC') }
     scope :by_lesson, -> { order(:lesson_id, :weight) }
 
-  before_create :set_weight
+  before_save :set_weight, if: :need_new_weight?
 
 
   def previous_item
@@ -75,8 +75,13 @@ class Item < ApplicationRecord
 private
 
   def set_weight
-    current_weight = Item.where(lesson_id: self.lesson.id).order(:weight).last&.weight || 0
+    current_weight = Item.where(lesson_id: self.lesson_id).order(:weight).last&.weight || 0
     self.weight = current_weight + 1
+  end
+
+  def need_new_weight?
+    return true if self.new_record?
+    Item.where(lesson_id: self.lesson_id, weight: self.weight).exists?
   end
 
 end
