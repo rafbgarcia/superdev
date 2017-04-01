@@ -56,6 +56,7 @@ private
       user = User.create(user_params)
     else
       user = User.where(email: user_params[:email]).first
+
       if !user || !user.valid_password?(user_params[:password])
         flash[:alert] = 'E-mail ou senha incorretos'
         return User.new
@@ -70,7 +71,6 @@ private
     @blog_posts = BlogPost.approved.published
 
     post_id = params[:blog_post_id] || params[:id]
-
     @current_post = BlogPost.friendly.find(post_id) if post_id.present?
   end
 

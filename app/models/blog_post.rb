@@ -6,7 +6,7 @@ class BlogPost < ApplicationRecord
 
   # Slug
   extend FriendlyId
-  friendly_id :title, use: :slugged
+  friendly_id :slug_candidates, use: :slugged
 
   # Scopes
   scope :published, -> { includes(:user).where('posted_at <= ?', Time.now).order(posted_at: :desc) }
@@ -27,6 +27,19 @@ class BlogPost < ApplicationRecord
 
     event :approve { transitions from: :pending_approval, to: :approved }
     event :reject { transitions from: :pending_approval, to: :rejected }
+  end
+
+private
+
+  def slug_candidates
+    [
+      :title,
+      [:title, :count_same_title],
+    ]
+  end
+
+  def count_same_title
+    BlogPost.where(title: title).count
   end
 
 end

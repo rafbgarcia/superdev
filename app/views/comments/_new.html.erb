@@ -2,22 +2,20 @@
   <aside>
     <div class="avatar"><%= image_tag current_user&.current_avatar || 'default_avatar.png' %></div>
   </aside>
-  <div class="content">
+  <div class="content" ng-init="comment_text = '<%= @comment.text %>'">
     <%= simple_form_for @comment, url: url, html: { id: 'new_comment_form' } do |f| %>
-      <%= f.input :text, label: false, input_html: { 'ng-model' => 'comment_text'} %>
+      <%= f.input :text, label: false, input_html: { 'ng-model' => 'comment_text' } %>
 
       <div ng-show="<%= @comment.errors.any? %> || comment_text.length > 3" class="mt-4">
         <%= render partial: 'users/signup_or_login', locals: { f: f } %>
       </div>
 
-      <div class="mb-2">
-        <small ng-if="!comment_text || comment_text.length <= 3" class="text-muted">
-          * Digite algum texto para enviar
-        </small>
-      </div>
       <button type="submit" class="btn btn-primary" ng-disabled="!comment_text || comment_text.length <= 3">
         Enviar
       </button>
+      <small ng-if="!comment_text || comment_text.length <= 3" class="text-muted">
+        * Digite algum texto para enviar
+      </small>
     <% end %>
   </div>
 </div>

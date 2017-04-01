@@ -272,7 +272,7 @@ pt-BR:
     messages:
       taken: "este %{attribute} já existe, por favor escolha outro ou faça login"
       too_short: "valor muito curto, deve ter ao menos %{count} caracteres"
-      invalid: "valor inválido"
+      invalid: "%{attribute} inválido"
       blank: "campo obrigatório"
       already_confirmed: "já foi confirmado"
       confirmation_period_expired: "precisa ser confirmada em até %{period}, por favor, solicite uma nova"

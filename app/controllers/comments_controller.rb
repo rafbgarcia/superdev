@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_comment
+  before_action :set_back_to_url
   before_action :check_comment_user
 
   def edit
@@ -8,7 +9,7 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to params[:back_to_url]
+      redirect_to @back_to_url
     else
       render :edit
     end
@@ -26,8 +27,17 @@ private
 
   def check_comment_user
     if !@comment.belongs_to?(current_user)
-      redirect_to anchor_discussion_path(@comment.commentable)
+      redirect_to @back_to_url
     end
+  end
+
+  def set_back_to_url
+    @back_to_url =
+      if @comment.from_discussion?
+        anchor_discussion_path(@comment.commentable)
+      elsif @comment.from_blog_post?
+        blog_post_path(@comment.commentable)
+      end
   end
 
 
