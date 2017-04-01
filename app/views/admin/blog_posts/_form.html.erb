@@ -1,5 +1,7 @@
 <% action = @blog_post.new_record? ? admin_blog_posts_path : admin_blog_post_path(@blog_post) %>
 
+<style>textarea { height: 20rem }</style>
+
 <%= simple_form_for @blog_post, url: action do |f| %>
   <%= f.error_notification %>
 
