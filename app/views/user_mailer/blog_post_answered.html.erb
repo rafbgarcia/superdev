@@ -1,0 +1,12 @@
+<div style="font-size: 15px; color: #333; line-height: 22px;">
+  <p style="font-size: 20px">
+    Fala, <%= @user.first_name %>,
+  </p>
+
+  <p>Acabei de responder sua pergunta, veja no link abaixo:</p>
+  <p><%= link_to 'Ver resposta', blog_post_path(@blog_post) %></p>
+
+  <p>Obrigado por contribuir :)</p>
+
+  <p>SuperDev</p>
+</div>

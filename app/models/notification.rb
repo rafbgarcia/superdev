@@ -25,6 +25,12 @@ class Notification < ApplicationRecord
       end
     end
 
+    def blog_post_answered(blog_post)
+      if blog_post.user.present?
+        UserMailer.blog_post_answered(blog_post).deliver_later
+      end
+    end
+
     def create_for_comment!(comment)
       return if comment.user_id == comment.commentable.user_id
 

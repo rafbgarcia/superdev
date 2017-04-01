@@ -33,7 +33,10 @@ class Admin::BlogPostsController < AdminController
     end
 
     def approve
-      @blog_post.approve!
+      if @blog_post.pending_approval?
+        @blog_post.approve!
+        Notification.blog_post_answered(@blog_post)
+      end
       redirect_to admin_blog_posts_url
     end
 

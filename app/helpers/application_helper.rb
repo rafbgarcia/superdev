@@ -9,6 +9,8 @@ module ApplicationHelper
   end
 
   def render_md(markdown)
+    return if markdown.blank?
+
     markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, fenced_code_blocks: true)
     markdown_renderer.render(markdown).html_safe
   end

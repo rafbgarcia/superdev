@@ -73,10 +73,10 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:edit, :update]
 
-  resources :blog_posts, only: [:new, :create] do
+  resources :blog_posts, path: '/dev_questions', only: [:index, :new, :create, :show] do
     post :comments
   end
-  get '/blog_posts(/:id)' => 'blog_posts#index', as: :blog_post # precisa ficar depois
+  # get '/blog_posts(/:id)' => 'blog_posts#index', as: :blog_post # precisa ficar depois
 
 ################
 # Admin Routes #

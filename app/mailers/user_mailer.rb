@@ -21,6 +21,16 @@ class UserMailer < ApplicationMailer
     )
   end
 
+  def blog_post_answered(blog_post)
+    @user = blog_post.user
+    @blog_post = blog_post
+
+    mail(
+      to: %("#{@user.name}" <#{@user.email}>),
+      subject: "Sua pergunta foi respondida",
+    )
+  end
+
   def notify_admin(discussion)
     @discussion = discussion
     mail(

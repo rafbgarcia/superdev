@@ -1,12 +1,13 @@
 class BlogPostsController < ApplicationController
-  before_action :set_current_post, only: [:create, :comments, :index]
+  before_action :set_current_post, only: [:show, :create, :comments, :index]
 
   def index
-    if params[:id].blank? && @blog_posts.first.present?
-      redirect_to blog_post_path(@blog_posts.first)
-    end
+    redirect_to blog_post_path(@blog_posts.first)
+  end
 
+  def show
     @comment = Comment.new(user: User.new)
+    render :index
   end
 
   def new
