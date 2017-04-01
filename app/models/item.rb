@@ -75,7 +75,8 @@ class Item < ApplicationRecord
 private
 
   def set_weight
-    self.weight = Item.where(lesson_id: self.lesson.id).order(:weight).last.weight + 1
+    current_weight = Item.where(lesson_id: self.lesson.id).order(:weight).last&.weight || 0
+    self.weight = current_weight + 1
   end
 
 end
