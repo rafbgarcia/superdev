@@ -10,7 +10,7 @@
 
     <% else %>
       <p><%= @comment.user.first_name %> acabou de comentar em seu Post, veja no link abaixo:</p>
-      <p><%= link_to 'Ver comentário', blog_post_path(@comment.commentable) %></p>
+      <p><%= link_to 'Ver comentário', blog_post_url(@comment.commentable) %></p>
     <% end %>
 
   <% else %>
@@ -20,7 +20,7 @@
       <p><%= link_to 'Ver comentário', anchor_discussion_path(@comment.commentable) %></p>
     <% else %>
       <p><%= @comment.user.first_name %> respondeu ao Post que você comentou, veja no link abaixo:</p>
-      <p><%= link_to 'Ver comentário', blog_post_path(@comment.commentable) %></p>
+      <p><%= link_to 'Ver comentário', blog_post_url(@comment.commentable) %></p>
     <% end %>
   <% end %>
 
