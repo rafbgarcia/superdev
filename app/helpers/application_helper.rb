@@ -11,8 +11,9 @@ module ApplicationHelper
   def render_md(markdown)
     return if markdown.blank?
 
-    markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, fenced_code_blocks: true)
-    markdown_renderer.render(markdown).html_safe
+    extensions = { fenced_code_blocks: true, strikethrough: true, tables: true, autolink: true }
+    renderer = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { target: '_blank' })
+    Redcarpet::Markdown.new(renderer, extensions).render(markdown).html_safe
   end
 
   def relative_time(date)

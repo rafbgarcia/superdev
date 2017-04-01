@@ -48,7 +48,7 @@
 
 
     <main>
-      <p><%= html_text @item.description %></p>
+      <p><%= render_md @item.description %></p>
 
       <%= render format_item_type(@item.type) %>
     </main>
