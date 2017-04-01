@@ -33,22 +33,22 @@
         <% @blog_posts.each do |blog_post| -%>
           <%= active_link_to blog_post_path(blog_post), class: "post", exact_match: true do %>
             <div><%= blog_post.title %></div>
-            <% if blog_post.user.present? %>
-              <div class="mt-4">
-                <small class="d-flex align-items-center justify-content-start">
+            <div class="mt-4">
+              <small class="d-flex align-items-center justify-content-start">
+                <% if blog_post.user.present? %>
                   <span class="d-flex align-items-center text-muted mr-3">
                     <span class="mr-1">Por</span>
                     <span class="avatar mr-1"><%= image_tag blog_post.user.current_avatar, width: 18 %></span>
                     <span><%= blog_post.user.name %></span>
                   </span>
+                <% end %>
 
-                  <span class="d-flex align-items-center text-muted">
-                    <%= icon 'comments', class: 'mr-1' %>
-                    <span><%= blog_post.comments.count %></span>
-                  </span>
-                </small>
-              </div>
-            <% end %>
+                <span class="d-flex align-items-center text-muted">
+                  <%= icon 'comments', class: 'mr-1' %>
+                  <span><%= blog_post.comments.count %></span>
+                </span>
+              </small>
+            </div>
           <% end %>
         <% end %>
       </div>
