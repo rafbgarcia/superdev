@@ -25,7 +25,7 @@
             <abbr title="required"> *</abbr>
             Quer que eu te avise quando responder?
           </label>
-          <div class="custom-controls-stacked" ng-init="receive_email = '<%= params.dig(:receive_email) %>'">
+          <div class="custom-controls-stacked" ng-init="receive_email = '<%= params[:receive_email] %>'">
             <label class="custom-control custom-radio">
               <input type="radio" class="custom-control-input" name="receive_email" ng-model="receive_email" value="1">
               <span class="custom-control-indicator"></span>
@@ -34,7 +34,7 @@
             <label class="custom-control custom-radio">
               <input type="radio" class="custom-control-input" name="receive_email" ng-model="receive_email" value="0">
               <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Não... não estou tão interessado.</span>
+              <span class="custom-control-description">Não... Não estou tão interessado.</span>
             </label>
           </div>
         </div>
@@ -45,7 +45,7 @@
             <hr>
             <p class="alert alert-info">* Dessa forma, eu consigo te notificar e você pode gerenciar suas perguntas</p>
 
-            <%= render partial: 'users/signup_or_login', locals: { f: f, user_field: @blog_post.user } %>
+            <%= render partial: 'users/signup_or_login', locals: { f: f } %>
           </div>
         </div>
 

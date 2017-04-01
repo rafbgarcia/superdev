@@ -16,7 +16,7 @@ class BlogPostsController < ApplicationController
   def create
     @blog_post = BlogPost.new(blog_post_params.except(:user))
     @blog_post.posted_at = Time.now
-    @blog_post.user = current_user || create_signin_user(blog_post_params[:user], optional: true)
+    @blog_post.user = current_user || create_signin_user(blog_post_params[:user])
 
     if @blog_post.save
       redirect_to blog_post_path(@blog_post)
@@ -28,7 +28,7 @@ class BlogPostsController < ApplicationController
   def comments
     @comment = Comment.new(comment_params.except(:user))
     @comment.commentable = BlogPost.friendly.find(params[:blog_post_id])
-    @comment.user = current_user || create_signin_user(comment_params[:user], optional: false)
+    @comment.user = current_user || create_signin_user(comment_params[:user])
 
     if @comment.save
       redirect_to blog_post_path(@comment.commentable, anchor: "")
@@ -48,11 +48,10 @@ private
     params.require(:comment).permit(:text, user: [:name, :email, :password])
   end
 
-  def create_signin_user(user_params, optional:)
-    if params[:new_account] == '1'
-      user_opted_not_to_signup = user_params&.values&.all?(&:blank?)
-      return if optional && user_opted_not_to_signup
+  def create_signin_user(user_params)
+    return if params[:receive_email] == '0'
 
+    if params[:new_account] == '1'
       user = User.create(user_params)
     else
       user = User.where(email: user_params[:email]).first

@@ -2,7 +2,7 @@ class BlogPost < ApplicationRecord
   include AASM
 
   belongs_to :user
-  has_many :comments, -> { order(created_at: :desc) }, as: :commentable
+  has_many :comments, -> { order(created_at: :asc) }, as: :commentable
 
   # Slug
   extend FriendlyId

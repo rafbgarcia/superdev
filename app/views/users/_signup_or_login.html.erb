@@ -11,7 +11,7 @@
   <div class="p-2 mt-2">
     <%= display_flash %>
 
-    <%= f.simple_fields_for f.object.user do |u| %>
+    <%= f.simple_fields_for f.object.user || User.new do |u| %>
       <input type="hidden" name="new_account" ng-value="new_account">
 
       <div ng-if="new_account === '1'">
