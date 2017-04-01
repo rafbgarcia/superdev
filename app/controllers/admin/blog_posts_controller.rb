@@ -2,7 +2,7 @@ class Admin::BlogPostsController < AdminController
     before_action :set_blog_post, only: [:edit, :update, :destroy, :approve]
 
     def index
-      @blog_posts = BlogPost.all
+      @blog_posts = BlogPost.pending_approval
     end
 
     def new

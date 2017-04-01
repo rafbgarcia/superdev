@@ -1,7 +1,9 @@
-<h5>Comentários</h5>
+<% if @current_post.comments.present? %>
+  <h5>Comentários</h5>
 
-<% @current_post.comments.each do |comment| %>
-  <%= render partial: 'discussions/comment', locals: { comment: comment } %>
+  <% @current_post.comments.each do |comment| %>
+    <%= render partial: 'discussions/comment', locals: { comment: comment } %>
+  <% end %>
 <% end %>
 
 <h5>Faça um Comentário</h5>
