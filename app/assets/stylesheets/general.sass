@@ -126,11 +126,12 @@ body > footer
   border: 1px solid #ededed
   background-color: #ededed
   overflow: hidden
-  width: 65px
-  height: 65px
-  @extend .d-flex
-  @extend .align-items-center
-  @extend .justify-content-center
+  // width: 65px
+  // height: 65px
+  // @extend .d-flex
+  // @extend .align-items-center
+  // @extend .justify-content-center
+  display: inline-block
 
 
 // card.js overrides
@@ -229,3 +230,7 @@ body > footer
 
     &.active
       background-color: $blue
+
+.markdown
+  h1,h2,h3,h4,h5,h6
+    margin: 2rem 0 1rem

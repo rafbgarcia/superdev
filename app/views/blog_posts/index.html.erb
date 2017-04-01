@@ -35,7 +35,11 @@
             <div><%= blog_post.title %></div>
             <% if blog_post.user.present? %>
               <div class="mt-2">
-                <small>Por <%= blog_post.user.name %></small>
+                <small class="d-flex align-items-center">
+                  <span class="mr-1">Por</span>
+                  <span class="avatar mr-1"><%= image_tag blog_post.user.current_avatar, width: 18 %></span>
+                  <%= blog_post.user.name %>
+                </small>
               </div>
             <% end %>
           <% end %>
@@ -58,7 +62,7 @@
             <div class="avatar"><%= image_tag 'rafa.png' %></div>
             <small>Rafa Garcia</small>
           </aside>
-          <article class="content">
+          <article class="content markdown">
             <%= render_md @current_post.body %>
             <!-- <hr>
             <footer>Isso lhe foi útil? Vote e faça um comentário!</footer> -->

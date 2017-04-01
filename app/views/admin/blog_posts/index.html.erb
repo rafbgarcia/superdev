@@ -19,8 +19,10 @@
         <td><%= blog_post.aasm_state %></td>
         <td><%= blog_post.user&.name %></td>
         <td>
-          <%= link_to 'Approve', admin_blog_post_approve_path(blog_post), method: :patch %>
-          |
+          <% if blog_post.pending_approval? %>
+            <%= link_to('Approve', admin_blog_post_approve_path(blog_post), method: :patch)  %>
+            |
+          <% end %>
           <%= link_to 'Edit', edit_admin_blog_post_path(blog_post) %>
           |
           <%= link_to 'Delete', admin_blog_post_path(blog_post), method: :delete, data: { confirm: 'Are you sure?' } %>
