@@ -68,7 +68,7 @@ private
   end
 
   def set_current_post
-    @blog_posts = BlogPost.approved.published
+    @blog_posts = BlogPost.includes(comments: :user).approved.published
 
     post_id = params[:blog_post_id] || params[:id]
     @current_post = BlogPost.friendly.find(post_id) if post_id.present?
