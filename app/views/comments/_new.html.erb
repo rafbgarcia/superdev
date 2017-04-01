@@ -3,14 +3,21 @@
     <div class="avatar"><%= image_tag current_user&.current_avatar || 'default_avatar.png' %></div>
   </aside>
   <div class="content">
-    <%= simple_form_for @comment, url: url do |f| %>
+    <%= simple_form_for @comment, url: url, html: { id: 'new_comment_form' } do |f| %>
       <%= f.input :text, label: false, input_html: { 'ng-model' => 'comment_text'} %>
 
-      <div ng-show="comment_text.length > 3" class="mt-4">
-        <%= render partial: 'users/signup_or_login', locals: { f: f, user_field: user_field } if local_assigns[:user_field].present? %>
+      <div ng-show="<%= @comment.errors.any? %> || comment_text.length > 3" class="mt-4">
+        <%= render partial: 'users/signup_or_login', locals: { f: f } %>
       </div>
 
-      <button type="submit" class="btn btn-primary">Enviar</button>
+      <div class="mb-2">
+        <small ng-if="!comment_text || comment_text.length <= 3" class="text-muted">
+          * Digite algum texto para enviar
+        </small>
+      </div>
+      <button type="submit" class="btn btn-primary" ng-disabled="!comment_text || comment_text.length <= 3">
+        Enviar
+      </button>
     <% end %>
   </div>
 </div>

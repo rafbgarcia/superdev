@@ -97,13 +97,15 @@ class User < ApplicationRecord
     return if params.blank?
     user = User.where(email: params[:email].downcase).first_or_initialize
 
-    if user.persisted? && !user.valid_password?(params[:password])
-      user.errors.add(:password, 'Esta senha não confere com o e-mail')
-      return user
+    if user.persisted?
+      if !user.valid_password?(params[:password])
+        user.errors.add(:password, 'Esta senha não confere com o e-mail')
+      end
+    else
+      user.attributes = params
+      user.save
     end
 
-    user.attributes = params
-    user.save
     user
   end
 

@@ -1,5 +1,5 @@
 <% if !user_signed_in? %>
-  <ul class="nav nav-tabs" ng-init="new_account = '1'">
+  <ul class="nav nav-tabs" ng-init="new_account = '<%= params.fetch(:new_account, 1) %>'">
     <li class="nav-item">
       <a class="nav-link" href="javascript:;" ng-click="new_account = '1'" ng-class="{active: new_account === '1'}">Não tenho conta</a>
     </li>
@@ -9,7 +9,11 @@
   </ul>
 
   <div class="p-2 mt-2">
-    <%= f.simple_fields_for user_field do |u| %>
+    <%= display_flash %>
+
+    <%= f.simple_fields_for f.object.user do |u| %>
+      <input type="hidden" name="new_account" ng-value="new_account">
+
       <div ng-if="new_account === '1'">
         <%= u.input :name, label: 'Seu Nome' %>
       </div>

@@ -15,22 +15,25 @@ class Notification < ApplicationRecord
     end
 
     def new_comment(comment)
-      users_to_notify = []
-      users_to_notify.push(comment.discussion.user_id)
-      users_to_notify += comment.discussion.comments.map(&:user_id)
+      users_with_comments = []
+      users_with_comments += comment.commentable.comments.map(&:user_id).compact.uniq
 
-      users_to_notify = users_to_notify.uniq - [comment.user_id]
+      users_to_notify = users_with_comments - [comment.user_id]
 
-      users_to_notify.each do |user_id|
-        UserMailer.new_comment_on_discussion(User.find(user_id), comment).deliver_later
+      users_with_comments.each do |user_id|
+        UserMailer.new_comment(User.find(user_id), comment).deliver_later
+      end
+
+      if comment.commentable.user_id
+        UserMailer.new_post_owner(comment.commentable.user, comment).deliver_later
       end
     end
 
     def create_for_comment!(comment)
-      return if comment.user_id == comment.discussion.user_id
+      return if comment.user_id == comment.commentable.user_id
 
       create!(
-        user_id: comment.discussion.user_id,
+        user_id: comment.commentable.user_id,
         notificable: comment,
       )
     end

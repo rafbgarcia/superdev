@@ -4,7 +4,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :asked_by, label: 'Pergunta feita por', disabled: true %>
+    <%= f.association :user, label: 'Pergunta feita por', disabled: true %>
 
     <%= f.input :title, label: 'Título' %>
     <%= f.input :body, label: 'Texto' %>

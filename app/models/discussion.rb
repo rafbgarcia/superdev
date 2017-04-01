@@ -1,7 +1,7 @@
 class Discussion < ApplicationRecord
   belongs_to :item
   belongs_to :user
-  has_many :comments, -> { order(:created_at) }
+  has_many :comments, -> { order(:created_at) }, as: :commentable
 
   validates_presence_of :title, :text, :user, :item
 

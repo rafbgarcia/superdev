@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331172547) do
+ActiveRecord::Schema.define(version: 20170401162835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,10 +43,11 @@ ActiveRecord::Schema.define(version: 20170331172547) do
     t.string   "slug"
     t.text     "body"
     t.datetime "posted_at"
-    t.string   "asked_by_id"
-    t.string   "aasm_state",  default: "pending_approval"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.string   "aasm_state", default: "pending_approval"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_blog_posts_on_user_id", using: :btree
   end
 
   create_table "choice_questions", force: :cascade do |t|
@@ -64,12 +65,13 @@ ActiveRecord::Schema.define(version: 20170331172547) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "discussion_id"
     t.text     "text"
     t.integer  "upvotes"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["discussion_id"], name: "index_comments_on_discussion_id", using: :btree
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "commentable_type"
+    t.integer  "commentable_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
@@ -212,7 +214,7 @@ ActiveRecord::Schema.define(version: 20170331172547) do
   add_foreign_key "answers", "alternatives"
   add_foreign_key "answers", "items"
   add_foreign_key "answers", "users"
-  add_foreign_key "comments", "discussions"
+  add_foreign_key "blog_posts", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "discussions", "items"
   add_foreign_key "discussions", "users"

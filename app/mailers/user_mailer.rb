@@ -11,7 +11,7 @@ class UserMailer < ApplicationMailer
     )
   end
 
-  def new_comment_on_discussion(user, comment)
+  def new_comment(user, comment)
     @user = user
     @comment = comment
     mail(

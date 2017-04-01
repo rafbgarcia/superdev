@@ -1,5 +1,14 @@
 <% title 'Edite seu comentário' %>
 
+<%
+back_to_url =
+  if @comment.from_discussion?
+    anchor_discussion_path(@comment.commentable)
+  elsif @comment.from_blog_post?
+    blog_post_path(@comment.commentable)
+  end
+%>
+
 <div class="container smallest">
   <div class="box bigger">
     <h3 class="mb-5">Edite seu Comentário</h3>
@@ -7,7 +16,9 @@
     <%= simple_form_for @comment do |f| %>
       <%= f.input :text, label: 'Texto' %>
       <%= f.submit 'Salvar', class: 'btn btn-primary' %>
-      <%= link_to 'Voltar', anchor_discussion_path(@comment.discussion) %>
+
+      <input type="hidden" name="back_to_url" value="<%= back_to_url %>">
+      <%= link_to 'Voltar', back_to_url %>
     <% end %>
   </div>
 </div>

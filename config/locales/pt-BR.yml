@@ -270,6 +270,8 @@ pt-BR:
 
   errors:
     messages:
+      taken: "este %{attribute} já existe, por favor escolha outro ou faça login"
+      too_short: "valor muito curto, deve ter ao menos %{count} caracteres"
       invalid: "valor inválido"
       blank: "campo obrigatório"
       already_confirmed: "já foi confirmado"

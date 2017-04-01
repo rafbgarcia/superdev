@@ -17,7 +17,7 @@
         <td><%= blog_post.title %></td>
         <td><%= relative_time blog_post.posted_at %></td>
         <td><%= blog_post.aasm_state %></td>
-        <td><%= blog_post.asked_by&.name %></td>
+        <td><%= blog_post.user&.name %></td>
         <td>
           <%= link_to 'Approve', admin_blog_post_approve_path(blog_post), method: :patch %>
           |

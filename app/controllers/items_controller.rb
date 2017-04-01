@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
   def create_comment
     @comment.attributes = comment_params
     @comment.user = current_user
-    @comment.discussion = Discussion.friendly.find(params[:discussion_id])
+    @comment.commentable = Discussion.friendly.find(params[:discussion_id])
 
     if @comment.save
       redirect_to action: :show, anchor: "comment_#{@comment.id}"
