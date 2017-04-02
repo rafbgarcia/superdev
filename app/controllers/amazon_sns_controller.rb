@@ -18,10 +18,16 @@ class AmazonSnsController < ApplicationController
     else
       logger.info "AWS has sent us the following bounce notification(s): #{json}"
 
-      SimpleMailer.mail_it('rafael@superdev.academy', json).deliver
       json['bounce']['bouncedRecipients'].each do |recipient|
         logger.info "AWS SES received a bounce on an email send attempt to #{recipient['emailAddress']}"
       end
+
+      mail(
+        from: 'SuperDev <noreply@superdev.academy>',
+        to: %("Rafael Garcia" <rafael@superdev.academy>),
+        subject: "Email Bounce",
+        body: json
+      ).deliver_later
     end
 
     render nothing: true, status: 200
