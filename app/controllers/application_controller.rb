@@ -32,7 +32,9 @@ protected
 
   def log_user
     if user_signed_in?
-      Rails.logger.info ">>> Usuário: #{current_user.name} <#{current_user.email}>"
+      Rails.logger.info ">>> Usuário: #{current_user.name} <#{current_user.email}> (#{request.ip})\n\n"
+    else
+      Rails.logger.info ">>> Usuário Anônimo: #{request.ip}\n\n"
     end
   end
 
