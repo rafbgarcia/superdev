@@ -3,8 +3,9 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception, prepend: true
 
-  # after_action :set_csrf_cookie_for_angular_xhr_requests
   before_action :log_user
+  after_action :log_end_request
+
   after_action :clear_flash
 
   def acme_challenge
@@ -12,10 +13,6 @@ class ApplicationController < ActionController::Base
   end
 
 protected
-
-  # def set_csrf_cookie_for_angular_xhr_requests
-  #   cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
-  # end
 
   def require_subscription
     if !user_signed_in? || !current_user.has_active_subscription?
@@ -32,10 +29,16 @@ protected
 
   def log_user
     if user_signed_in?
-      Rails.logger.info ">>> Usuário: #{current_user.name} <#{current_user.email}> (#{request.ip})\n\n"
+      Rails.logger.info "---------------------------"
+      Rails.logger.info ">>> Usuário: #{current_user.name} <#{current_user.email}> (#{request.ip})"
     else
-      Rails.logger.info ">>> Usuário Anônimo: #{request.ip}\n\n"
+      Rails.logger.info "---------------------------"
+      Rails.logger.info ">>> Usuário Anônimo: #{request.ip}"
     end
+  end
+
+  def log_end_request
+    Rails.logger.info "---------------------------"
   end
 
 
