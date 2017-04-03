@@ -7,6 +7,8 @@ git_source(:github) do |repo_name|
 end
 
 # app specific
+  gem 'redis-rails'
+  gem 'sidekiq'
   gem 'airbrake', '~> 6.0'
   gem 'redcarpet'
   gem 'aasm'
