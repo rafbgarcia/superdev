@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   # after_action :set_csrf_cookie_for_angular_xhr_requests
   after_action :clear_flash
+  after_action :log_user
 
   def acme_challenge
     render text: 'LJvIFUW0yHXTNEGGr6YPwdRt8HxPB2UK7ZLKmW3w5IQ.BALPitwZqtD4Fya9BP5w6jnmDZlP6S0iYEuXkZjoY9k'
@@ -27,6 +28,12 @@ protected
   # - After user logout and access login page
   def clear_flash
     flash.clear
+  end
+
+  def log_user
+    if user_signed_in?
+      Rails.logger.info ">>> Usuário: #{current_user.name} <#{current_user.email}>"
+    end
   end
 
 
