@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   before_action :require_subscription, only: [:show]
 
   def index
-    @courses = Course.by_weight
+    @courses = Course.visible.by_weight
   end
 
   def show

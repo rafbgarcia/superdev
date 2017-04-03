@@ -13,9 +13,14 @@
 
   <tbody>
     <% @courses.each do |course| %>
-      <tr>
+      <tr class="<%= 'alert-danger' if !course.visible? %>">
         <td><%= image_tag course.image %></td>
-        <td><%= course.weight %> - <%= course.name %></td>
+        <td>
+          <div>
+            <%= course.weight %> - <%= course.name %>
+            <%= content_tag :span, 'Inativo', class: 'badge badge-danger' if !course.visible? %>
+          </div>
+        </td>
         <td><%= datefy course.available_at %></td>
         <td><%= course.description %></td>
         <td>

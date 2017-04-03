@@ -11,6 +11,7 @@ class Course < ApplicationRecord
 
   # Scopes
     scope :by_weight, -> { order(:weight) }
+    scope :visible, -> { where(visible: true) }
 
 
   def previous_course
