@@ -132,7 +132,7 @@ class User < ApplicationRecord
   end
 
   def self.admin
-    User.where(email: 'rafbgarcia@gmail.com').first
+    User.where(email: 'rafael@superdev.academy').first
   end
 
 private
