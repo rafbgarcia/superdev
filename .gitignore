@@ -16,3 +16,4 @@
 # Ignore Byebug command history file.
 .byebug_history
 config/s3.yml
+dump.rdb
