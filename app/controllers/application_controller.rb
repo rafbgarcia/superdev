@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception, prepend: true
 
   # after_action :set_csrf_cookie_for_angular_xhr_requests
+  before_action :log_user
   after_action :clear_flash
-  after_action :log_user
 
   def acme_challenge
     render text: 'LJvIFUW0yHXTNEGGr6YPwdRt8HxPB2UK7ZLKmW3w5IQ.BALPitwZqtD4Fya9BP5w6jnmDZlP6S0iYEuXkZjoY9k'
