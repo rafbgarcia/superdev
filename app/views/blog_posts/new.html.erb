@@ -11,7 +11,8 @@
     <% end %>
 
     <%= simple_form_for @blog_post do |f| %>
-      <%= f.input :title, label: 'Sua pergunta' %>
+      <%= f.input :title, label: 'Título da pergunta' %>
+      <%= f.input :question_text, label: 'Texto' %>
 
       <% if user_signed_in? %>
         <div class="text-center">
