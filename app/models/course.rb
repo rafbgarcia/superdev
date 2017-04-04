@@ -3,7 +3,7 @@ class Course < ApplicationRecord
 
   # Slug
     extend FriendlyId
-    friendly_id :name, use: :slugged
+    friendly_id :slug_candidates, use: :slugged
 
   # Paperclip
     has_attached_file :image, path: "/courses-images/:id-:style.:extension"
@@ -34,4 +34,16 @@ class Course < ApplicationRecord
     name
   end
 
+private
+
+  def slug_candidates
+    [
+      :name,
+      [:name, :count_same_name],
+    ]
+  end
+
+  def count_same_name
+    Course.where(name: name).count
+  end
 end

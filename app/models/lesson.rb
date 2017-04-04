@@ -11,7 +11,7 @@ class Lesson < ApplicationRecord
 
   # Slug
     extend FriendlyId
-    friendly_id :name, use: :slugged
+    friendly_id :slug_candidates, use: :slugged
 
   before_save :set_weight, if: :need_new_weight?
 
@@ -58,6 +58,17 @@ private
   def need_new_weight?
     return true if self.new_record?
     Lesson.where(course_id: self.course_id, weight: self.weight).exists?
+  end
+
+  def slug_candidates
+    [
+      :name,
+      [:name, :count_same_name],
+    ]
+  end
+
+  def count_same_name
+    Lesson.where(name: name).count
   end
 
 end
