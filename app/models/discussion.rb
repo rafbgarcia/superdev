@@ -5,7 +5,7 @@ class Discussion < ApplicationRecord
 
   validates_presence_of :title, :text, :user, :item
 
-  after_create :notify_new_discussion
+  after_create :notify_admin
 
   # Slug
     extend FriendlyId
@@ -29,8 +29,8 @@ private
     Discussion.where(title: title).count
   end
 
-  def notify_new_discussion
-    Notification.new_discussion(self)
+  def notify_admin
+    Notification.new_post(self)
   end
 
 end

@@ -14,6 +14,8 @@ class BlogPost < ApplicationRecord
   validates_presence_of :title
   accepts_nested_attributes_for :user
 
+  after_create :notify_admin
+
 
   def belongs_to?(user)
     return false if self.user.blank?
@@ -40,6 +42,10 @@ private
 
   def count_same_title
     BlogPost.where(title: title).count
+  end
+
+  def notify_admin
+    Notification.new_post(self)
   end
 
 end
