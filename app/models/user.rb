@@ -72,16 +72,29 @@ class User < ApplicationRecord
 # class methods
 
   def self.create_from_facebook(auth)
-    self.create!(
-      provider: auth.provider,
-      uid: auth.uid,
-      email: auth.info.email,
-      password: Devise.friendly_token[0, 10],
-      name: auth.info.name,
-      gender: auth.info.gender,
-      facebook_avatar: auth.info.image,
-      facebook_link: auth.extra.raw_info.link,
-    )
+    existing_user = User.where(email: auth.info.email).first
+
+    if existing_user
+      existing_user.update({
+        provider: auth.provider,
+        uid: auth.uid,
+        name: auth.info.name,
+        gender: auth.info.gender,
+        facebook_avatar: auth.info.image,
+        facebook_link: auth.extra.raw_info.link,
+      })
+    else
+      self.create!(
+        provider: auth.provider,
+        uid: auth.uid,
+        email: auth.info.email,
+        password: Devise.friendly_token[0, 10],
+        name: auth.info.name,
+        gender: auth.info.gender,
+        facebook_avatar: auth.info.image,
+        facebook_link: auth.extra.raw_info.link,
+      )
+    end
   end
 
   def self.from_name_and_email(params)
