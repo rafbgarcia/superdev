@@ -83,6 +83,7 @@ class User < ApplicationRecord
         facebook_avatar: auth.info.image,
         facebook_link: auth.extra.raw_info.link,
       })
+      existing_user
     else
       self.create!(
         provider: auth.provider,
