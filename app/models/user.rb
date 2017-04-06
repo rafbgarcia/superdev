@@ -81,7 +81,6 @@ class User < ApplicationRecord
       gender: auth.info.gender,
       facebook_avatar: auth.info.image,
       facebook_link: auth.extra.raw_info.link,
-      guest: false,
     )
   end
 
