@@ -63,6 +63,7 @@
         <% if user_signed_in? %>
           <p>Vou te avisar no e-mail <u><strong><%= current_user.email %></strong></u></p>
         <% end %>
+
       <% else %>
 
         <% if @current_post.question_text.present? %>
@@ -75,6 +76,13 @@
             <blockquote class="content markdown">
               <%= render_md @current_post.question_text %>
             </blockquote>
+          </div>
+
+          <div class="text-center mb-4">
+            <div class="mb-2">
+              <strong class="mr-2">Curtiu? Compartilhe para mais ajudar ainda mais pessoas!</strong>
+            </div>
+            <div class="addthis_inline_share_toolbox"></div>
           </div>
         <% end %>
 
