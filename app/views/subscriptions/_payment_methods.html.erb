@@ -102,7 +102,7 @@
     </div>
 
     <div ng-show="method === 'credit_card'">
-      <h3 class="mb-5 text-center">Informe seus dados do cartão</h3>
+      <h3 class="mb-5 mt-5 text-center">Informe seus dados do cartão</h3>
 
       <div class="card-wrapper" style="margin: 2rem 0 1rem"></div>
       <div class="text-center" style="margin-bottom: 2rem">
@@ -122,8 +122,8 @@
 
       <input type="hidden" name="token" id="token" value="" readonly="true" size="64">
 
-      <div class="text-center mt-2 d-flex">
-        <button type="submit" class="p-4 btn btn-primary btn-lg d-flex align-items-center justify-content-between" style="flex-grow: 1;">
+      <div class="text-center mt-2">
+        <button type="submit" class="p-4 w-100 btn btn-primary btn-lg d-flex align-items-center justify-content-between" style="flex-grow: 1;">
           Começar a Estudar
           <%= icon 'arrow-right' %>
         </button>
@@ -137,7 +137,7 @@
     </small>
     <div class="p-4">
       <%= link_to 'https://www.sslshopper.com/ssl-checker.html#hostname=www.superdev.academy', target: '_blank' do %>
-        <%= image_tag 'site_blindado.png', height: 55 %>
+        <%= image_tag 'site_blindado.png', style: 'max-height: 55px' %>
      <% end %>
     </div>
   </footer>

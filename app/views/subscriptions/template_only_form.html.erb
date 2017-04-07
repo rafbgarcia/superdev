@@ -1,0 +1,37 @@
+<style>
+  h1,h4,h5,h3 { font-weight: 100; color: #111; }
+  p { font-size: 1rem }
+  .campanha {
+    background: #51b8e2;
+    box-shadow: 0 0 15px #66c7ef;
+  }
+  .campanha * {
+    color: #fff;
+  }
+</style>
+
+<script>
+  fbq('track', 'InitiateCheckout');
+</script>
+
+<div class="container smallest">
+  <div class="text-center">
+    <h1 class="mb-2">Comece sua Jornada</h1>
+    <h5 class="mb-4 text-muted">Torne-se um Super Programador</h5>
+  </div>
+
+  <div class="box bigger campanha">
+    <h3 class="mb-3 text-center">
+      <%= @plan.title %>
+    </h3>
+    <hr>
+    <%= @plan.description %>
+  </div>
+
+  <div class="box bigger">
+    <h5 class="mb-3 text-center">Seus dados</h5>
+    <hr>
+
+    <%= render 'payment_form' %>
+  </div>
+</div>

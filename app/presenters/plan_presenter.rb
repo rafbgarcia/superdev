@@ -27,11 +27,7 @@ class PlanPresenter < BasePresenter
     when 'partiu_codar'
       %{
         <p class="mb-0">
-          Junte-se a dezenas de aprendizes nesta iniciativa de incentivo à Programação.
-          <br><br>
-          Ganhe <u><strong>31% OFF</strong></u> nas mensalidades.
-          <br>
-          De <del>R$ 65,00</del> por apenas #{self.price}.
+          Junte-se a dezenas de aprendizes nesta iniciativa de incentivo à Programação! :)
         </p>
       }.html_safe
     end

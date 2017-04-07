@@ -3,12 +3,12 @@ class SubscriptionsController < ApplicationController
 
   def pioneiros
     @plan = PlanPresenter.new(Iugu::Plan.fetch_by_identifier('superdev_academy_pioneiros'))
-    render :template
+    render :template_only_form
   end
 
   def partiu_codar
     @plan = PlanPresenter.new(Iugu::Plan.fetch_by_identifier('partiu_codar'))
-    render :template
+    render :template_only_form
   end
 
   def create
@@ -23,7 +23,7 @@ class SubscriptionsController < ApplicationController
 
     if customer.errors
       @errors = customer.errors
-      return render :template
+      return render :template_only_form
     end
 
     if params[:method] == 'credit_card'
@@ -42,7 +42,7 @@ class SubscriptionsController < ApplicationController
       subscription = Iugu::Subscription.create(sub_params)
 
       if subscription.errors
-        return render :template
+        return render :template_only_form
       end
 
       user.save_iugu_token!(subscription_params[:token])
