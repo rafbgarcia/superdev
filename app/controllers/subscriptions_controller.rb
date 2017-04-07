@@ -62,7 +62,7 @@ class SubscriptionsController < ApplicationController
         plan_identifier: @plan.identifier,
         customer_id: customer.id,
         payable_with: :bank_slip,
-        expires_at: 2.days.from_now,
+        expires_at: 5.days.from_now,
       )
 
       invoice = subscription.recent_invoices.first

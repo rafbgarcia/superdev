@@ -15,6 +15,10 @@
 </script>
 
 <div class="container smallest">
+  <% if @subscription.present? || @errors.present? %>
+    <div class="alert alert-danger">Opa, alguma informação errada! <br>Veja e corrija logo abaixo</div>
+  <% end %>
+
   <div class="text-center">
     <h1 class="mb-2">Comece sua Jornada</h1>
     <h5 class="mb-4 text-muted">Torne-se um Super Programador</h5>
