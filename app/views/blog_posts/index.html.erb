@@ -47,7 +47,7 @@
           <div class="box d-flex justify-content-between">
             <aside class="text-center">
               <div class="avatar"><%= image_tag @current_post.user&.current_avatar || 'default_avatar.png' %></div>
-              <small><%= @current_post.user&.name || 'Desconhecido' %></small>
+              <small><%= @current_post.user&.name || 'Anônimo' %></small>
             </aside>
 
             <blockquote class="content markdown">
