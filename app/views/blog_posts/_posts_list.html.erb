@@ -6,7 +6,7 @@
 
 
 <div class="box no-padding post-list hidden-lg-up">
-  <% posts = (@blog_posts - [@current_post]) %>
+  <% posts = @blog_posts - [@current_post] %>
 
   <%= render partial: 'post_list_link', locals: { post: @current_post } %>
 

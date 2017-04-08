@@ -82,6 +82,19 @@
 
         <%= render 'comments' %>
       <% end %>
+
+
+
+      <div class="hidden-lg-up">
+        <h5 class="mt-5">Outras perguntas</h5>
+
+        <div class="box no-padding post-list">
+          <% @blog_posts.each do |blog_post| -%>
+            <%= render partial: 'post_list_link', locals: { post: blog_post } %>
+          <% end %>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
