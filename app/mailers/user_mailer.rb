@@ -41,4 +41,18 @@ class UserMailer < ApplicationMailer
     )
   end
 
+  def ask_about_purchase_completion(email)
+    @user = User.where(email: email).first
+
+    logger.info ">>> #{email}"
+    if @user.present?
+      logger.info ">>> #{user.name}"
+      mail(
+        from: 'Rafael Garcia <rafael@superdev.academy>',
+        to: %("#{@user.name}" <#{@user.email}>),
+        subject: "Fala #{@user.first_name}! Posso te Perguntar uma coisa?",
+      )
+    end
+  end
+
 end
