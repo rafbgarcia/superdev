@@ -22,12 +22,7 @@ class AmazonSnsController < ApplicationController
         logger.info "AWS SES received a bounce on an email send attempt to #{recipient['emailAddress']}"
       end
 
-      mail(
-        from: 'SuperDev <noreply@superdev.academy>',
-        to: %("Rafael Garcia" <rafael@superdev.academy>),
-        subject: "Email Bounce",
-        body: json
-      ).deliver_later
+      AdminMailer.notify_bounce(json).deliver_later
     end
 
     render nothing: true, status: 200
