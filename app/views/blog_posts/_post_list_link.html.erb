@@ -1,0 +1,19 @@
+<%= active_link_to blog_post_path(post), class: "post", exact_match: true do %>
+  <div><%= post.title %></div>
+  <div class="mt-4">
+    <small class="d-flex align-items-center justify-content-start">
+      <% if post.user.present? %>
+        <span class="d-flex align-items-center text-muted mr-3">
+          <span class="mr-1">Por</span>
+          <span class="avatar mr-1"><%= image_tag post.user.current_avatar, width: 18 %></span>
+          <span><%= post.user.name %></span>
+        </span>
+      <% end %>
+
+      <span class="d-flex align-items-center text-muted">
+        <%= icon 'comments', class: 'mr-1' %>
+        <span><%= post.comments.count %></span>
+      </span>
+    </small>
+  </div>
+<% end %>
