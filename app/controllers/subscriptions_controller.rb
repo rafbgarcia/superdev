@@ -39,43 +39,35 @@ class SubscriptionsController < ApplicationController
         only_on_charge_success: true,
       }
 
-      subscription = Iugu::Subscription.create(sub_params)
+      @subscription = Iugu::Subscription.create(sub_params)
 
-      if subscription.errors
+      if @subscription.errors
         return render :template_only_form
       end
 
       user.save_iugu_token!(subscription_params[:token])
 
-      invoice = subscription.recent_invoices.first
+      @invoice = @subscription.recent_invoices.first
 
-      if invoice['status'] == 'paid'
-        user.activate_subscription!(subscription)
+      if @invoice['status'] == 'paid'
+        user.activate_subscription!(@subscription)
         sign_in(user)
 
-        redirect_to subscribed_path
-      elsif invoice['status'] == 'pending'
-        redirect_to subscription_waiting_confirmation_path
+        render :complete
       end
     else
-      subscription = Iugu::Subscription.create(
+      @subscription = Iugu::Subscription.create(
         plan_identifier: @plan.identifier,
         customer_id: customer.id,
         payable_with: :bank_slip,
         expires_at: 5.days.from_now,
       )
 
-      invoice = subscription.recent_invoices.first
+      @invoice = @subscription.recent_invoices.first
+      @bank_slip_url = @invoice['secure_url']
 
-      redirect_to invoice['secure_url']
+      render :complete
     end
-  end
-
-  def complete
-    redirect_to root_path if !user_signed_in?
-  end
-
-  def waiting_confirmation
   end
 
 private

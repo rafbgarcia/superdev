@@ -22,10 +22,7 @@ Rails.application.routes.draw do
 # Subscription
   get 'pioneiros' => 'subscriptions#pioneiros', as: :pioneiros
   get 'partiu-codar' => 'subscriptions#partiu_codar', as: :subscribe_step_1
-  post :create, controller: 'subscriptions', as: :create_subscription
-
-  get 'aguardando-confirmacao' => 'subscriptions#waiting_confirmation'
-  get 'inscricao-concluida' => 'subscriptions#complete', as: :subscribed
+  post 'nova-inscricao' => 'subscriptions#create', as: :create_subscription
 
 # Sales pages
   get 'como-programar-do-zero(/:video_id)' => 'sales_pages#index', as: :sales

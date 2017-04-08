@@ -1,16 +1,51 @@
-<% title 'Parabéns! Pagamento Aprovado' %>
 <div class="container smallest">
   <h1 class="text-center" style="font-weight: 100; color: #111; margin-bottom: 1rem;">Comece sua Jornada</h1>
   <h5 class="text-center" style="font-weight: 100; color: #666; margin-bottom: 2rem;">Torne-se um Super Programador</h5>
 
   <div class="box bigger">
-    <h3 class="text-success mb-3">Parabéns <%= current_user&.first_name %>!</h3>
+    <% if @bank_slip_url %>
+      <% title 'Boleto de pagamento' %>
+      <h3 class="text-success mb-3">Parabéns <%= current_user&.first_name %>!</h3>
 
-    <p class="mb-5">Sua inscrição está feita!</p>
+      <p>Investir em conhecimento é uma prática diária das pessoas de maior sucesso no mundo.</p>
 
-    <div class="text-center">
-      <%= link_to 'Acesse o conteúdo', root_path, class: 'btn btn-success btn-lg d-block' %>
+      <p>E isso é óbvio, pois você é sua melhor ferramenta pra te trazer resultados.</p>
+      <p class="mb-4">Acesse e imprima seu boleto abaixo:</p>
+
+      <div class="mb-4">
+        <%= link_to @bank_slip_url, target: '_blank', class: 'btn btn-success btn-lg' do %>
+          Ver meu Boleto
+        <% end %>
+      </div>
+
+      <p class="mb-0">Também lhe enviei o boleto no seu e-mail, ok?</p>
+
     </div>
+
+    <div class="box bigger">
+      <h3 class="text-success mb-3">Dados de acesso</h3>
+      <p>Você vai receber um e-mail com seus dados de acesso imediatamente após a confirmação do pagamento.</p>
+
+      <p>Qualquer dúvida é só enviar me enviar um e-mail: <a href="mailto:rafael@superdev.academy">rafael@superdev.academy</a></p>
+
+      <p>Conte comigo, abraço!</p>
+      <p>Rafa Garcia</p>
+    <% else %>
+      <% if @invoice['status'] == 'paid' %>
+        <% title 'Parabéns! Pagamento Aprovado' %>
+        <h3 class="text-success mb-3">Parabéns <%= current_user&.first_name %>!</h3>
+
+        <p class="mb-5">Sua inscrição está feita!</p>
+
+        <div class="text-center">
+          <%= link_to 'Acesse o conteúdo', root_path, class: 'btn btn-success btn-lg d-block' %>
+        </div>
+      <% elsif @invoice['status'] == 'pending' %>
+        <% title 'Aguardando confirmação' %>
+        <h3 class="text-center text-success">Aguardando confirmação do cartão</h3>
+        <p>Você receberá um e-mail com seus dados de acesso assim que o pagamento for aprovado</p>
+      <% end %>
+    <% end %>
 
   </div>
 </div>
