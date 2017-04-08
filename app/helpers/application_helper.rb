@@ -110,4 +110,8 @@ module ApplicationHelper
     end
   end
 
+  def should_track?
+    Rails.env.production? && request.remote_ip != '181.223.128.243'
+  end
+
 end
