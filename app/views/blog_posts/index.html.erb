@@ -1,5 +1,5 @@
 <% title(@current_post.title) %>
-<% seo_description(@current_post.question_text.present? @current_post.question_text : @current_post.text) %>
+<% seo_description(@current_post.question_text.present? ? @current_post.question_text : @current_post.text) %>
 
 <div class="container">
   <div class="box">
