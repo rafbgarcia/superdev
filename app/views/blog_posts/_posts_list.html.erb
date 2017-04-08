@@ -4,17 +4,23 @@
   <% end %>
 </div>
 
+
 <div class="box no-padding post-list hidden-lg-up">
+  <% posts = (@blog_posts - [@current_post]) %>
+
   <%= render partial: 'post_list_link', locals: { post: @current_post } %>
 
-  <span ng-init="showMorePosts = undefined"></span>
+  <% posts.first(2).each do |post| %>
+   <%= render partial: 'post_list_link', locals: { post: post } %>
+   <% end %>
+
   <a class="post text-center text-muted" ng-click="showMorePosts = 1" ng-show="!showMorePosts">
     Ver mais perguntas
     <%= icon 'chevron-down' %>
   </a>
 
   <div ng-show="showMorePosts === 1">
-    <% (@blog_posts - [@current_post]).each do |blog_post| -%>
+    <% posts.from(2).each do |blog_post| -%>
       <%= render partial: 'post_list_link', locals: { post: blog_post } %>
     <% end %>
 
