@@ -107,7 +107,9 @@
 
   document.addEventListener('turbolinks:load', function (event) {
     if (typeof ga === 'function') {
-      ga('set', 'userId', '<%= user_signed_in? ? current_user.email : request.ip %>');
+      <% if user_signed_in? %>
+        ga('set', 'userId', '<%= current_user.email %>');
+      <% end %>
       ga('set', 'location', event.data.url)
       ga('send', 'pageview')
     }
