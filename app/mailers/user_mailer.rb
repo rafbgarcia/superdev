@@ -46,7 +46,7 @@ class UserMailer < ApplicationMailer
 
     logger.info ">>> #{email}"
     if @user.present?
-      logger.info ">>> #{user.name}"
+      logger.info ">>> #{@user.name}"
       mail(
         from: 'Rafael Garcia <rafael@superdev.academy>',
         to: %("#{@user.name}" <#{@user.email}>),
