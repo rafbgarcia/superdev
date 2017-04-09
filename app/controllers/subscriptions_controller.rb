@@ -1,4 +1,5 @@
 class SubscriptionsController < ApplicationController
+  layout 'sales'
   before_action :set_iugu_api_key
 
   def pioneiros

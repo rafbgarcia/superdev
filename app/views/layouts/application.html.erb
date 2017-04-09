@@ -34,10 +34,39 @@
 </head>
 
 <body>
-  <%= javascript_include_tag 'include_tags/superdev_fb_app' %>
-
-  <header class="text-center p-3">
-    <%= image_tag 'logo.png', width: '165' %>
+  <header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-8 hidden-md-up">
+          <%= link_to root_path, class: 'ml-2' do %>
+            <%= image_tag 'logo.png', width: '165' %>
+          <% end %>
+        </div>
+        <div class="col-4 offset-4 hidden-sm-down text-center">
+          <%= link_to root_path, class: 'ml-2' do %>
+            <%= image_tag 'logo.png', width: '165' %>
+          <% end %>
+        </div>
+        <div class="col-4 d-flex align-items-center justify-content-end flex-wrap">
+          <% if user_signed_in? %>
+            <div>
+              Olá, <%= link_to current_user.first_name, dashboard_users_path %></div>
+              <span class="m-1">|</span>
+              <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+            </div>
+          <% else %>
+            <%= link_to 'Inscreva-se', subscribe_step_1_path, class: 'btn btn-primary' %>
+            <%= link_to 'Faça Login', new_user_session_path, class: 'ml-2 p-2' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <nav class="sub-header">
+      <%= link_to 'Cursos', root_path, class: 'btn-info p-3 d-ib ' %>
+      <%= active_link_to '#DevQuestions', blog_posts_path, class: 'secondary p-3 d-ib ' %>
+      <%= active_link_to 'Sobre', about_path, class: 'secondary p-3 d-ib ' %>
+      <%= active_link_to 'Contato', contact_path, class: 'secondary p-3 d-ib' %>
+    </nav>
   </header>
 
   <main>
@@ -51,6 +80,16 @@
       <p class="text-center">
         <small>Copyright @ 2015-2017 SuperDev</small>
       </p>
+
+      <div class="text-center">
+        <%= link_to 'DevQuestions', blog_posts_path %>
+        <span class="divider">.</span>
+        <%= link_to 'Contato', contact_path %>
+        <span class="divider">.</span>
+        <%= link_to 'Sobre o SuperDev', about_path %>
+        <span class="divider">.</span>
+        <a href="https://www.facebook.com/superdev.academy" target="_superdev_facebook">Facebook</a>
+      </div>
     </div>
   </footer>
 
