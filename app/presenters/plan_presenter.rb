@@ -27,7 +27,7 @@ class PlanPresenter < BasePresenter
     when 'partiu_codar'
       %{
         <p class="mb-0">
-          Junte-se a dezenas de aprendizes nesta iniciativa de incentivo à Programação! :)
+          Preparado para se juntar à tribo que mais ama programação no Brasil?
         </p>
       }.html_safe
     end

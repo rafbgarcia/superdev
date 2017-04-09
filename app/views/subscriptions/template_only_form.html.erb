@@ -14,15 +14,15 @@
   fbq('track', 'InitiateCheckout');
 </script>
 
+
+<div class="text-center">
+  <h1 class="mb-4">Sua Jornada começa aqui</h1>
+  <h5 class="mb-4 text-muted">Torne-se um Super Programador</h5>
+</div>
 <div class="container smallest">
   <% if @subscription.present? || @errors.present? %>
     <div class="alert alert-danger">Opa, alguma informação errada! <br>Veja e corrija logo abaixo</div>
   <% end %>
-
-  <div class="text-center">
-    <h1 class="mb-2">Comece sua Jornada</h1>
-    <h5 class="mb-4 text-muted">Torne-se um Super Programador</h5>
-  </div>
 
   <div class="box bigger campanha">
     <h3 class="mb-3 text-center">
@@ -33,7 +33,7 @@
   </div>
 
   <div class="box bigger">
-    <h5 class="mb-3 text-center">Seus dados</h5>
+    <h5 class="mb-3 text-center">Seus dados de acesso</h5>
     <hr>
 
     <%= render 'payment_form' %>
