@@ -4,14 +4,17 @@
   <div class="box bigger text-center">
     <h4 class="mb-5">Você precisa de uma inscrição para continuar</h4>
 
-    <%= link_to subscribe_step_1_path, class: 'btn btn-primary btn-lg' do %>
-      <%= icon 'heart' %> Inscreva-se
-    <% end %>
+    <div class="d-flex align-items-center flex-column justify-content-center flex-wrap">
+      <%= link_to subscribe_step_1_path, class: 'btn btn-primary btn-lg' do %>
+        <%= icon 'heart' %> Inscreva-se
+      <% end %>
 
-    <% if !user_signed_in? %>
-      <span style="font-size: 22px; margin: 0 1rem">ou</span>
+      <% if !user_signed_in? %>
+        <div class="fz-1 mt-5">
+        Já tem conta?
+        </div>
+        <%= link_to 'Faça Login', new_user_session_path, class: 'mt-2 fz-1' %>
 
-      <%= link_to 'Faça Login', new_user_session_path, class: 'btn btn-primary btn-lg' %>
-    <% end %>
+      <% end %></div>
   </div>
 </section>
