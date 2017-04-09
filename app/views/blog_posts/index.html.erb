@@ -58,8 +58,10 @@
 
         <div class="box d-flex justify-content-between">
           <aside class="text-center">
-            <div class="avatar"><%= image_tag 'rafa.png' %></div>
-            <small>Rafa Garcia</small>
+            <%= link_to about_path(anchor: 'who') do %>
+              <div class="avatar"><%= image_tag 'rafa.png' %></div>
+              <small>Rafa Garcia</small>
+            <% end %>
           </aside>
           <article class="content markdown">
             <%= render_md @current_post.text %>
