@@ -57,7 +57,10 @@ private
 
   def need_new_weight?
     return true if self.new_record?
-    Lesson.where(course_id: self.course_id, weight: self.weight).exists?
+    Lesson
+      .where(course_id: self.course_id, weight: self.weight)
+      .where.not(id: self.id)
+      .exists?
   end
 
   def slug_candidates

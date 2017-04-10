@@ -81,7 +81,10 @@ private
 
   def need_new_weight?
     return true if self.new_record?
-    Item.where(lesson_id: self.lesson_id, weight: self.weight).exists?
+    Item
+      .where(lesson_id: self.lesson_id, weight: self.weight)
+      .where.not(id: self.id)
+      .exists?
   end
 
 end
