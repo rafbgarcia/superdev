@@ -65,4 +65,13 @@ class UserMailer < ApplicationMailer
     )
   end
 
+  def new_course_available(user)
+    @user = user
+    mail(
+      from: 'Rafael Garcia <rafael@superdev.academy>',
+      to: %("#{@user.name}" <#{@user.email}>),
+      subject: "#{@user.first_name}, novo curso liberado!",
+    )
+  end
+
 end
