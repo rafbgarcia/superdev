@@ -13,5 +13,6 @@
 <meta property="og:description" content="<%= description %>" />
 <meta property="og:site_name" content="SuperDev Academy" />
 <meta property="og:url" content="<%= request.url %>" />
-<meta property="og:image" content="<%= image_url(@og_image || 'og_default.png') %>" />
-<meta property="og:image:secure_url" content="<%= image_url(@og_image || 'og_default.png') %>" />
+<meta property="og:image" content="<%= image_url(@og_image || 'logo.png') %>" />
+<meta property="og:image:secure_url" content="<%= image_url(@og_image || 'logo.png') %>" />
+<meta property="fb:app_id" content="<%= Rails.env.production? ? '1607378846226919' : '1607381742893296' %>" />
