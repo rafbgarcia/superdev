@@ -11,9 +11,9 @@ class UserMailer < ApplicationMailer
     )
   end
 
-  def new_comment(user, comment)
-    @user = user
-    @comment = comment
+  def new_comment(user_id, comment_id)
+    @user = User.find(user_id)
+    @comment = Comment.find(comment_id)
 
     mail(
       from: 'SuperDev <noreply@superdev.academy>',

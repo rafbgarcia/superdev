@@ -15,13 +15,18 @@ class Notification < ApplicationRecord
     end
 
     def new_comment(comment)
-      users_with_comments = [comment.commentable.user_id, User.admin&.id]
-      users_with_comments += comment.commentable.comments.map(&:user_id).compact.uniq
+      admin = User.admin&.id
+      post_owner = comment.commentable.user_id
 
+      users_with_comments = (
+        [admin, post_owner] + comment.commentable.comments.map(&:user_id)
+      ).compact.uniq
+
+      # remove user who made the comment
       users_to_notify = users_with_comments - [comment.user_id]
 
-      users_with_comments.each do |user_id|
-        UserMailer.new_comment(User.find(user_id), comment).deliver_later
+      users_to_notify.each do |user_id|
+        UserMailer.new_comment(user_id, comment.id).deliver_later
       end
     end
 
