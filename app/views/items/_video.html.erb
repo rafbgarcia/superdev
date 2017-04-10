@@ -1,4 +1,4 @@
-<% if @item.itemable.url.blank? %>
+<% if @item.itemable.url.present? %>
   <div class="video-container d-flex flex-column justify-content-center align-items-end">
     <button type="button" class="close" aria-label="Close" title="Minimizar o Vídeo">
       <span aria-hidden="true">&times;</span>
