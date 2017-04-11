@@ -16,8 +16,13 @@ module ApplicationHelper
     return if markdown.blank?
 
     extensions = { fenced_code_blocks: true, strikethrough: true, tables: true, autolink: true }
-    renderer = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { target: '_blank' })
-    Redcarpet::Markdown.new(renderer, extensions).render(markdown).html_safe
+    renderer = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { target: '_blank' })#, escape_html: true )
+    rendered_md = Redcarpet::Markdown.new(renderer, extensions).render(markdown).html_safe
+
+    scrubber = Rails::Html::TargetScrubber.new()
+    scrubber.tags = ['script']
+
+    sanitize(rendered_md, scrubber: scrubber)
   end
 
   def relative_time(date)
