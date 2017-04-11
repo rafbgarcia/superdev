@@ -17,12 +17,10 @@ module ApplicationHelper
 
     extensions = { fenced_code_blocks: true, strikethrough: true, tables: true, autolink: true }
     renderer = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { target: '_blank' })#, escape_html: true )
-    rendered_md = Redcarpet::Markdown.new(renderer, extensions).render(markdown).html_safe
+    html = Redcarpet::Markdown.new(renderer, extensions).render(markdown)
 
-    scrubber = Rails::Html::TargetScrubber.new()
-    scrubber.tags = ['script']
-
-    sanitize(rendered_md, scrubber: scrubber)
+    escaped_html = html.gsub('<script', '&lt;script')
+    escaped_html.gsub('</script', '&lt;/script').html_safe
   end
 
   def relative_time(date)
