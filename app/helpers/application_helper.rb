@@ -19,8 +19,12 @@ module ApplicationHelper
     renderer = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { target: '_blank' })#, escape_html: true )
     html = Redcarpet::Markdown.new(renderer, extensions).render(markdown)
 
-    escaped_html = html.gsub('<script', '&lt;script')
-    escaped_html.gsub('</script', '&lt;/script').html_safe
+    escape_tags = %w(style script)
+    escape_tags.each do |tag|
+      html = html.gsub("<#{tag}", "&lt;#{tag}")
+      html = html.gsub("</#{tag}", "&lt;/#{tag}")
+    end
+    html.html_safe
   end
 
   def relative_time(date)
