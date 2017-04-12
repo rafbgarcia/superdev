@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :require_subscription
-  before_action :set_vars
-  before_action :set_discussion_variables
+  before_action :set_vars, except: [:mark_as_done]
+  before_action :set_discussion_variables, except: [:mark_as_done]
 
   def show
     if params[:discussion_id].blank?
@@ -21,6 +21,12 @@ class ItemsController < ApplicationController
     else
       render :show
     end
+  end
+
+  def mark_as_done
+    @item = Item.find(params[:item_id])
+    @item.done!
+    render :mark_as_done
   end
 
 private

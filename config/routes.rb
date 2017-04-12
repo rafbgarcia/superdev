@@ -49,8 +49,9 @@ Rails.application.routes.draw do
     patch '/:discussion_id/edit' => 'discussions#update'
   end
 
-  resources :item, only: [] do
+  resources :items, only: [] do
     resources :answers, only: [:create]
+    patch :mark_as_done
   end
 
   resources :users, only: [:update] do

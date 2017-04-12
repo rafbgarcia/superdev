@@ -120,18 +120,34 @@ input::placeholder
       img
         margin-right: .3rem
 
-.questions-list a
-  display: block
-  padding: 15px 25px
-  border-top: 1px solid #f3f3f3
-  text-decoration: none
-  color: darken($blue, 15%)
+.questions-list .item-link-wrapper
+  position: relative
+  height: 3.3rem
 
-  .title
-    margin: 0 0.8rem
+  .item-link
+    padding: 15px 25px
+    border-top: 1px solid #f3f3f3
+    text-decoration: none
+    color: darken($blue, 15%)
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
 
-  &:hover
-    background-color: #fafafa
+    .title
+      margin: 0 0.8rem
+
+    &:hover
+      background-color: #fafafa
+
+  .item-done-link
+    position: absolute
+    right: 0
+    top: 0
+    margin: 0.9rem
+
+
 
 .blue
   color: $blue

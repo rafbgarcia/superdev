@@ -25,10 +25,23 @@
 
       <section class="questions-list">
         <% lesson.items.each do |item| %>
-          <%= link_to course_item_path(lesson_id: lesson.slug, item_weight: item.weight) do %>
-            <%= image_tag "question_type_#{format_item_type(item.type)}.png" %>
-            <span class="title"><%= item.title %></span>
-          <% end %>
+          <div class="item-link-wrapper">
+            <%= link_to course_item_path(lesson_id: lesson.slug, item_weight: item.weight), class: 'item-link' do %>
+              <%= image_tag "question_type_#{format_item_type(item.type)}.png" %>
+              <span class="title"><%= item.title %></span>
+            <% end %>
+
+            <%= content_tag :span, icon('check'), class: "btn btn-success btn-sm item-done-link #{'d-none' if !item.done?}", id: "item_#{item.id}_done" %>
+
+            <%= link_to item_mark_as_done_path(item),
+              remote: true,
+              class: "btn btn-info btn-sm item-done-link #{'d-none' if item.done?}",
+              method: :patch,
+              id: "item_#{item.id}_mark_done" do %>
+              <span>Já vi</span>
+              <%= icon 'check' %>
+            <% end %>
+          </div>
         <% end -%>
       </section>
     </div>

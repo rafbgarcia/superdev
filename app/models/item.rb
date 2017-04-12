@@ -51,6 +51,10 @@ class Item < ApplicationRecord
     end
   end
 
+  def done!
+    self.update(done: true)
+  end
+
   # Types
 
     def type
