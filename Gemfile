@@ -7,6 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 # app specific
+  gem "intercom-rails"
   gem 'redis-rails'
   gem 'sidekiq'
   gem 'airbrake', '~> 6.0'
