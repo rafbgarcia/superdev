@@ -105,18 +105,18 @@ module ApplicationHelper
   end
 
   def fb_comments(path: nil)
-    %{<div class="fb-comments" data-order-by="reverse_time" data-href="#{request.url}" data-mobile="true" data-numposts="10"></div>}.html_safe
+    %{<div data-turbolinks-no-cache class="fb-comments" data-order-by="reverse_time" data-href="#{request.url}" data-mobile="true" data-numposts="10"></div>}.html_safe
   end
 
   def fb_share
     %{
-      <div class="fb-share-button" data-href="#{request.url}" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Compartilhar</a></div>
+      <div data-turbolinks-no-cache class="fb-share-button" data-href="#{request.url}" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Compartilhar</a></div>
     }.html_safe
   end
 
   def fb_like
     %{
-      <div class="fb-like" data-href="https://www.facebook.com/superdev.academy" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true" ></div>
+      <div data-turbolinks-no-cache class="fb-like" data-href="https://www.facebook.com/superdev.academy" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true" ></div>
     }.html_safe
   end
 
