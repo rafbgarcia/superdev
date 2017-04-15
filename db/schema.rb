@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412170818) do
+ActiveRecord::Schema.define(version: 20170415202030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,15 @@ ActiveRecord::Schema.define(version: 20170412170818) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
+  create_table "item_progresses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_progresses_on_item_id", using: :btree
+    t.index ["user_id"], name: "index_item_progresses_on_user_id", using: :btree
+  end
+
   create_table "items", force: :cascade do |t|
     t.integer  "lesson_id"
     t.string   "itemable_type"
@@ -126,9 +135,8 @@ ActiveRecord::Schema.define(version: 20170412170818) do
     t.string   "title"
     t.text     "description"
     t.integer  "difficulty",    default: 0
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "done",          default: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["lesson_id", "weight"], name: "index_items_on_lesson_id_and_weight", unique: true, using: :btree
     t.index ["lesson_id"], name: "index_items_on_lesson_id", using: :btree
   end
@@ -221,6 +229,8 @@ ActiveRecord::Schema.define(version: 20170412170818) do
   add_foreign_key "comments", "users"
   add_foreign_key "discussions", "items"
   add_foreign_key "discussions", "users"
+  add_foreign_key "item_progresses", "items"
+  add_foreign_key "item_progresses", "users"
   add_foreign_key "items", "lessons"
   add_foreign_key "notifications", "users"
   add_foreign_key "post_comments", "blog_posts"

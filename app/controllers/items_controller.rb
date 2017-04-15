@@ -25,7 +25,8 @@ class ItemsController < ApplicationController
 
   def mark_as_done
     @item = Item.find(params[:item_id])
-    @item.done!
+    current_user.mark_item_as_done @item
+
     render :mark_as_done
   end
 

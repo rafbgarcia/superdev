@@ -5,6 +5,9 @@ class User < ApplicationRecord
     has_many :comments, dependent: :nullify
     has_many :notifications, -> { order(created_at: :desc) }
 
+    has_many :item_progress
+    has_many :items, through: :item_progress
+
   # Devise
     devise :omniauthable, :omniauth_providers => [:facebook]
     devise :database_authenticatable, :recoverable, :rememberable,
@@ -19,6 +22,14 @@ class User < ApplicationRecord
     has_attached_file :avatar, styles: { medium: "300x300#", small: "100x100#" }, path: "/users-images/:id-:style.:extension", default_url: 'default_avatar.png'
     validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
+
+  def item_done?(item)
+    self.items.include?(item)
+  end
+
+  def mark_item_as_done(item)
+    self.items << item
+  end
 
   def first_name
     name.split(' ').first if name.present?
