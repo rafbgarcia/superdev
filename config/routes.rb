@@ -6,6 +6,7 @@ Rails.application.routes.draw do
                     controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
 # Site
+  get 'minha-historia' => 'application#my_history', as: :my_history
   get 'sobre' => 'application#about', as: :about
   get 'contato' => 'application#contact', as: :contact
 
