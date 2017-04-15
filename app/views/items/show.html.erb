@@ -48,9 +48,16 @@
 
 
     <main>
-      <p><%= render_md @item.description %></p>
+      <div class="d-flex align-items-start justify-content-between">
+        <div class="mr-4">
+          <%= render_md @item.description %>
+        </div>
+        <div>
+          <%= render partial: 'items/mark_as_done_buttons', locals: { item: @item } %>
+        </div>
+      </div>
 
-      <%= render format_item_type(@item.type) %>
+      <div class="mt-5"><%= render format_item_type(@item.type) %></div>
     </main>
   </div>
 

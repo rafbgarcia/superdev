@@ -31,16 +31,7 @@
               <span class="title"><%= item.title %></span>
             <% end %>
 
-            <%= content_tag :span, icon('check'), class: "btn btn-success btn-sm item-done-link #{'d-none' if !current_user.item_done?(item)}", id: "item_#{item.id}_done" %>
-
-            <%= link_to item_mark_as_done_path(item),
-              remote: true,
-              class: "btn btn-info btn-sm item-done-link #{'d-none' if current_user.item_done?(item)}",
-              method: :patch,
-              id: "item_#{item.id}_mark_done" do %>
-              <span>Já vi</span>
-              <%= icon 'check' %>
-            <% end %>
+            <%= render partial: 'items/mark_as_done_buttons', locals: { item: item } %>
           </div>
         <% end -%>
       </section>
