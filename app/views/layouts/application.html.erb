@@ -35,6 +35,7 @@
 </head>
 
 <body>
+  <div id="fb-root" data-turbolinks-permanent></div>
   <%= javascript_include_tag 'include_tags/superdev_fb_app' %>
 
   <header>
@@ -75,7 +76,6 @@
   <main>
     <div class="container-fluid">
       <%= yield  %>
-      <div id="permanent" data-turbolinks-permanent></div>
     </div>
   </main>
 
