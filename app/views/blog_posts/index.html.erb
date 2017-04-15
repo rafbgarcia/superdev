@@ -72,20 +72,13 @@
           <div class="mb-2">
             <strong class="mr-2">Curtiu? Compartilhe para mais ajudar ainda mais pessoas!</strong>
           </div>
-          <div class="addthis_inline_share_toolbox"></div>
+          <%= fb_share %>
         </div>
 
         <hr>
 
-        <div class="m-4 fz-1 text-center">
-          <p class="mb-1 text-success"><strong><u>Isso lhe foi útil?</u></strong></p>
-          <p>Contribua com seu comentário!</p>
-        </div>
-
         <%= render 'comments' %>
       <% end %>
-
-
 
       <div class="hidden-lg-up">
         <h5 class="mt-5">Outras perguntas</h5>
@@ -100,14 +93,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58e8099e2e955bd7"></script>
-<%= javascript_include_tag 'include_tags/init_addthis' %>
-
-<style>
-  #at-cv-lightbox-message-holder { padding: 0 30px; }
-  #at-cv-lightbox-message { line-height: 30px; }
-  .at-cv-footer { display: none; }
-  .at-cv-message.at-cv-toaster-message {text-align: left !important;}
-  .at-cv-body {padding: 0 !important;}
-</style>
