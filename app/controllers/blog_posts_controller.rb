@@ -6,7 +6,7 @@ class BlogPostsController < ApplicationController
   end
 
   def show
-    @comment = Comment.new(user: User.new)
+    # @comment = Comment.new(user: User.new)
     render :index
   end
 
@@ -68,7 +68,7 @@ private
   end
 
   def set_current_post
-    @blog_posts = BlogPost.includes(comments: :user).approved.published
+    @blog_posts = BlogPost.approved.published
 
     post_id = params[:blog_post_id] || params[:id]
     @current_post = BlogPost.friendly.find(post_id) if post_id.present?

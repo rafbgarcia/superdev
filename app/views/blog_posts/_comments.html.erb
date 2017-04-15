@@ -1,11 +1,15 @@
-<% if @current_post.comments.present? %>
+<%= fb_comments %>
+<!--
+<%# if @current_post.comments.present? %>
   <h5>Comentários</h5>
 
-  <% @current_post.comments.each do |comment| %>
-    <%= render partial: 'discussions/comment', locals: { comment: comment } %>
-  <% end %>
-<% end %>
+  <%# @current_post.comments.each do |comment| %>
+    <%#= render partial: 'discussions/comment', locals: { comment: comment } %>
+  <%# end %>
+<%# end %>
 
 <h5>Faça um Comentário</h5>
 
-<%= render partial: 'comments/new', locals: { url: blog_post_comments_path(@current_post, anchor: 'new_comment_form') } %>
+<%#= render partial: 'comments/new', locals: { url: blog_post_comments_path(@current_post, anchor: 'new_comment_form') } %>
+
+-->

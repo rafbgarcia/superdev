@@ -105,8 +105,7 @@ module ApplicationHelper
   end
 
   def fb_comments(path: nil)
-    url = "https://www.superdev.academy#{path || request.path}"
-    %{<div class="fb-comments" data-order-by="reverse_time" data-href="#{url}" data-mobile="true" data-numposts="10"></div>}.html_safe
+    %{<div class="fb-comments" data-order-by="reverse_time" data-href="#{request.url}" data-mobile="true" data-numposts="10"></div>}.html_safe
   end
 
   def commentable_url(commentable)
