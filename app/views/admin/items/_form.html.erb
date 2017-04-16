@@ -1,28 +1,22 @@
-<% action = @itemable.new_record? ? admin_items_path(type: params[:type]) : admin_item_path(@itemable, type: params[:type]) %>
+<% action = @itemable.new_record? ? admin_course_lesson_items_path(@course, @lesson, type: params[:type]) : admin_course_lesson_item_path(@course, @lesson, @itemable, type: params[:type]) %>
 
 
 <%= simple_form_for @itemable, url: action do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <fieldset>
-      <legend>Item</legend>
-      <div class="body">
-        <%= f.fields_for :item, (@itemable.item || Item.new) do |i| %>
-          <%= i.association :lesson, include_blank: false %>
-          <%= i.input :title %>
-          <%= i.input :description %>
-          <%= i.input :difficulty %>
-        <% end %>
-      </div>
-    </fieldset>
+    <%= f.fields_for :item, @itemable.item do |i| %>
+      <%= i.association :lesson, include_blank: false, disabled: true %>
+      <%= i.input :title %>
+      <%= i.input :description %>
+    <% end %>
 
     <%= render partial: "#{format_item_type(params[:type])}_fields", locals: {f: f} %>
   </div>
 
   <div class="form-actions">
     <%= f.button :submit, class: 'btn btn-success btn-lg' %>
-    <%= link_to 'Back to Listing', admin_items_path %>
+    <%= link_to 'Back to Listing', admin_course_lesson_items_path(@course, @lesson) %>
   </div>
 <% end %>
 

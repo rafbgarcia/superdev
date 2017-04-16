@@ -1,4 +1,4 @@
-<h1>Cursos</h1>
+<h5 class="mb-4">Cursos</h5>
 
 <table class="table table-bordered table-hover">
   <thead>
@@ -16,10 +16,11 @@
       <tr class="<%= 'alert-danger' if !course.visible? %>">
         <td><%= image_tag course.image %></td>
         <td>
-          <div>
-            <%= course.weight %> - <%= course.name %>
-            <%= content_tag :span, 'Inativo', class: 'badge badge-danger' if !course.visible? %>
+          <div class="mb-2">
+              <%= course.weight %> - <%= course.name %>
+              <%= content_tag :span, 'Inativo', class: 'badge badge-danger' if !course.visible? %>
           </div>
+          <%= link_to 'Lições', admin_course_lessons_path(course) %>
         </td>
         <td><%= datefy course.available_at %></td>
         <td><%= course.description %></td>

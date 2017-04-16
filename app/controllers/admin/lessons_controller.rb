@@ -1,22 +1,23 @@
 class Admin::LessonsController < AdminController
     before_action :set_lesson, only: [:edit, :update, :destroy, :update_weight]
+    before_action :set_course
 
     def index
-      @lessons = Lesson.by_course
+      @lessons = @course.lessons.by_weight
     end
 
     def new
-      @lesson = Lesson.new
+      @lesson = Lesson.new(course: @course)
     end
 
     def edit
     end
 
     def create
-      @lesson = Lesson.new(lesson_params)
+      @lesson = Lesson.new(lesson_params.merge(course: @course))
 
       if @lesson.save
-        redirect_to admin_lessons_url, notice: 'lesson was successfully created.'
+        redirect_to admin_course_lessons_url, notice: 'lesson was successfully created.'
       else
         render :new
       end
@@ -24,7 +25,7 @@ class Admin::LessonsController < AdminController
 
     def update
       if @lesson.update(lesson_params)
-        redirect_to admin_lessons_url, notice: 'lesson was successfully updated.'
+        redirect_to admin_course_lessons_url, notice: 'lesson was successfully updated.'
       else
         render :edit
       end
@@ -32,7 +33,7 @@ class Admin::LessonsController < AdminController
 
     def update_weight
       if @lesson.update_weight(lesson_params[:weight])
-        redirect_to admin_lessons_url, notice: 'lesson was successfully updated.'
+        redirect_to admin_course_lessons_url, notice: 'lesson was successfully updated.'
       else
         render :index
       end
@@ -40,13 +41,17 @@ class Admin::LessonsController < AdminController
 
     def destroy
       @lesson.destroy
-      redirect_to admin_lessons_url, notice: 'lesson was successfully destroyed.'
+      redirect_to admin_course_lessons_url, notice: 'lesson was successfully destroyed.'
     end
 
   private
 
     def set_lesson
       @lesson = Lesson.friendly.find(params[:id] || params[:lesson_id])
+    end
+
+    def set_course
+      @course = Course.friendly.find(params[:course_id])
     end
 
     def lesson_params

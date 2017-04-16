@@ -7,14 +7,15 @@
 ##
 class Admin::ItemsController < AdminController
     before_action :set_item, only: [:edit, :update, :destroy]
+    before_action :set_lesson_course
 
     def index
-      # @items = Item.by_lesson.includes(:itemable, lesson: :course).all
-      @lessons = Lesson.by_course.includes(:course, items: :itemable).all
+      @items = @lesson.items.by_weight
     end
 
     def new
       @itemable = itemable_class.new
+      @itemable.item = Item.new(lesson: @lesson)
     end
 
     def edit
@@ -22,9 +23,10 @@ class Admin::ItemsController < AdminController
 
     def create
       @itemable = itemable_class.new(itemable_params)
+      @itemable.item.lesson = @lesson
 
       if @itemable.save!
-        redirect_to admin_items_url, notice: 'item was successfully created.'
+        redirect_to admin_course_lesson_items_url, notice: 'item was successfully created.'
       else
         render :new
       end
@@ -32,7 +34,7 @@ class Admin::ItemsController < AdminController
 
     def update
       if @itemable.update(itemable_params)
-        redirect_to admin_items_url, notice: 'item was successfully updated.'
+        redirect_to admin_course_lesson_items_url, notice: 'item was successfully updated.'
       else
         render :edit
       end
@@ -42,7 +44,7 @@ class Admin::ItemsController < AdminController
       item = Item.find(params[:item_id])
 
       if item.update_weight(params[:item][:weight])
-        redirect_to admin_items_url, notice: 'item was successfully updated.'
+        redirect_to admin_course_lesson_items_url, notice: 'item was successfully updated.'
       else
         render :index
       end
@@ -50,10 +52,15 @@ class Admin::ItemsController < AdminController
 
     def destroy
       @itemable.destroy!
-      redirect_to admin_items_url, notice: 'item was successfully destroyed.'
+      redirect_to admin_course_lesson_items_url, notice: 'item was successfully destroyed.'
     end
 
   private
+
+    def set_lesson_course
+      @lesson = Lesson.friendly.find(params[:lesson_id])
+      @course = Course.friendly.find(params[:course_id])
+    end
 
     def set_item
       @itemable = itemable_class.find(params[:id])

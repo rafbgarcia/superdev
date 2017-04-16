@@ -1,10 +1,14 @@
-<h1>Listing Lesson</h1>
+<h5 class="mb-4">
+<%= link_to 'Cursos', admin_courses_path %>
+>
+Lições de "<%= @course.name %>"
+</h5>
 
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th>Curso</th>
       <th>Nome</th>
+      <th>Items</th>
       <th>Free</th>
       <th width="10%"></th>
     </tr>
@@ -13,15 +17,14 @@
   <tbody>
     <% @lessons.each do |lesson| %>
       <tr>
-        <td><%= lesson.course %></td>
         <td>
           <div class="d-flex">
-            <%= simple_form_for lesson, url: admin_lesson_update_weight_path(lesson) do |f| %>
+            <%= simple_form_for lesson, url: admin_course_lesson_update_weight_path(@course, lesson) do |f| %>
               <input type="hidden" name="lesson[weight]" value="<%= lesson.weight-1 %>">
               <button class="btn btn-sm btn-default">-1</button>
             <% end %>
             &nbsp;
-            <%= simple_form_for lesson, url: admin_lesson_update_weight_path(lesson) do |f| %>
+            <%= simple_form_for lesson, url: admin_course_lesson_update_weight_path(@course, lesson) do |f| %>
               <input type="hidden" name="lesson[weight]" value="<%= lesson.weight+1 %>">
               <button class="btn btn-sm btn-default">+1</button>
             <% end %>
@@ -29,11 +32,14 @@
             <%= lesson.weight %> - <%= lesson.name %>
           </div>
         </td>
+        <td>
+          <%= link_to 'Ver itens', admin_course_lesson_items_path(@course, lesson) %>
+        </td>
         <td><%= lesson.free %></td>
         <td>
-          <%= link_to 'Edit', edit_admin_lesson_path(lesson) %>
+          <%= link_to 'Edit', edit_admin_course_lesson_path(@course, lesson) %>
           |
-          <%= link_to 'Delete', admin_lesson_path(lesson), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Delete', admin_course_lesson_path(@course, lesson), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
@@ -42,4 +48,4 @@
 
 <br>
 
-<%= link_to 'New lesson', new_admin_lesson_path %>
+<%= link_to 'New lesson', new_admin_course_lesson_path %>

@@ -1,57 +1,61 @@
-<h3 class="mb-5">Items</h3>
+<h5 class="mb-4">
+<%= link_to 'Cursos', admin_courses_path %>
+>
+<%= link_to @course.name, admin_course_lessons_path(@course) %>
+>
+<%= link_to %{items de "#{@lesson.name}"}, admin_course_lesson_items_path(@course, @lesson) %>
+</h5>
 
-<% @lessons.each do |lesson| %>
-  <h6>
-    <span class="badge badge-default"><%= lesson.course.name %></span>
-    >
-    <span class="badge badge-success"><%= lesson.weight %> - <%= lesson.name %></span>
-  </h6>
 
-  <table class="table table-bordered table-hover mb-5">
-    <thead>
+<table class="table table-bordered table-hover mb-5">
+  <thead>
+    <tr>
+      <th width="35%">Título</th>
+      <th width="10%">Tipo</th>
+      <th width="50%">URL</th>
+      <th width="5%"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
       <tr>
-        <th width="35%">Título</th>
-        <th width="10%">Tipo</th>
-        <th width="50%">URL</th>
-        <th width="5%"></th>
+        <td>
+          <div class="d-flex">
+            <%= simple_form_for item, url: admin_course_lesson_item_update_weight_path(@course, @lesson, item) do |f| %>
+              <input type="hidden" name="item[weight]" value="<%= item.weight - 1 %>">
+              <button class="btn btn-sm btn-default">-1</button>
+            <% end %>
+            &nbsp;
+            <%= simple_form_for item, url: admin_course_lesson_item_update_weight_path(@course, @lesson, item) do |f| %>
+              <input type="hidden" name="item[weight]" value="<%= item.weight + 1 %>">
+              <button class="btn btn-sm btn-default">+1</button>
+            <% end %>
+            &nbsp;
+            <%= item.weight %> - <%= item.title %>
+          </div>
+        </td>
+        <td><%= item.type %></td>
+        <td><%= item.itemable.try :url %></td>
+        <td>
+          <%= link_to 'Edit', edit_admin_course_lesson_item_path(@course, @lesson, item.itemable, type: item.itemable.class.name) %>
+          |
+          <%= link_to 'Delete', admin_course_lesson_item_path(@course, @lesson, item.itemable, type: item.itemable.class.name), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
-    </thead>
+    <% end %>
+  </tbody>
+</table>
 
-    <tbody>
-      <% lesson.items.each do |item| %>
-        <tr>
-          <td>
-            <div class="d-flex">
-              <%= simple_form_for item, url: admin_item_update_weight_path(item) do |f| %>
-                <input type="hidden" name="item[weight]" value="<%= item.weight - 1 %>">
-                <button class="btn btn-sm btn-default">-1</button>
-              <% end %>
-              &nbsp;
-              <%= simple_form_for item, url: admin_item_update_weight_path(item) do |f| %>
-                <input type="hidden" name="item[weight]" value="<%= item.weight + 1 %>">
-                <button class="btn btn-sm btn-default">+1</button>
-              <% end %>
-              &nbsp;
-              <%= item.weight %> - <%= item.title %>
-            </div>
-          </td>
-          <td><%= item.type %></td>
-          <td><%= item.itemable.try :url %></td>
-          <td>
-            <%= link_to 'Edit', edit_admin_item_path(item.itemable, type: item.itemable.class.name) %>
-            |
-            <%= link_to 'Delete', admin_item_path(item.itemable, type: item.itemable.class.name), method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
 
-<br>
+<div class="mt-4">
+  <%= link_to 'New Video', new_admin_course_lesson_item_path(@course, @lesson, type: Video.name), class: 'btn btn-primary' %>
 
-<%= link_to 'New Video', new_admin_item_path(type: Video.name), class: 'btn btn-primary' %>
-|
-<%= link_to 'New Choice Question', new_admin_item_path(type: ChoiceQuestion.name), class: 'btn btn-primary' %>
-|
-<%= link_to 'New Code Question', new_admin_item_path(type: CodeQuestion.name), class: 'btn btn-primary' %>
+  <br><br>
+
+  <%= link_to 'New Choice Question', new_admin_course_lesson_item_path(@course, @lesson, type: ChoiceQuestion.name), class: 'btn btn-primary' %>
+
+  <br><br>
+
+  <%= link_to 'New Code Question', new_admin_course_lesson_item_path(@course, @lesson, type: CodeQuestion.name), class: 'btn btn-primary' %>
+</div>

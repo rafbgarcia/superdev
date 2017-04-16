@@ -84,16 +84,18 @@ Rails.application.routes.draw do
   get 'admin' => 'admin#index'
 
   namespace :admin do
-    resources :courses
-    resources :blog_posts do
-      patch :approve
-    end
-    resources :lessons do
-      patch :update_weight
+    resources :courses do
+      resources :lessons do
+        patch :update_weight
+
+        resources :items do
+          patch :update_weight
+        end
+      end
     end
 
-    resources :items do
-      patch :update_weight
+    resources :blog_posts do
+      patch :approve
     end
   end
 

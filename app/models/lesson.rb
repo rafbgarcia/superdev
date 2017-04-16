@@ -7,7 +7,7 @@ class Lesson < ApplicationRecord
     validates_presence_of :name, :course
 
   # Scopes
-    scope :by_course, -> { order(:course_id, :weight) }
+    scope :by_weight, -> { order(:weight) }
 
   # Slug
     extend FriendlyId

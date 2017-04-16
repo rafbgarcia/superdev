@@ -8,8 +8,7 @@ class Item < ApplicationRecord
     validates_presence_of :title, :lesson_id
 
   # Scopes
-    # scope :by_lesson, -> { includes(:lesson).order('lessons.weight ASC, items.weight ASC') }
-    scope :by_lesson, -> { order(:lesson_id, :weight) }
+    scope :by_weight, -> { order(:weight) }
 
   before_save :set_weight, if: :need_new_weight?
 
