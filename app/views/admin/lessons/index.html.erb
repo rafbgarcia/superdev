@@ -8,7 +8,6 @@ Lições de "<%= @course.name %>"
   <thead>
     <tr>
       <th>Nome</th>
-      <th>Items</th>
       <th>Free</th>
       <th width="10%"></th>
     </tr>
@@ -29,11 +28,11 @@ Lições de "<%= @course.name %>"
               <button class="btn btn-sm btn-default">+1</button>
             <% end %>
             &nbsp;
-            <%= lesson.weight %> - <%= lesson.name %>
+
+            <%= link_to admin_course_lesson_items_path(@course, lesson) do %>
+              <%= lesson.weight %> - <%= lesson.name %>
+            <% end %>
           </div>
-        </td>
-        <td>
-          <%= link_to 'Ver itens', admin_course_lesson_items_path(@course, lesson) %>
         </td>
         <td><%= lesson.free %></td>
         <td>
