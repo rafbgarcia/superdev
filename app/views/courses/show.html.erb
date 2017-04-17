@@ -27,7 +27,7 @@
         <% lesson.items.each do |item| %>
           <div class="item-link-wrapper">
             <%= link_to course_item_path(lesson_id: lesson.slug, item_weight: item.weight), class: 'item-link' do %>
-              <%= image_tag "question_type_#{format_item_type(item.type)}.png" %>
+              <%= image_tag item_icon(item) %>
               <span class="title"><%= item.title %></span>
             <% end %>
 
