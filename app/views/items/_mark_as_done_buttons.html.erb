@@ -1,10 +1,12 @@
-<%= content_tag :span, icon('check'), class: "btn btn-success btn-sm item-done-link #{'d-none' if !current_user.item_done?(item)}", id: "item_#{item.id}_done" %>
+<%= content_tag :span,  class: "btn btn-success btn-sm item-done-link #{'d-none' if !current_user.item_done?(item)}", id: "item_#{item.id}_done" do %>
+  Visto
+  <%= icon('check') %>
+  <% end %>
 
 <%= link_to item_mark_as_done_path(item),
   remote: true,
-  class: "btn btn-info btn-sm item-done-link #{'d-none' if current_user.item_done?(item)}",
+  class: "btn btn-secondary btn-sm item-done-link #{'d-none' if current_user.item_done?(item)}",
   method: :patch,
   id: "item_#{item.id}_mark_done" do %>
-  <span>Visto</span>
-  <%= icon 'check' %>
+  <span>Marcar como visto</span>
 <% end %>
