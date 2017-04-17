@@ -13,8 +13,6 @@ class Discussion < ApplicationRecord
 
 
   def belongs_to?(user)
-    return true if user.admin?
-
     self.user.id == user.id
   end
 

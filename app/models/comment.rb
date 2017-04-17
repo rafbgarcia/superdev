@@ -9,8 +9,6 @@ class Comment < ApplicationRecord
 
 
   def belongs_to?(user)
-    return true if user.admin?
-
     return false if user.blank?
     self.user.id == user.id
   end

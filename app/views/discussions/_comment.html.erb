@@ -22,6 +22,12 @@
           <span class="blue"><%= comment.user.name %></span>
           <small class="text-muted"><%= relative_time comment.created_at %></small>
         </div>
+
+        <% if current_user.admin? %>
+          <%= link_to edit_comment_path(comment), class: 'btn btn-sm btn-secondary' do %>
+            <small><%= icon 'pencil' %> Editar</small>
+          <% end %>
+        <% end %>
       <% end %>
     </footer>
   </div>

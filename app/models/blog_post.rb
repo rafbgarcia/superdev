@@ -18,8 +18,6 @@ class BlogPost < ApplicationRecord
 
 
   def belongs_to?(user)
-    return true if user.admin?
-
     return false if self.user.blank?
     self.user.id == user.id
   end
