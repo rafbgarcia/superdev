@@ -3,6 +3,7 @@ class SubscriptionsController < ApplicationController
   before_action :set_iugu_api_key
 
   def pioneiros
+    return redirect_to(root_path)
     @plan = PlanPresenter.new(Iugu::Plan.fetch_by_identifier('superdev_academy_pioneiros'))
     render :template_only_form
   end
