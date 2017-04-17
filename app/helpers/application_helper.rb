@@ -12,19 +12,24 @@ module ApplicationHelper
     content_for(:seo_description) { text }
   end
 
-  def render_md(markdown)
+  def render_md(markdown, escape_html: true)
     return if markdown.blank?
 
     extensions = { fenced_code_blocks: true, strikethrough: true, tables: true, autolink: true }
-    renderer = Redcarpet::Render::HTML.new(hard_wrap: true, link_attributes: { target: '_blank' })#, escape_html: true )
+    opts = { hard_wrap: true, link_attributes: { target: '_blank' }, escape_html: escape_html }
+
+    renderer = Redcarpet::Render::HTML.new(opts)
     html = Redcarpet::Markdown.new(renderer, extensions).render(markdown)
 
-    escape_tags = %w(style script)
-    escape_tags.each do |tag|
-      html = html.gsub("<#{tag}", "&lt;#{tag}")
-      html = html.gsub("</#{tag}", "&lt;/#{tag}")
+    if !escape_html
+      escape_tags = %w(style script)
+      escape_tags.each do |tag|
+        html = html.gsub("<#{tag}", "&lt;#{tag}")
+        html = html.gsub("</#{tag}", "&lt;/#{tag}")
+      end
     end
-    html.html_safe
+
+    content_tag :div, html.html_safe, class: 'markdown-content'
   end
 
   def relative_time(date)

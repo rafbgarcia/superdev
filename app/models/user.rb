@@ -79,6 +79,10 @@ class User < ApplicationRecord
     self.iugu_subscription_id.present?
   end
 
+  def admin?
+    self.email.in?(['rafael@superdev.academy', 'rafbgarcia@gmail.com'])
+  end
+
 
 # class methods
 

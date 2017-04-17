@@ -51,7 +51,7 @@
             </aside>
 
             <blockquote class="content markdown">
-              <%= render_md @current_post.question_text %>
+              <%= render_md @current_post.question_text, escape_html: false %>
             </blockquote>
           </div>
         <% end %>

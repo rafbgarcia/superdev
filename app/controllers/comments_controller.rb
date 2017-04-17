@@ -26,6 +26,8 @@ private
   end
 
   def check_comment_user
+    return if current_user.admin?
+
     if !@comment.belongs_to?(current_user)
       redirect_to @back_to_url
     end
