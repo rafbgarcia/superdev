@@ -32,7 +32,7 @@
 
 
   <% if @active_discussion.present? %>
-    <div class="col-sm 8 active-post">
+    <div class="col-sm-8 active-post">
       <%= render partial: 'discussions/discussion', locals: { discussion: @active_discussion } %>
 
       <% @active_discussion.comments.each do |comment| %>
