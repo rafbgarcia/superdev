@@ -29,8 +29,9 @@ src="https://www.facebook.com/tr?id=269782243444073&ev=PageView&noscript=1"
 <!-- DO NOT MODIFY -->
 <!-- End Facebook Pixel Code -->
 
-
-<%= javascript_include_tag 'include_tags/smartlook' if should_track? %>
+<% if should_track? && action_name != 'partiu_codar' %>
+  <%= javascript_include_tag 'include_tags/smartlook' %>
+<% end %>
 
 <% if should_track? %>
   <!-- Getresponse Analytics -->
