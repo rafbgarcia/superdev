@@ -50,7 +50,7 @@
     <main>
       <div class="d-flex align-items-start justify-content-between">
         <div class="mr-4 w-100">
-          <%= render_md @item.description %>
+          <%= render_md @item.description, escape_html: false %>
         </div>
         <div>
           <%= render partial: 'items/mark_as_done_buttons', locals: { item: @item } %>
