@@ -6,9 +6,13 @@ module ItemsHelper
 
   def item_icon(item)
     if item.video? && item.itemable.url.blank?
-      "question_type_choice_question.png"
+      if item.itemable.exercise?
+        icon('list-ol')
+      else
+        icon('file-text', style: 'margin-left: 2px')
+      end
     else
-      "question_type_#{format_item_type(item.type)}.png"
+      image_tag "question_type_#{format_item_type(item.type)}.png"
     end
   end
 
