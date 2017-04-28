@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
 # Devise
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' },
-                    controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+                    controllers: {
+                      omniauth_callbacks: "users/omniauth_callbacks",
+                      sessions: "users/sessions",
+                    }
 
 # Site
   get 'minha-historia' => 'application#my_history', as: :my_history

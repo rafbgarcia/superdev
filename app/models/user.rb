@@ -62,6 +62,11 @@ class User < ApplicationRecord
     UserMailer.payment_approved(self, new_password).deliver_later
   end
 
+  def subscription
+    return if self.iugu_subscription_id.blank?
+    Iugu::Subscription.fetch(self.iugu_subscription_id)
+  end
+
   def create_customer_account
     customer = Iugu::Customer.create(
       name: self.name,
