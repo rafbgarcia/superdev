@@ -125,35 +125,6 @@ class User < ApplicationRecord
     user
   end
 
-  # def self.find_or_create_by(params)
-  #   return if params.blank?
-  #   user = User.where(email: params[:email].downcase).first_or_initialize
-
-  #   if user.persisted?
-  #     if !user.valid_password?(params[:password])
-  #       user.errors.add(:password, 'Esta senha não confere com o e-mail')
-  #     end
-  #   else
-  #     user.attributes = params
-  #     user.save
-  #   end
-
-  #   user
-  # end
-
-  def self.from_customer_data(data)
-    user = where(email: data[:email]).first_or_initialize
-
-    if user.new_record?
-      user.name = data[:name]
-      user.password = Devise.friendly_token[0, 10]
-      user.iugu_customer_id = data[:customer_id]
-      user.save!(validate: false)
-    end
-
-    user
-  end
-
   def self.activate_subscription!(subscription)
     user = User.where(iugu_customer_id: subscription.customer_id).first
     user.activate_subscription!(subscription)

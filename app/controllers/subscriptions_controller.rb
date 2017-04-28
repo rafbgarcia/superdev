@@ -1,6 +1,5 @@
 class SubscriptionsController < ApplicationController
   layout 'sales'
-  before_action :set_iugu_api_key
 
   def pioneiros
     return redirect_to(root_path)
@@ -80,10 +79,6 @@ private
 
   def subscription_params
     params.permit(:token, :method)
-  end
-
-  def set_iugu_api_key
-    Iugu.api_key = ENV['IUGU_API_KEY'] || "30e045b8172796b804714c8423be3d9e"
   end
 
 end
