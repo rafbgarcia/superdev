@@ -132,6 +132,8 @@ class User < ApplicationRecord
 
   def self.activate_subscription!(subscription)
     user = User.where(iugu_customer_id: subscription.customer_id).first
+    return if user.blank?
+
     user.activate_subscription!(subscription)
   end
 
