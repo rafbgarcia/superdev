@@ -16,6 +16,8 @@ class IuguController < ActionController::API
       return
     end
 
+    Iugu.api_key = ENV['IUGU_API_KEY'] || "30e045b8172796b804714c8423be3d9e"
+
     if params['data']['status'] == 'paid'
       begin
         subscription = Iugu::Subscription.fetch(params['data']['subscription_id'])
