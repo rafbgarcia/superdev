@@ -49,7 +49,7 @@ class User < ApplicationRecord
   end
 
   def activate_subscription!(subscription)
-    return if self.has_active_subscription?
+    return if self.subscription.present?
 
     new_password = Devise.friendly_token[0, 10]
 
