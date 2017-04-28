@@ -11,7 +11,6 @@ class Users::SessionsController < Devise::SessionsController
     self.update_subscription_expiration
   end
 
-private
 
   def update_subscription_expiration
     subscription = current_user.subscription
