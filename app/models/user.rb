@@ -119,7 +119,7 @@ class User < ApplicationRecord
   end
 
   def self.from_name_and_email(params)
-    user = where(email: params[:email]).first_or_initialize
+    user = where(email: params[:email].downcase).first_or_initialize
 
     if user.new_record?
       user.name = params[:name]
