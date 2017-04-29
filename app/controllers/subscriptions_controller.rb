@@ -17,6 +17,7 @@ class SubscriptionsController < ApplicationController
 
     if customer_params.any? { |field_name, value| value.blank?}
       @errors = { '' => ['Por favor, preencha todos os campos'] }
+      return render :template_only_form
     end
 
     user = User.from_name_and_email(customer_params)
@@ -60,7 +61,6 @@ class SubscriptionsController < ApplicationController
       @subscription = Iugu::Subscription.create(
         plan_identifier: @plan.identifier,
         customer_id: customer.id,
-        payable_with: :bank_slip,
         expires_at: 5.days.from_now,
       )
 
