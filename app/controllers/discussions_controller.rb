@@ -46,6 +46,8 @@ private
   end
 
   def check_discussion_user
+    return if current_user.admin?
+
     if !@discussion.belongs_to?(current_user)
       redirect_to anchor_discussion_path(@discussion)
     end
