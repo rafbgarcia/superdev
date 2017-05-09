@@ -1,9 +1,5 @@
 module ApplicationHelper
 
-  def subscribe_step_1_path
-    'http://partiu-codar.superdev.academy/'
-  end
-
   def title(title)
     content_for(:page_title) { title }
   end
