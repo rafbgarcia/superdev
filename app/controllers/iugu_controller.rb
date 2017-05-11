@@ -23,7 +23,7 @@ class IuguController < ActionController::API
       if user
         user.update_subscription(subscription)
       else
-        user.activate_subscription!(subscription)
+        User.activate_subscription!(subscription)
       end
     end
 
