@@ -17,12 +17,13 @@ class IuguController < ActionController::API
     end
 
     if params['data']['status'] == 'paid'
-      begin
-        subscription = Iugu::Subscription.fetch(params['data']['subscription_id'])
-        User.activate_subscription!(subscription)
-      rescue Iugu::ObjectNotFound
-        head 404
-        return
+      subscription = Iugu::Subscription.fetch(params['data']['subscription_id'])
+      user = User.with_subscription_id(params['data']['subscription_id']).first
+
+      if user
+        user.update_subscription(subscription)
+      else
+        user.activate_subscription!(subscription)
       end
     end
 

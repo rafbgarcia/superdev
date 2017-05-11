@@ -22,6 +22,9 @@ class User < ApplicationRecord
     has_attached_file :avatar, styles: { medium: "300x300#", small: "100x100#" }, path: "/users-images/:id-:style.:extension", default_url: 'default_avatar.png'
     validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
+  # Scopes
+    scope :with_subscription_id, -> (subscription_id) { where(iugu_subscription_id: subscription_id) }
+
 
   def item_done?(item)
     self.items.include?(item)
@@ -60,6 +63,10 @@ class User < ApplicationRecord
     )
 
     UserMailer.payment_approved(self, new_password).deliver_later
+  end
+
+  def update_subscription(subscription)
+    self.update(iugu_subscription_expires_at: subscription.expires_at)
   end
 
   def subscription
