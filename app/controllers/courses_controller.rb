@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   before_action :require_subscription
 
   def index
-    @projects = Project.by_weight.includes(:courses)
+    @projects = Project.by_weight
     # @courses = Course.visible.by_weight
   end
 
