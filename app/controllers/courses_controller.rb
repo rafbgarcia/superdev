@@ -3,7 +3,6 @@ class CoursesController < ApplicationController
 
   def index
     @projects = Project.by_weight
-    # @courses = Course.visible.by_weight
   end
 
   def show
