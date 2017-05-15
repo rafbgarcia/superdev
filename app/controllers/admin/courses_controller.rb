@@ -42,7 +42,7 @@ class Admin::CoursesController < AdminController
     end
 
     def course_params
-      params.require(:course).permit(:name, :image, :weight, :description, :available_at, :visible)
+      params.require(:course).permit(:name, :image, :weight, :description, :available_at, :visible, :project_id)
     end
 
 end

@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
   has_many :lessons, -> { order(:weight) }
+  belongs_to :project
 
   # Slug
     extend FriendlyId

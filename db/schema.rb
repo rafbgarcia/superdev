@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418013846) do
+ActiveRecord::Schema.define(version: 20170515135005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 20170418013846) do
     t.datetime "available_at"
     t.integer  "weight",             default: 1
     t.boolean  "visible",            default: true
+    t.integer  "project_id"
+    t.index ["project_id"], name: "index_courses_on_project_id", using: :btree
   end
 
   create_table "discussions", force: :cascade do |t|
@@ -174,6 +176,18 @@ ActiveRecord::Schema.define(version: 20170418013846) do
     t.index ["user_id"], name: "index_post_comments_on_user_id", using: :btree
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "weight",             default: 0
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
     t.date     "expires_at"
@@ -228,6 +242,7 @@ ActiveRecord::Schema.define(version: 20170418013846) do
   add_foreign_key "answers", "users"
   add_foreign_key "blog_posts", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "courses", "projects"
   add_foreign_key "discussions", "items"
   add_foreign_key "discussions", "users"
   add_foreign_key "item_progresses", "items"
