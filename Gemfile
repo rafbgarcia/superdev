@@ -10,7 +10,7 @@ end
   gem "intercom-rails"
   gem 'redis-rails'
   gem 'sidekiq'
-  gem 'airbrake', '~> 6.0'
+  gem 'rollbar'
   gem 'redcarpet'
   gem 'aasm'
   gem 'iugu'

@@ -41,9 +41,6 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    airbrake (6.0.0)
-      airbrake-ruby (~> 2.0)
-    airbrake-ruby (2.0.0)
     arel (7.1.4)
     autoprefixer-rails (6.7.7.1)
       execjs
@@ -227,6 +224,8 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rollbar (2.14.1)
+      multi_json
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -301,7 +300,6 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
-  airbrake (~> 6.0)
   aws-sdk (~> 2)
   aws-sdk-rails
   bootstrap (~> 4.0.0.alpha6)
@@ -325,6 +323,7 @@ DEPENDENCIES
   rails-assets-tether (>= 1.3.3)!
   redcarpet
   redis-rails
+  rollbar
   rspec-rails
   sass-rails (~> 5.0)
   sidekiq
@@ -340,4 +339,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.13.7
+   1.14.6
