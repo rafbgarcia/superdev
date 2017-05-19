@@ -165,17 +165,6 @@ ActiveRecord::Schema.define(version: 20170515135005) do
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 
-  create_table "post_comments", force: :cascade do |t|
-    t.text     "text"
-    t.integer  "user_id"
-    t.integer  "blog_post_id"
-    t.integer  "votes"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["blog_post_id"], name: "index_post_comments_on_blog_post_id", using: :btree
-    t.index ["user_id"], name: "index_post_comments_on_user_id", using: :btree
-  end
-
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -249,7 +238,5 @@ ActiveRecord::Schema.define(version: 20170515135005) do
   add_foreign_key "item_progresses", "users"
   add_foreign_key "items", "lessons"
   add_foreign_key "notifications", "users"
-  add_foreign_key "post_comments", "blog_posts"
-  add_foreign_key "post_comments", "users"
   add_foreign_key "subscriptions", "users"
 end
